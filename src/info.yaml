@@ -1,0 +1,30 @@
+
+autor: Sven Vogel
+titel: Konfiguration & Integration von PROFINET
+untertitel: für die AC500 SPS
+typ: T2000
+semester: 3
+fakultät: Technik
+studiengang: Informationstechnik
+universität: DHBW Mannheim
+matrikelnummer: 1191225
+betrieb: ABB AG
+betreuer: Florian Miedniak
+abgabe: 20. März 2024
+bearbeitungszeitraum: 1. Januar 2024 - 20. März 2024
+stichwörter:
+  - informatik
+  - profinet
+
+# Berechent automatisch die Wochen Anzahl
+# Start- und Endzeit müssen im Format dd-mm-yyyy sein.
+arbeits-pakete:
+  - thema: Konfiguration des Stacks
+    start: 08.01.2024
+    ende: 31.01.2024
+  - thema: Integration in die Laufzeit
+    start: 01.02.2024
+    ende: 01.03.2024
+  - thema: Testen und Evaluation
+    start: 04.03.2024
+    ende: 20.03.2024
