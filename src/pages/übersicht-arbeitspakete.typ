@@ -1,22 +1,19 @@
-
-#box(height: 7em)
+#import "../prelude.typ" as prelude
 
 // title
-#text(size: 2em, weight: "semibold", align(center, "Übersicht Arbeitspakete"))
+= Übersicht Arbeitspakete
 
-#box(height: 5em)
-
-#let info = yaml("../info.yaml")
+Folgende Tabelle zeigt die Aktivtäten welche im Zeitraum vom #prelude.info.bearbeitungszeitraum abgehandelt wurden.
 
 #figure(
   kind: table,
   caption: "Übersicht Arbeitspakete",
   table(
-    columns: 3,
-    align: right,
-    inset: 1em,
+    columns: (1fr, auto, auto),
+    align: center,
+    inset: 0.25cm,
     [*Thema*], [*Zeitraum*], [*Dauer (Wochen)*],
-    ..for packet in info.arbeits-pakete {
+    ..for packet in prelude.info.arbeits-pakete {
 
       let start_split = packet.start.split(".")
       let start = datetime(day: int(start_split.at(0)), month: int(start_split.at(1)), year: int(start_split.at(2)))

@@ -1,49 +1,46 @@
+#import "../prelude.typ" as prelude
 
-// load general information from YAML
-#let info = yaml("../info.yaml")
+#let LogoHeight = 1.5cm
 
 #set align(center)
 
 // logo of ABB and DHBW
-#pad(
-  top: 3em,
-  grid(
-    // set width of columns
-    // we need two, so make both half the page width
-    columns: (50%, 50%),
-    // left align logo of ABB
-    align(left, image("../../res/svg/ABB.svg", height: 35pt)),
-    // right align logo of DHBW
-    align(right, image("../../res/svg/DHBW.svg", height: 40pt))
-  )
+#grid(
+  // set width of columns
+  // we need two, so make both half the page width
+  columns: (50%, 50%),
+  // left align logo of ABB
+  align(left, image("../../res/svg/ABB.svg", height: LogoHeight)),
+  // right align logo of DHBW
+  align(right, image("../../res/svg/DHBW.svg", height: LogoHeight))
 )
 
 // title
-#pad(top: 4em, text(size: 2em, weight: "semibold", info.titel))
+#v(2cm)
+#prelude.title(prelude.info.titel)
 
 // subtitle
-#pad(top: 1em, text(size: 1.5em, info.untertitel))
+#prelude.subtitle(prelude.info.untertitel)
 
-// subtitle
-#pad(top: 4em, text(size: 1.5em, weight: "bold", info.typ))
+// type of paper
+#v(1cm)
+#prelude.largetext(prelude.info.typ)
 
 // number of semester
-#pad(top: 2em)[
-  Praxisphase des #info.semester Studienjahrs
-]
+Praxisphase des #prelude.info.semester Studienjahrs
 
 // fakulty
-#pad(top: 0.5em)[
-  an der Fakultät für #info.fakultät
+#pad(top: 0.5cm)[
+  an der Fakultät für #prelude.info.fakultät
   #linebreak()
-  im Studiengang #info.studiengang
+  im Studiengang #prelude.info.studiengang
 ]
 
 // university
-#pad(top: 1.5em)[
+#pad(top: 0.5cm)[
   an der
   #linebreak()
-  #info.universität
+  #prelude.info.universität
 ]
 
 #set align(bottom + left)
@@ -54,32 +51,32 @@
   stroke: none,
   
   "Verfasser:",
-  info.autor,
+  prelude.info.autor,
 
   "Bearbeitungszeitraum:",
-  info.bearbeitungszeitraum,
+  prelude.info.bearbeitungszeitraum,
 
   "Matrikelnummer, Kurs:",
-  str(info.matrikelnummer) + ", " + info.studiengang,
+  str(prelude.info.matrikelnummer) + ", " + prelude.info.studiengang,
 
   "Ausbildungsbetrieb:",
-  info.betrieb,
+  prelude.info.betrieb,
 
-  "Betr. Betreuer:",
-  info.betreuer,
+  "Betrieblicher Betreuer:",
+  prelude.info.betreuer,
 
   "Abgabedatum:",
-  info.abgabe
+  prelude.info.abgabe
 )
 
 #pad(
-  top: 3em,
+  top: 1cm,
   grid(
     // set width of columns
     // we need two, so make both half the page width
     columns: (50%, 50%),
     align(left, "Unterschrift des betrieblichen Betreuers"),
-    align(right, {line(length: 16em)})
+    align(right, {line(length: 6cm)})
   )
 )
 
