@@ -6,3 +6,4 @@ paragraph-spacing: 1.5  # relative to line height
 line-spacing: 0.75    # relative to line height
 first-line-indent: 1  # in centimetres
 font-size: 12         # in point
+font-familty: "Noto Serif"

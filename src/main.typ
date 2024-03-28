@@ -10,7 +10,7 @@
 
 // set global text parameter
 #set text(
-  font: "Times New Roman",
+  font: prelude.format.font-familty,
   size: prelude.to_pt(prelude.format.font-size),
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
@@ -28,6 +28,39 @@
   alternates: prelude.format.ligratures,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language
+)
+
+#show heading.where(level: 1): set text(
+  font: prelude.format.font-familty,
+  size: prelude.to_pt(prelude.format.font-size) * 2,
+  ligatures: prelude.format.ligratures,
+  hyphenate: prelude.format.hyphenate,
+  alternates: prelude.format.ligratures,
+  discretionary-ligatures: prelude.format.ligratures,
+  lang: prelude.format.language,
+  weight: "regular"
+)
+
+#show heading.where(level: 2): set text(
+  font: prelude.format.font-familty,
+  size: prelude.to_pt(prelude.format.font-size) * 1.5,
+  ligatures: prelude.format.ligratures,
+  hyphenate: prelude.format.hyphenate,
+  alternates: prelude.format.ligratures,
+  discretionary-ligatures: prelude.format.ligratures,
+  lang: prelude.format.language,
+  weight: "regular"
+)
+
+#show heading.where(level: 3): set text(
+  font: prelude.format.font-familty,
+  size: prelude.to_pt(prelude.format.font-size) * 1.25,
+  ligatures: prelude.format.ligratures,
+  hyphenate: prelude.format.hyphenate,
+  alternates: prelude.format.ligratures,
+  discretionary-ligatures: prelude.format.ligratures,
+  lang: prelude.format.language,
+  weight: "regular"
 )
 
 // use block element as paragraph
@@ -53,15 +86,6 @@
 #set heading(numbering: none)
 #set page(numbering: "I.", footer: "")
 
-#show heading.where(
-  level: 1
-): it => block(width: 100%)[
-  #set align(center)
-  #set text(prelude.to_pt(prelude.format.font-size) * 2, weight: "regular")
-  #it.body
-  #v(0.5cm)
-]
-
 #include "pages/titel.typ"
 #include "pages/selbständigkeitserklärung.typ"
 #include "pages/sperrvermerk.typ"
@@ -70,24 +94,16 @@
   binding: left,
   header-ascent: 1em,
   header: locate(loc => {
-    smallcaps(prelude.info.titel)
-    v(-2em)
-    align(right, counter(page).display("I."))
-    v(-1em)
-    line(length: 100%)
+    text(size: 12pt)[
+      #prelude.info.titel
+      #v(-2em)
+      #align(right, counter(page).display("I."))
+      #v(-1em)
+      #line(length: 100%)
+    ]
   }),
   footer: ""
 )
-
-#show heading.where(
-  level: 1
-): it => block(width: 100%)[
-  #set align(left)
-  #set text(prelude.to_pt(prelude.format.font-size) * 2, weight: "regular")
-  #v(0.25cm)
-  #it.body
-  #v(0.5cm)
-]
 
 #include "pages/gender-hinweis.typ"
 #include "pages/übersicht-arbeitspakete.typ"
@@ -152,23 +168,26 @@
 
 = Abteilung
 
-#show heading.where(
-  level: 1
-): it => block(width: 100%)[
-  #set align(left)
-  #set text(prelude.to_pt(prelude.format.font-size) * 2, weight: "regular")
-  #v(0.25cm)
-  #it.numbering
-  #it.body
-  #v(0.5cm)
-]
-
 #set heading(numbering: "1.")
+
+#let filter_heading(heading) = {
+  heading.level == 1
+}
+
 #set page(
   binding: left,
   header-ascent: 1em,
   header: locate(loc => {
-    align(right, counter(page).display("1."))
+    align(left, context [
+      #let current_heading = query(selector(heading).after(here())).filter(filter_heading).first()
+      #let heading_depth = counter(heading).get().at(0) + 1
+
+      #heading_depth
+      #h(0.25cm)
+      #current_heading.body
+    ])
+    v(-2em)
+    align(right, counter(page).display("1"))
     v(-1em)
     line(length: 100%)
   }),
@@ -178,11 +197,34 @@
 #set page(numbering: "1.")
 
 = Kapitel
-#lorem(100)
+
+== Überschrift 2
+
+#pagebreak()
+
+#lorem(200)
+
+= Kapitel 2
+
+=== Überschrift 3
+
+#lorem(50)
 
 #pagebreak()
 
 #set heading(numbering: none)
+#set page(
+  header: locate(loc => {
+    align(left, context [
+      #let current_heading = query(selector(heading).after(here())).filter(filter_heading).first()
+      #current_heading.body
+    ])
+    v(-2em)
+    align(right, counter(page).display("1"))
+    v(-1em)
+    line(length: 100%)
+  }),
+)
 
 #bibliography(
   style: "ieee",
