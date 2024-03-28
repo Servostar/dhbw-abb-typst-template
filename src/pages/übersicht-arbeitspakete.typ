@@ -1,16 +1,36 @@
 #import "../prelude.typ" as prelude
 
 // title
-= Übersicht Arbeitspakete
+#if prelude.format.language == "de" [
+  = Übersicht Arbeitspakete
+  Folgende Tabelle zeigt die Aktivtäten welche im Zeitraum vom #prelude.info.bearbeitungszeitraum abgehandelt wurden.
+] else if prelude.format.language == "en" [
+  = Work package overview
+  The following table shows the activities that were covered during the #prelude.info.processing period.
+] else [
+  #panic("no translation for language: ", prelude.format.language)
+]
 
-Folgende Tabelle zeigt die Aktivtäten welche im Zeitraum vom #prelude.info.bearbeitungszeitraum abgehandelt wurden.
+#let table_align(col, row) = {
+  if row == 0 {
+    center
+  } else {
+    left
+  }
+}
 
 #figure(
   kind: table,
-  caption: "Übersicht Arbeitspakete",
+  caption: if prelude.format.language == "de" [
+      Übersicht Arbeitspakete
+    ] else if prelude.format.language == "en" [
+      Work package overview
+    ] else [
+      #panic("no translation for language: ", prelude.format.language)
+    ],
   table(
     columns: (1fr, auto, auto),
-    align: center,
+    align: table_align,
     inset: 0.25cm,
     [*Thema*], [*Zeitraum*], [*Dauer (Wochen)*],
     ..for packet in prelude.info.arbeits-pakete {
