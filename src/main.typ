@@ -38,7 +38,8 @@
   alternates: prelude.format.ligratures,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language,
-  weight: "regular"
+  weight: "regular",
+  baseline: 1em
 )
 
 #show heading.where(level: 2): set text(
@@ -86,9 +87,9 @@
 #set heading(numbering: none)
 #set page(numbering: "I.", footer: "")
 
-#include "pages/titel.typ"
-#include "pages/selbständigkeitserklärung.typ"
-#include "pages/sperrvermerk.typ"
+#include "pages/title.typ"
+#include "pages/declaration-of-indipendence.typ"
+#include "pages/confidential-clause.typ"
 
 #set page(
   binding: left,
@@ -105,8 +106,8 @@
   footer: ""
 )
 
-#include "pages/gender-hinweis.typ"
-#include "pages/übersicht-arbeitspakete.typ"
+#include "pages/gender-note.typ"
+#include "pages/working-packages.typ"
 
 #let heading_outline_title = if prelude.format.language == "de" [
   Inhaltsverzeichnis
