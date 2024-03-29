@@ -108,10 +108,24 @@
 #include "pages/gender-hinweis.typ"
 #include "pages/übersicht-arbeitspakete.typ"
 
-#outline(title: "Inhaltsverzeichnis", indent: auto)
+#let heading_outline_title = if prelude.format.language == "de" [
+  Inhaltsverzeichnis
+] else if prelude.format.language == "en" [
+  Table of contents
+] else [
+  #panic("no translation for language: ", prelude.format.language)
+]
+#outline(title: heading_outline_title, indent: auto)
 
 #pagebreak()
 
+#let image_outline_title = if prelude.format.language == "de" [
+  Abbildungsverzeichnis
+] else if prelude.format.language == "en" [
+  List of figures
+] else [
+  #panic("no translation for language: ", prelude.format.language)
+]
 #outline(
   title: "Abbildungsverzeichnis",
   target: figure.where(kind: image),
@@ -119,15 +133,29 @@
 
 #pagebreak()
 
+#let table_outline_title = if prelude.format.language == "de" [
+  Tabellensverzeichnis
+] else if prelude.format.language == "en" [
+  List of tables
+] else [
+  #panic("no translation for language: ", prelude.format.language)
+]
 #outline(
-  title: "Tabellensverzeichnis",
+  title: table_outline_title,
   target: figure.where(kind: table),
 )
 
 #pagebreak()
 
+#let raw_outline_title = if prelude.format.language == "de" [
+  Quelltextverzeichnis
+] else if prelude.format.language == "en" [
+  Table of source code
+] else [
+  #panic("no translation for language: ", prelude.format.language)
+]
 #outline(
-  title: "Quelltextverzeichnis",
+  title: raw_outline_title,
   target: figure.where(kind: raw),
 )
 
@@ -137,7 +165,13 @@
 #import "@preview/glossarium:0.2.6": make-glossary, print-glossary, gls, glspl 
 #show: make-glossary
 
-= Glossar
+#if prelude.format.language == "de" [
+  = Glossar
+] else if prelude.format.language == "en" [
+  = Glossary
+] else [
+  #panic("no translation for language: ", prelude.format.language)
+]
 
 // read all entries from config file
 #let glossary = yaml("../conf/glossary.yaml")
