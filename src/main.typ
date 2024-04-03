@@ -30,7 +30,7 @@
   size: prelude.to_pt(prelude.format.font-size),
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language
 )
@@ -41,7 +41,7 @@
   size: prelude.to_pt(prelude.format.font-size),
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language
 )
@@ -51,7 +51,7 @@
   size: prelude.to_pt(prelude.format.font-size) * 2,
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language,
   weight: "regular"
@@ -62,7 +62,7 @@
   size: prelude.to_pt(prelude.format.font-size) * 1.5,
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language,
   weight: "regular"
@@ -73,7 +73,7 @@
   size: prelude.to_pt(prelude.format.font-size) * 1.25,
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language,
   weight: "regular"
