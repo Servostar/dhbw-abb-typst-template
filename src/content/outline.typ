@@ -114,3 +114,6 @@
 }
 
 #print-glossary(glossary_entries)
+
+// reset page counter
+#counter(page).update(0)

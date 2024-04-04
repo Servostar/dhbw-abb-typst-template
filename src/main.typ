@@ -104,9 +104,6 @@
 #include "content/preface.typ"
 #include "content/outline.typ"
 
-// reset page counter
-#counter(page).update(1)
-
 #set heading(numbering: "1.")
 
 // start numbering pages with numeric digits
