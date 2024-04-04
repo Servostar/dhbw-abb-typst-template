@@ -21,5 +21,3 @@
     #panic("no translation for language: ", prelude.format.language)
   ]
 ]
-
-#pagebreak()

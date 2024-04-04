@@ -68,6 +68,7 @@
 #if prelude.format.language == "de" [
   #table(
     columns: 2,
+    column-gutter: 1cm,
     align: left,
     stroke: none,
     
@@ -92,6 +93,7 @@
 ] else if prelude.format.language == "en" [
   #table(
     columns: 2,
+    column-gutter: 1cm,
     align: left,
     stroke: none,
     

@@ -28,7 +28,10 @@
 // subtitle
 #prelude.subtitle(prelude.info.untertitel)
 
+#set align(left)
+
 #v(1cm)
+
 #prelude.largetext()[
    #if prelude.format.language == "de" [
     selbständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe.

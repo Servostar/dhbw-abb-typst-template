@@ -1,12 +1,28 @@
 
 #import "prelude.typ" as prelude
 
+// ------------------------------------------
+// Set page geometry and PDF meta data
+// ------------------------------------------
+
 // set page geometry:
 // paper format of A4
+// top margin is 2cm (blank space) + 2em (header) + 1em (spacing)
 #set page(
-  margin: (left: 3cm, right: 2cm, top: 2cm + 2em, bottom: 2cm),
+  margin: (left: 3cm, right: 2cm, top: 2cm + 3em, bottom: 2cm),
   paper: "a4",
 )
+
+// set PDF meta information
+#set document(
+  author: prelude.info.autor,
+  date: datetime.today(),
+  keywords: prelude.info.stichwörter
+)
+
+// ------------------------------------------
+// Configure fonts and headings
+// ------------------------------------------
 
 // set global text parameter
 #set text(
@@ -14,7 +30,7 @@
   size: prelude.to_pt(prelude.format.font-size),
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language
 )
@@ -25,7 +41,7 @@
   size: prelude.to_pt(prelude.format.font-size),
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language
 )
@@ -35,11 +51,10 @@
   size: prelude.to_pt(prelude.format.font-size) * 2,
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language,
-  weight: "regular",
-  baseline: 1em
+  weight: "regular"
 )
 
 #show heading.where(level: 2): set text(
@@ -47,7 +62,7 @@
   size: prelude.to_pt(prelude.format.font-size) * 1.5,
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language,
   weight: "regular"
@@ -58,11 +73,15 @@
   size: prelude.to_pt(prelude.format.font-size) * 1.25,
   ligatures: prelude.format.ligratures,
   hyphenate: prelude.format.hyphenate,
-  alternates: prelude.format.ligratures,
+  alternates: false,
   discretionary-ligatures: prelude.format.ligratures,
   lang: prelude.format.language,
   weight: "regular"
 )
+
+// ------------------------------------------
+// Setup paragraphs
+// ------------------------------------------
 
 // use block element as paragraph
 // set block settings for every paragraph
@@ -77,133 +96,18 @@
   first-line-indent: prelude.to_cm(prelude.format.first-line-indent)
 )
 
-// set PDF meta information
-#set document(
-  author: prelude.info.autor,
-  date: datetime.today(),
-  keywords: prelude.info.stichwörter
-)
+// ------------------------------------------
+// Start of content
+// ------------------------------------------
 
-#set heading(numbering: none)
-#set page(numbering: "I.", footer: "")
-
-#include "pages/title.typ"
-#include "pages/declaration-of-indipendence.typ"
-#include "pages/confidential-clause.typ"
-
-#set page(
-  binding: left,
-  header-ascent: 1em,
-  header: locate(loc => {
-    text(size: 12pt)[
-      #prelude.info.titel
-      #v(-2em)
-      #align(right, counter(page).display("I."))
-      #v(-1em)
-      #line(length: 100%)
-    ]
-  }),
-  footer: ""
-)
-
-#include "pages/gender-note.typ"
-#include "pages/working-packages.typ"
-
-#let heading_outline_title = if prelude.format.language == "de" [
-  Inhaltsverzeichnis
-] else if prelude.format.language == "en" [
-  Table of contents
-] else [
-  #panic("no translation for language: ", prelude.format.language)
-]
-#outline(title: heading_outline_title, indent: auto)
-
-#pagebreak()
-
-#let image_outline_title = if prelude.format.language == "de" [
-  Abbildungsverzeichnis
-] else if prelude.format.language == "en" [
-  List of figures
-] else [
-  #panic("no translation for language: ", prelude.format.language)
-]
-#outline(
-  title: "Abbildungsverzeichnis",
-  target: figure.where(kind: image),
-)
-
-#pagebreak()
-
-#let table_outline_title = if prelude.format.language == "de" [
-  Tabellensverzeichnis
-] else if prelude.format.language == "en" [
-  List of tables
-] else [
-  #panic("no translation for language: ", prelude.format.language)
-]
-#outline(
-  title: table_outline_title,
-  target: figure.where(kind: table),
-)
-
-#pagebreak()
-
-#let raw_outline_title = if prelude.format.language == "de" [
-  Quelltextverzeichnis
-] else if prelude.format.language == "en" [
-  Table of source code
-] else [
-  #panic("no translation for language: ", prelude.format.language)
-]
-#outline(
-  title: raw_outline_title,
-  target: figure.where(kind: raw),
-)
-
-#pagebreak()
-
-// for creating glossary
-#import "@preview/glossarium:0.2.6": make-glossary, print-glossary, gls, glspl 
-#show: make-glossary
-
-#if prelude.format.language == "de" [
-  = Glossar
-] else if prelude.format.language == "en" [
-  = Glossary
-] else [
-  #panic("no translation for language: ", prelude.format.language)
-]
-
-// read all entries from config file
-#let glossary = yaml("../conf/glossary.yaml")
-// destination array
-#let glossary_entries = ()
-
-// parse TOML entries into correct format
-#if glossary.glossary != none {
-  for entry in glossary.glossary {
-    let short = entry.at("short", default: none)
-    let long  = entry.at("long", default: none)
-    let desc  = entry.at("desc", default: none)
- 
-    if short == none {
-      panic("Key of glossary term must be specified")
-    }
-
-    glossary_entries.push((key: short, short: short, long: long, desc: desc))
-  }
-}
-
-#print-glossary(glossary_entries)
-
-#pagebreak()
-
-// reset page counter
-#counter(page).update(0)
-
-= Abteilung
+#include "content/audition.typ"
+#include "content/preface.typ"
+#include "content/outline.typ"
 
 #set heading(numbering: "1.")
+
+// start numbering pages with numeric digits
+#set page(numbering: "1.")
 
 #let filter_heading(heading) = {
   heading.level == 1
@@ -211,57 +115,26 @@
 
 #set page(
   binding: left,
-  header-ascent: 1em,
+  header-ascent: 2em,
   header: locate(loc => {
-    align(left, context [
-      #let current_heading = query(selector(heading).after(here())).filter(filter_heading).first()
-      #let heading_depth = counter(heading).get().at(0) + 1
-
-      #heading_depth
-      #h(0.25cm)
-      #current_heading.body
-    ])
-    v(-2em)
-    align(right, counter(page).display("1"))
-    v(-1em)
-    line(length: 100%)
+    let current_heading = query(selector(heading).after(here())).filter(filter_heading).first()
+    let heading_depth = counter(heading).get().at(0) + 1
+    table(columns: (1fr, auto),
+      align: (left, right),
+      stroke: none,
+      inset: (top: 0pt, bottom: 0.5em, left: 0pt, right: 0pt),
+      text(size: prelude.to_pt(prelude.format.font-size))[#heading_depth #current_heading.body],
+      text(size: prelude.to_pt(prelude.format.font-size), counter(page).display("1")),
+      table.hline()
+    )
   }),
   footer: ""
 )
 
-#set page(numbering: "1.")
+#include "pages/introduction.typ"
 
-= Kapitel
+// ------------------------------------------
+// Actual work pages follow here
+// ------------------------------------------
 
-== Überschrift 2
-
-#pagebreak()
-
-#lorem(200)
-
-= Kapitel 2
-
-=== Überschrift 3
-
-#lorem(50)
-
-#pagebreak()
-
-#set heading(numbering: none)
-#set page(
-  header: locate(loc => {
-    align(left, context [
-      #let current_heading = query(selector(heading).after(here())).filter(filter_heading).first()
-      #current_heading.body
-    ])
-    v(-2em)
-    align(right, counter(page).display("1"))
-    v(-1em)
-    line(length: 100%)
-  }),
-)
-
-#bibliography(
-  style: "ieee",
-  "../conf/bibliography.bib"
-)
+#include "content/bibliography.typ"
