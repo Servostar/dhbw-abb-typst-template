@@ -138,3 +138,5 @@
 // ------------------------------------------
 
 #include "content/bibliography.typ"
+
+#include "pages/appendix.typ"
