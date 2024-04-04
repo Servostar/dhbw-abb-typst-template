@@ -15,8 +15,8 @@
 
 // set PDF meta information
 #set document(
+  title: prelude.info.titel,
   author: prelude.info.autor,
-  date: datetime.today(),
   keywords: prelude.info.stichwörter
 )
 
