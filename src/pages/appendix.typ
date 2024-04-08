@@ -28,12 +28,27 @@
 
 #set heading(numbering: none)
 
-= Appendix
+#if prelude.format.language == "de" [
+  = Anhang
+] else if prelude.format.language == "en" [
+  = Appendix
+] else [
+  #panic("no translation for language: ", prelude.format.language)
+]
 
 #set heading(numbering: "A.1")
 
 // reset page counter
 #counter(heading).update(1)
+
+#let appendix(text) = [
+  #heading(
+    supplement: [Appendix],
+    level: 2,
+    numbering: "A.1",
+  )[#text]
+  <#text>
+]
 
 // ------------------------------------------
 // Put your appendencies here and link them
@@ -42,10 +57,9 @@
 
 // Example:
 //
-// == Appendix title
-// <appendix-section-link-name>
+// #appendix([Titel])
 //
 // Some appendix content goes here
 
-// Then reference with in the document:
-// @appendix-section-link-name
+// Then reference it in the document:
+// @Titel

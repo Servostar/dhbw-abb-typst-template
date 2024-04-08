@@ -28,54 +28,69 @@
   footer: ""
 )
 
-#let heading_outline_title = if prelude.format.language == "de" [
-  Inhaltsverzeichnis
+#set heading(supplement: [Heading])
+#set page(numbering: "I.", footer: "")
+
+#if prelude.format.language == "de" [
+  = Inhaltsverzeichnis
 ] else if prelude.format.language == "en" [
-  Table of contents
+  = Table of contents
 ] else [
   #panic("no translation for language: ", prelude.format.language)
 ]
-#outline(title: heading_outline_title, indent: auto)
+
+#par(first-line-indent: 0pt)[
+  #show outline.entry.where(
+    level: 1
+  ): it => {
+    strong(it)
+  }
+
+  #outline(title: none, indent: auto, target: heading.where(supplement: [Heading]))
+]
 
 #pagebreak()
 
-#let image_outline_title = if prelude.format.language == "de" [
-  Abbildungsverzeichnis
+#if prelude.format.language == "de" [
+  = Abbildungsverzeichnis
 ] else if prelude.format.language == "en" [
-  List of figures
+  = List of figures
 ] else [
   #panic("no translation for language: ", prelude.format.language)
 ]
+
 #outline(
-  title: image_outline_title,
+  title: none,
   target: figure.where(kind: image),
 )
 
 #pagebreak()
 
-#let table_outline_title = if prelude.format.language == "de" [
-  Tabellensverzeichnis
+#if prelude.format.language == "de" [
+  = Tabellensverzeichnis
 ] else if prelude.format.language == "en" [
-  List of tables
+  = List of tables
 ] else [
   #panic("no translation for language: ", prelude.format.language)
 ]
+
 #outline(
-  title: table_outline_title,
+  title: none,
   target: figure.where(kind: table),
 )
 
 #pagebreak()
 
-#let raw_outline_title = if prelude.format.language == "de" [
-  Quelltextverzeichnis
+#if prelude.format.language == "de" [
+  = Quelltextverzeichnis
 ] else if prelude.format.language == "en" [
-  Table of source code
+  = List of source code
 ] else [
   #panic("no translation for language: ", prelude.format.language)
 ]
+
 #outline(
-  title: raw_outline_title,
+  title: none,
   target: figure.where(kind: raw),
 )
 
@@ -98,7 +113,7 @@
 // destination array
 #let glossary_entries = ()
 
-// parse TOML entries into correct format
+// parse YAML entries into correct format
 #if glossary.glossary != none {
   for entry in glossary.glossary {
     let short = entry.at("short", default: none)
@@ -114,6 +129,21 @@
 }
 
 #print-glossary(glossary_entries)
+
+#pagebreak()
+
+#if prelude.format.language == "de" [
+  = Anhangsverzeichnis
+] else if prelude.format.language == "en" [
+  = List of appendencies
+] else [
+  #panic("no translation for language: ", prelude.format.language)
+]
+
+#outline(
+  title: none,
+  target: heading.where(supplement: [Appendix]),
+)
 
 // reset page counter
 #counter(page).update(0)

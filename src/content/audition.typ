@@ -18,7 +18,7 @@
 
 #import "../prelude.typ" as prelude
 
-#set heading(numbering: none)
+#set heading(numbering: none, supplement: [Heading])
 #set page(numbering: "I.", footer: "")
 
 #include "../pages/title.typ"

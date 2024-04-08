@@ -12,6 +12,9 @@
 
 #import "../prelude.typ" as prelude
 
+#set heading(supplement: [Heading])
+#set page(numbering: "I.", footer: "")
+
 #set page(
   binding: left,
   header-ascent: 2em,

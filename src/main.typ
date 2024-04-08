@@ -131,6 +131,8 @@
   footer: ""
 )
 
+#set heading(supplement: [Heading])
+
 #include "pages/introduction.typ"
 
 // ------------------------------------------
