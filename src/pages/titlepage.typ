@@ -1,5 +1,7 @@
 
-#let new_title_page() = [
+#let new_title_page(
+  thesis,
+  author) = context [
 
   #let LogoHeight = 1.5cm
 
@@ -11,113 +13,112 @@
     // we need two, so make both half the page width
     columns: (50%, 50%),
     // left align logo of ABB
-    align(left, image("../../res/svg/ABB.svg", height: LogoHeight)),
+    align(left, image("res/ABB.svg", height: LogoHeight)),
     // right align logo of DHBW
-    align(right, image("../../res/svg/DHBW.svg", height: LogoHeight))
-  )
+    align(right, image("res/DHBW.svg", height: LogoHeight)))
 
   // title
   #v(2cm)
-  #prelude.title(prelude.info.titel)
+  #text(size: 2em, weight: "semibold", thesis.title)
 
   // subtitle
-  #prelude.subtitle(prelude.info.untertitel)
+  #text(size: 1.5em, thesis.subtitle)
 
   // type of paper
   #v(1cm)
-  #prelude.largetext(prelude.info.typ)
+  #text(size: 1.5em, weight: "bold", thesis.kind)
 
   // number of semester
-  #if prelude.format.language == "de" [
-    Praxisphase des #prelude.info.semester Studienjahrs
-  ] else if prelude.format.language == "en" [
-    Practical phase of the #prelude.info.semester academic year
+  #if text.lang == "de" [
+    Praxisphase des #author.semester Studienjahrs
+  ] else if text.lang == "en" [
+    Practical phase of the #author.semester academic year
   ] else [
-    #panic("no translation for language: ", prelude.format.language)
+    #context panic("no translation for language: ", text.lang)
   ]
 
-  // fakulty
+  // faculty
   #pad(top: 0.5cm)[
-    #if prelude.format.language == "de" [
-      an der Fakultät für #prelude.info.fakultät
+    #if text.lang == "de" [
+      an der Fakultät für #author.faculty
       #linebreak()
-      im Studiengang #prelude.info.studiengang
-    ] else if prelude.format.language == "en" [
-      at the Faculty of #prelude.info.fakultät
+      im Studiengang #author.program
+    ] else if text.lang == "en" [
+      at the Faculty of #author.faculty
       #linebreak()
-      in the degree program #prelude.info.studiengang
+      in the degree program #author.program
     ] else [
-      #panic("no translation for language: ", prelude.format.language)
+      #context panic("no translation for language: ", text.lang)
     ]
   ]
 
   // university
   #pad(top: 0.5cm)[
-    #if prelude.format.language == "de" [
+    #if text.lang == "de" [
       an der
-    ] else if prelude.format.language == "en" [
+    ] else if text.lang == "en" [
       at
     ] else [
-      #panic("no translation for language: ", prelude.format.language)
+      #context panic("no translation for language: ", text.lang)
     ]
     #linebreak()
-    #prelude.info.universität
+    #author.university
   ]
 
   #set align(bottom + left)
 
-  #if prelude.format.language == "de" [
+  #if text.lang == "de" [
     #table(
       columns: 2,
       column-gutter: 1cm,
       align: left,
       stroke: none,
       
-      "Verfasser:",
-      prelude.info.autor,
+      [*Verfasser:*],
+      author.name,
 
-      "Bearbeitungszeitraum:",
-      prelude.info.bearbeitungszeitraum,
+      [*Bearbeitungszeitraum:*],
+      thesis.timeframe,
 
-      "Matrikelnummer, Kurs:",
-      str(prelude.info.matrikelnummer) + ", " + prelude.info.studiengang,
+      [*Matrikelnummer, Kurs:*],
+      str(author.matriculation-number) + ", " + author.course,
 
-      "Ausbildungsbetrieb:",
-      prelude.info.betrieb,
+      [*Ausbildungsbetrieb:*],
+      author.company,
 
-      "Betrieblicher Betreuer:",
-      prelude.info.betreuer,
+      [*Betrieblicher Betreuer:*],
+      author.supervisor,
 
-      "Abgabedatum:",
-      prelude.info.abgabe
+      [*Abgabedatum:*],
+      thesis.submission-date
     )
-  ] else if prelude.format.language == "en" [
+  ] else if text.lang == "en" [
     #table(
       columns: 2,
       column-gutter: 1cm,
       align: left,
       stroke: none,
       
-      "Author:",
-      prelude.info.autor,
+      [*Author:*],
+      author.name,
 
-      "Editing period:",
-      prelude.info.bearbeitungszeitraum,
+      [*Editing period:*],
+      thesis.timeframe,
 
-      "Matriculation number, course:",
-      str(prelude.info.matrikelnummer) + ", " + prelude.info.studiengang,
+      [*Matriculation number, course:*],
+      str(author.matriculation-number) + ", " + author.course,
 
-      "Training company:",
-      prelude.info.betrieb,
+      [*Training company:*],
+      author.company,
 
-      "Company supervisor:",
-      prelude.info.betreuer,
+      [*Company supervisor:*],
+      author.supervisor,
 
-      "Submission date:",
-      prelude.info.abgabe
+      [*Submission date:*],
+      thesis.submission-date
     )
   ] else [
-    #panic("no translation for language: ", prelude.format.language)
+    #context panic("no translation for language: ", text.lang)
   ]
 
   #pad(
@@ -126,19 +127,17 @@
       // set width of columns
       // we need two, so make both half the page width
       columns: (60%, 40%),
-      align(left, if prelude.format.language == "de" [
+      align(left, if text.lang == "de" [
           Unterschrift des betrieblichen Betreuers
-        ] else if prelude.format.language == "en" [
+        ] else if text.lang == "en" [
           Signature of the company supervisor
         ] else [
-          #panic("no translation for language: ", prelude.format.language)
+          #context panic("no translation for language: ", text.lang)
         ]
       ),
       align(right, {line(length: 6cm)})
     )
   )
-
-  #pagebreak()
 
   #counter(page).update(1)
 ]
