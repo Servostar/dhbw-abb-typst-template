@@ -3,7 +3,8 @@
   thesis,
   author) = context [
 
-    #if text.lang == "de" [
+  #v(2em)
+  #if text.lang == "de" [
     #text(size: 20pt, weight: "semibold", font: "Montserrat", "Sperrvermerk")
   ] else if text.lang == "en" [
     #text(size: 20pt, weight: "semibold", font: "Montserrat", "Confidentiality statement")

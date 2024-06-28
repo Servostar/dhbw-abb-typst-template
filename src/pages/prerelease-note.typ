@@ -1,6 +1,7 @@
 
 #let new_prerelease_note(thesis, author) = context [
 
+  #v(2em)
   #if text.lang == "de" [
     #text(size: 20pt, weight: "semibold", font: "Montserrat", "Vorabfassung")
   ] else if text.lang == "en" [

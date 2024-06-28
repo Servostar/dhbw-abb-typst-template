@@ -33,14 +33,20 @@
 
   #set raw(tab-size: 4)
 
+  #set block(spacing: 2em)
+  #set par(
+    justify: true,
+    first-line-indent: 1em,
+    leading: 1em)
+
   #doc
 ]
 
-#let HeaderPaddingBottom = 3em
+#let HeaderPaddingBottom = 1.5em
 #let LogoHeight = 3em
-#let HeaderUnderlinePaddingTop = 8pt
+#let HeaderUnderlinePaddingTop = 0pt
 
-#let prelude_styled(doc: content, thesis) = context [
+#let prelude_styled(body: content, thesis) = context [
   #set page(
     header-ascent: HeaderUnderlinePaddingTop + HeaderPaddingBottom,
     numbering: "I",
@@ -56,5 +62,40 @@
       #line(length: 100%)
     ])
 
-  #doc
+  #body
+]
+
+#let content_styled(body: content, thesis) = [
+  #set heading(numbering: "1.")
+  #page(
+    header-ascent: HeaderUnderlinePaddingTop + HeaderPaddingBottom,
+    numbering: "1/1",
+    footer-descent: 1em,
+    margin: (top: 2.5cm + LogoHeight + HeaderUnderlinePaddingTop + HeaderPaddingBottom, bottom: 2.5cm + 1em),
+    header: context [
+      #let headers-before = query(selector(heading.where(numbering: "1.", level: 1)).before(here()))
+
+      #let header-title = thesis.title
+
+      #if headers-before.len() > 0 {
+        header-title = headers-before.last().body
+      } else {
+        let headers-after = query(selector(heading.where(numbering: "1.", level: 1)).after(here()))
+
+        if headers-after.len() > 0 {
+          header-title = headers-after.first().body
+        }
+      }
+
+      #grid(
+        columns: (1fr, auto),
+        align: (horizon, bottom),
+        context [ _ #header-title _ ],
+        image("pages/res/DHBW.svg", height: LogoHeight)
+      )
+      #v(HeaderUnderlinePaddingTop - 1em)
+      #line(length: 100%)
+    ])[
+    #body
+  ]
 ]

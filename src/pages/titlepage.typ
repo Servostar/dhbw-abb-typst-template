@@ -28,23 +28,14 @@
   #v(1cm)
   #text(size: 1.5em, weight: "bold", thesis.kind)
 
-  // number of semester
-  #if text.lang == "de" [
-    Praxisphase des #author.semester Studienjahrs
-  ] else if text.lang == "en" [
-    Practical phase of the #author.semester academic year
-  ] else [
-    #context panic("no translation for language: ", text.lang)
-  ]
-
   // faculty
   #pad(top: 0.5cm)[
     #if text.lang == "de" [
-      an der Fakultät für #author.faculty
+      Praxisphase des #author.semester Studienjahrs an der Fakultät für #author.faculty
       #linebreak()
       im Studiengang #author.program
     ] else if text.lang == "en" [
-      at the Faculty of #author.faculty
+      Practical phase of the #author.semester academic year at the Faculty of #author.faculty
       #linebreak()
       in the degree program #author.program
     ] else [

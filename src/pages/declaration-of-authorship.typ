@@ -1,6 +1,7 @@
 
 #let new_declaration_of_authorship(thesis, author) = context [
 
+  #v(2em)
   #if text.lang == "de" [
     #text(size: 20pt, weight: "semibold", font: "Montserrat", "Selbständigkeitserklärung")
   ] else if text.lang == "en" [
