@@ -17,7 +17,11 @@
 
 #lorem(15)
 
-$ integral_2^8 4x^2 $
+$
+  angle.l a, b angle.r &= arrow(a) dot arrow(b) \
+                       &= a_1 b_1 + a_2 b_2 + ... a_n b_n \
+                       &= sum_(i=1)^n a_i b_i.
+$
 
 #figure(image("digitaldog.jpg", height: 480pt), caption: [ Some image caption ])
 

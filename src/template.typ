@@ -21,6 +21,7 @@
     #import "pages/prerelease-note.typ": new_prerelease_note
     #import "pages/outline.typ": new_outline
     #import "pages/abstract.typ": new_abstract
+    #import "pages/glossar.typ": new-glossar
 
     #set text(lang: "de", region: "de")
 
@@ -46,6 +47,8 @@
       abstract: "",
     )
 
+    #let glossary = ()
+
     // preppend title page
     #new_title_page(thesis, author)
 
@@ -64,13 +67,14 @@
 
       #pagebreak(weak: true)
       #new_abstract(thesis)
+
+      #pagebreak(weak: true)
+      #new-glossar(glossary)
     ])
 
     #content_styled(thesis, body: [
       // code of document follows here
       #doc
     ])
-
-
   ])
 ]
