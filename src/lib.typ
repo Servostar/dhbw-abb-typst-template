@@ -8,9 +8,11 @@
 // License: MIT
 
 // start of template pages and styles
-#let dhbw-template(config: dictionary, doc: content) = [
+#let dhbw-template(config: dictionary, body) = [
 
   #import "style.typ": global_styled_doc, content_styled, end_styled
+
+  #let doc = body
 
   // set document properties
   #set document(
@@ -48,6 +50,9 @@
     #new_prerelease_note(config)
 
     #pagebreak(weak: true)
+    #new_abstract(config)
+
+    #pagebreak(weak: true)
     #new_outline()
 
     // glossary is built inline here because the links must be 
@@ -60,9 +65,6 @@
     #heading(supplement: [outline], "Glossar")
 
     #print-glossary(config.thesis.glossary)
-
-    #pagebreak(weak: true)
-    #new_abstract(config)
 
     #pagebreak(weak: true)
     #counter(page).update(1)

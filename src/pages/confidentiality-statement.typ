@@ -33,7 +33,7 @@
 
   #if text.lang == "de" [
     darf weder als Ganzes noch in Auszügen Personen außerhalb des Prüfungsprozesses und des Evalua-tionsverfahrens zugänglich gemacht werden, sofern keine anderslautende Genehmigung der Ausbildungsstätte vorliegt.
-  ] else if text.lang = "en" [
+  ] else if text.lang == "en" [
     may not be made accessible to persons outside the examination process and the evaluation procedure, either as a whole or in excerpts, unless otherwise authorized by the training institution.
   ]
 

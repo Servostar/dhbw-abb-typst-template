@@ -127,11 +127,6 @@
 ]
 
 #let content_styled(config: dictionary, body: content) = [
-  // setup equate for sub equation labeling
-  #import "@preview/equate:0.2.0": equate
-  #show: equate.with(breakable: true, sub-numbering: true)
-  #set math.equation(numbering: "(1.1)")
-
   #set heading(numbering: "1.")
 
   #let thesis = config.thesis

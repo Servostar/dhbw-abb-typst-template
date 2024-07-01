@@ -36,7 +36,7 @@
   #if text.lang == "de" [
     handelt es sich _nicht_ um die fertige Fassung. Das Dokument kann Inhaltliche-, Grammatikalische- sowie Format-Fehler enthalten. Das Dokument ist im Rahmen der Aufgabenstellung von Seiten der #author.university nicht zur Bewertung freigegeben und ein anderer Verwendungszweck als eine Vorschau ist nicht gestattet.
   ] else if text.lang == "en" [
-    is _not_ the final version. The document may contain content, grammatical and format errors. The document is not released for evaluation by #author.university within the scope of the assignment and any use other than a preview is not permitted.
+    is not the final version. The document may contain errors in content, grammar and formatting. The document may not be released for evaluation to #author.university as part of the assignment, and any use other than a preview is not permitted.
   ]
 
   #v(1em)

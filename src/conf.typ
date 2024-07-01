@@ -6,5 +6,3 @@
 // Author: Sven Vogel
 // Edited: 27.06.2024
 // License: MIT
-
-
