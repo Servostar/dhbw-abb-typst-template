@@ -10,7 +10,7 @@
 // start of template pages and styles
 #let dhbw-template(config: dictionary, doc: content) = [
 
-  #import "style.typ": global_styled_doc, prelude_styled, content_styled, end_styled
+  #import "style.typ": global_styled_doc, content_styled, end_styled
 
   // set document properties
   #set document(
@@ -37,22 +37,18 @@
 
     // prelude includes: title, declaration of authorship, confidentiality statement, outline and abstract
     // these will have roman page numbers
-    #prelude_styled(config: config, body: [
-      #pagebreak(weak: true)
-      #new_declaration_of_authorship(config)
 
-      #pagebreak(weak: true)
-      #new_confidentiality_statement_page(config)
+    #pagebreak(weak: true)
+    #new_declaration_of_authorship(config)
 
-      #pagebreak(weak: true)
-      #new_prerelease_note(config)
+    #pagebreak(weak: true)
+    #new_confidentiality_statement_page(config)
 
-      #pagebreak(weak: true)
-      #new_outline()
+    #pagebreak(weak: true)
+    #new_prerelease_note(config)
 
-      #pagebreak(weak: true)
-      #new_abstract(config)
-    ])
+    #pagebreak(weak: true)
+    #new_outline()
 
     // glossary is built inline here because the links must be 
     // exposed to the entire document
@@ -60,7 +56,14 @@
     #show: make-glossary
 
     #pagebreak(weak: true)
+
+    #heading(supplement: [outline], "Glossar")
+
     #print-glossary(config.thesis.glossary)
+
+    #pagebreak(weak: true)
+    #new_abstract(config)
+
     #pagebreak(weak: true)
     #counter(page).update(1)
 

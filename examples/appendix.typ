@@ -1,5 +1,6 @@
 
 = Ein Text im Anhang
+#label("Anhang-A")
 
 #lorem(50)
 

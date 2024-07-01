@@ -55,21 +55,28 @@
   
   pagebreak(weak: true)
   outline(
+      target: heading.where(supplement: [chapter]),
       title: heading(level: 3, title),
       indent: auto)
 }
 
 #let render_appendix_outline() = context {
-  if query(heading.where(supplement: [appendix])).len() > 0 {
+  let supplement = if text.lang == "en" {
+    [Appendix]
+  } else {
+    [Anhang]
+  }
+
+  if query(heading.where(supplement: supplement)).len() > 0 {
     let title = if (text.lang == "de") {
-        "Anhangsverzeichnis"
-      } else if text.lang == "en" {
-        "Table of Appendices"
-      }
+      "Anhangsverzeichnis"
+    } else if text.lang == "en" {
+      "Table of Appendices"
+    }
     
     pagebreak(weak: true)
     outline(
-        target: heading.where(supplement: [appendix]),
+        target: heading.where(supplement: supplement),
         title: heading(level: 3, title),
         indent: auto)
   }
