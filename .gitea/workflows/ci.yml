@@ -9,11 +9,7 @@ jobs:
       - run: echo "This job is now running on a ${{ runner.os }}"
       - run: echo "The name of your branch is ${{ gitea.ref }} and your repository is ${{ gitea.repository }}."
       - uses: actions/checkout@v3
-      - uses: typst-community/setup-typst@v3
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: echo "The ${{ gitea.repository }} repository has been cloned to the runner."
-      - name: Install dependencies
-        run: apt update -y
-      - uses: typst-community/setup-typst@v3
-        with:
-          typst-version: '0.11.0'
+      - run: cargo install --locked typst-cli
       - run: bash run-ci.sh
