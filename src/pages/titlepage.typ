@@ -1,21 +1,10 @@
 
-#let new_title_page(
-  thesis,
-  author) = context [
+#let new_title_page(config) = context [
 
-  #let LogoHeight = 1.5cm
+  #let thesis = config.thesis
+  #let author = config.author
 
   #set align(center)
-
-  // logo of ABB and DHBW
-  #grid(
-    // set width of columns
-    // we need two, so make both half the page width
-    columns: (50%, 50%),
-    // left align logo of ABB
-    align(left, image("res/ABB.svg", height: LogoHeight)),
-    // right align logo of DHBW
-    align(right, image("res/DHBW.svg", height: LogoHeight)))
 
   // title
   #v(2cm)
@@ -130,5 +119,5 @@
     )
   )
 
-  #counter(page).update(1)
+  #counter(page).update(0)
 ]

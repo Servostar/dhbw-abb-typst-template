@@ -1,5 +1,8 @@
 
-#let new_prerelease_note(thesis, author) = context [
+#let new_prerelease_note(config) = context [
+
+  #let thesis = config.thesis
+  #let author = config.author
 
   #v(2em)
   #if text.lang == "de" [

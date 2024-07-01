@@ -1,7 +1,8 @@
 
-#let new_confidentiality_statement_page(
-  thesis,
-  author) = context [
+#let new_confidentiality_statement_page(config) = context [
+
+  #let thesis = config.thesis
+  #let author = config.author
 
   #v(2em)
   #if text.lang == "de" [

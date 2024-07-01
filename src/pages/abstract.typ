@@ -1,6 +1,8 @@
 
-#let new_abstract(thesis) = context [
+#let new_abstract(config) = context [
   
+  #let thesis = config.thesis
+
   #pagebreak(weak: true)
   #align(center + horizon)[
     #if text.lang == "de" [

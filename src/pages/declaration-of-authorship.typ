@@ -1,5 +1,8 @@
 
-#let new_declaration_of_authorship(thesis, author) = context [
+#let new_declaration_of_authorship(config) = context [
+
+  #let thesis = config.thesis
+  #let author = config.author
 
   #v(2em)
   #if text.lang == "de" [
