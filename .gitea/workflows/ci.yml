@@ -1,14 +1,16 @@
 name: Gitea Action for checking typst compilation
-run-name: ${{ gitea.actor }} is performing typst compilation
+run-name: Performing Typst compilation
 on: [push]
 
 jobs:
-  Explore-Gitea-Actions:
+  run-ci-linux:
     runs-on: ubuntu-latest
+    env:
+      TYPST_INSTALL: /usr/local
     steps:
-      - run: echo "This job is now running on a ${{ runner.os }}"
-      - run: echo "The name of your branch is ${{ gitea.ref }} and your repository is ${{ gitea.repository }}."
-      - uses: actions/checkout@v3
-      - uses: typst-community/setup-typst@v3
-      - run: echo "The ${{ gitea.repository }} repository has been cloned to the runner."
-      - run: bash -c run-ci.sh
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install Typst CLI
+        run: curl -fsSL https://typst.community/typst-install/install.sh | sh
+      - name: Run CI
+        run: bash -c run-ci.sh
