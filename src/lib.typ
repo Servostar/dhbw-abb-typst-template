@@ -62,12 +62,14 @@
 
     #pagebreak(weak: true)
 
-    #heading(supplement: [outline], "Glossar")
+    #if "glossary" in config.thesis and config.thesis.glossary != none {
+      heading(supplement: [outline], "Glossar")
 
-    #print-glossary(config.thesis.glossary)
+      print-glossary(config.thesis.glossary)
 
-    #pagebreak(weak: true)
-    #counter(page).update(1)
+      pagebreak(weak: true)
+      counter(page).update(1)
+    } 
 
     // mark end of prelude
     #metadata("prelude terminate") <end-of-prelude>
