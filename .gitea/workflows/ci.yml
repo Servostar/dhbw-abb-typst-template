@@ -1,0 +1,16 @@
+name: Gitea Action for checking typst compilation
+run-name: Performing Typst compilation
+on: [push]
+
+jobs:
+  run-ci-linux:
+    runs-on: ubuntu-latest
+    env:
+      TYPST_INSTALL: /usr/local
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install Typst CLI
+        run: curl -fsSL https://typst.community/typst-install/install.sh | sh
+      - name: Run CI
+        run: bash -c ./run-ci.sh

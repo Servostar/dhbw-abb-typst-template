@@ -1,0 +1,16 @@
+[package]
+name = "dhbw-abb-typst-template"
+version = "0.1.0"
+entrypoint = "src/template.typ"
+authors = ["Sven Vogel <sven.vogel1@de.abb.com>"]
+license = "MIT"
+description = "Unoffical typst DHBW/ABB template for use as thesis and report works"
+repository = "https://git.montehaselino.de/DHBW/dhbw-abb-typst-template"
+keywords = ["dhbw", "abb", "thesis"]
+categories = ["paper", "thesis", "report"]
+exclude = ["examples"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "assets/thumbnail.png"

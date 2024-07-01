@@ -1,17 +1,26 @@
-#import "../prelude.typ" as prelude
+// .--------------------------------------------------------------------------.
+// |                                Abstract                                  |
+// '--------------------------------------------------------------------------'
 
-= Abstract
+// Author: Sven Vogel
+// Edited: 28.06.2024
+// License: MIT
 
-// abstract text goes here 
-#let abstract = [
-
-]
-
-// summary text goes here
-// and is only included if the language is set to german
-#if prelude.format.language == "de" [
+#let new_abstract(config) = context [
   
-  = Zusammenfassung
+  #let thesis = config.thesis
 
-  
+  #pagebreak(weak: true)
+  #align(center + horizon)[
+    #if text.lang == "de" [
+      = Zusammenfassung
+
+      #thesis.summary
+    ]
+    
+    #pagebreak(weak: true)
+    = Abstract
+
+    #thesis.abstract
+  ]
 ]
