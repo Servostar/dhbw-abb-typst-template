@@ -9,6 +9,7 @@ function abort() {
 
 echo "Running tests..."
 
+echo "Running test local-import..."
 typst compile tests/local-import/main.typ --root . || abort "local-import"
 
 echo "Tests completed successfully"
