@@ -1,17 +1,9 @@
 # Praxisbericht-Template-Typst
 
-Tempalte für Praxisberichte, T100, T200, T3000 und Bechelor Arbeiten. Im Gegensatz zu https://git.montehaselino.de/DHBW/Praxisbericht-Template wird Typst und nicht LaTeX als typsetting sprache verwendet.
+The template makes use of ABB and DHBW branding.
 
-## Geplante Features:
-- Inhaltsverzeichnis
-- Quelltextverzeichnis
-- Abbildungsverzechnis
-- Tabellenverzeichnis
-- Literaturverzeichnis
-- Glossar
-- Abkürzungsverzeichnis
-- Ligratures in code blöcken
-- Diagramme
-- Literatur
-- Fußnoten
-- Anhang
+## Format
+All pages have a margin of 2.5cm between header/footer/content and the page border.
+Header and footer do not overlap into this margin.
+
+Bibliography is formated with the IEEE style. Appendecies make use of the APA style.

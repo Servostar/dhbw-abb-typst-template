@@ -2,6 +2,8 @@
 #import "../src/template.typ": dhbw-template
 
 #let config = (
+  lang: "de",
+  region: "de",
   author: (
     name: "Sven Vogel",
     semester: 4,
@@ -20,7 +22,7 @@
     kind: "T2000",
     summary: "",
     abstract: "",
-    keywods: ( "IT", "PROFINET" ),
+    keywords: ( "IT", "PROFINET" ),
     bibliography: bibliography("refs.yml"),
     glossary: (
         (
@@ -33,12 +35,12 @@
         (
           key: "potato",
           short: "potato",
-          // "plural" will be used when "short" should be pluralized
           plural: "potatoes",
           desc: [#lorem(10)],
           group: "Begriffe"
         ),
-    )
+    ),
+    appendices: include "appendix.typ"
 ))
 
 #show: doc => dhbw-template(config: config, doc: doc)

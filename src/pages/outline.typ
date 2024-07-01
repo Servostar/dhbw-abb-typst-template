@@ -59,6 +59,23 @@
       indent: auto)
 }
 
+#let render_appendix_outline() = context {
+  if query(heading.where(supplement: [appendix])).len() > 0 {
+    let title = if (text.lang == "de") {
+        "Anhangsverzeichnis"
+      } else if text.lang == "en" {
+        "Table of Appendices"
+      }
+    
+    pagebreak(weak: true)
+    outline(
+        target: heading.where(supplement: [appendix]),
+        title: heading(level: 3, title),
+        indent: auto)
+  }
+}
+
+
 #let new_outline() = {
   show outline.entry.where(
     level: 1,
@@ -72,6 +89,8 @@
   render_table_outline()
 
   render_raw_outline()
+
+  render_appendix_outline()
 
   render_heading_outline()
 }

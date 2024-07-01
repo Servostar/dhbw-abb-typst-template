@@ -64,10 +64,12 @@
       let current-page = here().page()
       if current-page == 1{
         []
-      } else if query(<end-of-prelude>).first().location().page() <= current-page {
+      } else if query(<end-of-prelude>).first().location().page() > current-page {
+        numbering("I", nums.pos().first())
+      } else if query(<end-of-content>).first().location().page() >= current-page {
         numbering("1 / 1", ..nums)
       } else {
-        numbering("I", nums.pos().first())
+        numbering("a", nums.pos().first())
       }
     },
     header: context {
@@ -131,6 +133,15 @@
   #import "@preview/equate:0.2.0": equate
   #show: equate.with(breakable: true, sub-numbering: true)
   #set math.equation(numbering: "(1.1)")
+
+  #set heading(numbering: "1.")
+
+  #let thesis = config.thesis
+
+  #body
+]
+
+#let end_styled(config: dictionary, body: content) = [
 
   #set heading(numbering: "1.")
 

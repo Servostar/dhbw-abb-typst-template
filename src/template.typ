@@ -10,7 +10,13 @@
 // start of template pages and styles
 #let dhbw-template(config: dictionary, doc: content) = [
 
-  #import "style.typ": global_styled_doc, prelude_styled, content_styled
+  #import "style.typ": global_styled_doc, prelude_styled, content_styled, end_styled
+
+  // set document properties
+  #set document(
+    author: config.author.name,
+    keywords: config.thesis.keywords,
+    title: config.thesis.title)
 
   // apply global style to every element in the argument content
   #global_styled_doc(config: config, body: [
@@ -21,12 +27,16 @@
     #import "pages/prerelease-note.typ": new_prerelease_note
     #import "pages/outline.typ": new_outline
     #import "pages/abstract.typ": new_abstract
+    #import "pages/appendix.typ": show-appendix
 
-    #set text(lang: "de", region: "de")
+    // configure text locale
+    #set text(lang: config.lang, region: config.region)
 
     // preppend title page
     #new_title_page(config)
 
+    // prelude includes: title, declaration of authorship, confidentiality statement, outline and abstract
+    // these will have roman page numbers
     #prelude_styled(config: config, body: [
       #pagebreak(weak: true)
       #new_declaration_of_authorship(config)
@@ -44,24 +54,37 @@
       #new_abstract(config)
     ])
 
+    // glossary is built inline here because the links must be 
+    // exposed to the entire document
     #import "@preview/glossarium:0.4.1": make-glossary, print-glossary, gls, glspl
     #show: make-glossary
 
     #pagebreak(weak: true)
     #print-glossary(config.thesis.glossary)
     #pagebreak(weak: true)
+    #counter(page).update(1)
 
+    // mark end of prelude
     #metadata("prelude terminate") <end-of-prelude>
 
     #content_styled(config: config, body: [
       // code of document follows here
       #doc
+    ])
 
+    #metadata("content terminate") <end-of-content>
+
+    #end_styled(config: config, body: [
+      // add bibliography if set
       #if config.thesis.bibliography != none {
         pagebreak(weak: true)
         set bibliography(style: "ieee")
         config.thesis.bibliography
+        counter(page).update(1)
       }
+
+      // appendix
+      #show-appendix(config: config)
     ])
   ])
 ]
