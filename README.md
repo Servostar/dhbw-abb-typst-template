@@ -1,19 +1,15 @@
 
-<h1 align="center">DHBW-ABB Typst template</h1>
+# DHBW-ABB Typst template 📃
 
-<p align="center">
-<b>Unofficial</b> but feature rich Typst template for writing a thesis or report at DHBW with according ABB AG branding in mind.
-</p>
-<p align="center">
-<img src="https://img.shields.io/gitea/last-commit/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de">
-<img src="https://img.shields.io/gitea/v/release/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de&display_name=release"/>
-<img src="https://img.shields.io/badge/Typst-2B9CB0">
-<img src="https://img.shields.io/gitea/languages/count/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de"/>
-<img src=" https://img.shields.io/badge/license-MIT-ff0000"/>
-</p>
-<p align="center">
-<img width="500pt" src="https://git.montehaselino.de/DHBW/dhbw-abb-typst-template/raw/commit/cd325b7076da91e58849512539460a481e48ef4e/assets/thumbnail.png" />
-</p>
+![last-commit-bade](https://img.shields.io/gitea/last-commit/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de)
+![release-badge](https://img.shields.io/gitea/v/release/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de&display_name=release)
+![typst-badge](https://img.shields.io/badge/Typst-2B9CB0)
+![language-count-badge](https://img.shields.io/gitea/languages/count/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de)
+![license-badge](https://img.shields.io/badge/license-MIT-ff0000)
+
+**Unofficial** but feature rich Typst template for writing a thesis or report at DHBW with according ABB AG branding in mind.
+
+![thumbnail](https://git.montehaselino.de/DHBW/dhbw-abb-typst-template/raw/commit/cd325b7076da91e58849512539460a481e48ef4e/assets/thumbnail.png)
 
 ## Features
 
