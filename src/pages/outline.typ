@@ -4,6 +4,7 @@
 // can optionally insert a pagebreak after the outline
 // NOTE: will not render in case the listing is empty 
 #let render_filtered_outline(title: str, kind: selector) = context {
+
   let elems = query(figure.where(kind: kind), here())
   let count = elems.len()
   
@@ -82,8 +83,9 @@
   }
 }
 
-
 #let new_outline() = {
+  pagebreak(weak: true)
+
   show outline.entry.where(
     level: 1,
   ): it => {

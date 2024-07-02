@@ -1,6 +1,8 @@
 
 #let new_confidentiality_statement_page(config) = context [
 
+  #pagebreak(weak: true)
+
   #let thesis = config.thesis
   #let author = config.author
 

@@ -1,6 +1,8 @@
 
 #let new_prerelease_note(config) = context [
 
+  #pagebreak(weak: true)
+
   #let thesis = config.thesis
   #let author = config.author
 

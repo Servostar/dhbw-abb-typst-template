@@ -1,6 +1,8 @@
 
 #let new_declaration_of_authorship(config) = context [
 
+  #pagebreak(weak: true)
+
   #let thesis = config.thesis
   #let author = config.author
 

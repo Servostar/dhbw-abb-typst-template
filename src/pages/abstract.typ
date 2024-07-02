@@ -8,6 +8,8 @@
 
 #let new_abstract(config) = context [
   
+  #pagebreak(weak: true)
+
   #let thesis = config.thesis
 
   #pagebreak(weak: true)

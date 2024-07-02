@@ -7,40 +7,38 @@
 // Edited: 27.06.2024
 // License: MIT
 
-#let HeaderPaddingBottom = 1.5em
-#let LogoHeight = 3em
-#let HeaderUnderlinePaddingTop = 0pt
-
 // global style of document
-#let global_styled_doc(config: dictionary, body: content) = context [
-  #let thesis = config.thesis
+#let global_styled_doc(config: dictionary, body: content) = context {
+  let thesis = config.thesis
+  let style = config.style
 
   // set page geometry
-  // paper format of A4
-  #set page(
-    paper: "a4",
-    margin: (left: 3cm, right: 2.5cm, top: 2.5cm, bottom: 2.5cm))
+  // and paper format
+  set page(
+    paper: style.page.format,
+    margin: style.page.margin)
 
-  #set text(
-    size: 12pt,
+  set text(
+    size: style.text.size,
     ligatures: true,
     hyphenate: true,
     dir: ltr,
-    font: "Open Sans")
+    font: style.text.font)
 
-  #show heading: set text(
-    font: "Montserrat",
+  show heading: set text(
+    font: style.heading.font,
     weight: "semibold")
 
-  #set heading(supplement: [chapter])
+  set heading(supplement: [chapter])
 
   // Set header spacing
-  #show heading.where(level: 1): it => v(2em) + it + v(1em)
-  #show heading.where(level: 2): it => v(1em) + it + v(0.5em)
-  #show heading.where(level: 3): it => v(0.5em) + it + v(0.25em)
+  show heading.where(level: 1): it => v(2em) + it + v(1em)
+  show heading.where(level: 2): it => v(1em) + it + v(0.5em)
+  show heading.where(level: 3): it => v(0.5em) + it + v(0.25em)
 
-  #set raw(tab-size: 4, theme: "res/github.tmTheme")
-  #show raw.where(block: true): code => {
+  // set theme for code blocks
+  set raw(tab-size: 4, theme: "res/github.tmTheme")
+  show raw.where(block: true): code => {
     show raw.line: line => {
       text(fill: gray)[#line.number]
       h(1em)
@@ -49,20 +47,23 @@
     code
   }
 
-  #set block(spacing: 2em)
-  #set par(
+  set block(spacing: 2em)
+  set par(
     justify: true,
     first-line-indent: 1em,
     leading: 1em)
 
-  #show link: set text(fill: red.darken(15%))
-  #show ref: set text(fill: red.darken(15%))
+  // give links a color
+  show link: set text(fill: style.link.color)
+  show ref: set text(fill: style.link.color)
 
-  #set heading(numbering: none)
-  #set page(
-    header-ascent: HeaderUnderlinePaddingTop + HeaderPaddingBottom,
+  set heading(numbering: none)
+  set page(
+    header-ascent: style.header.underline-top-padding + style.header.bottom-padding,
     footer-descent: 1em,
-    margin: (top: 2.5cm + LogoHeight + HeaderUnderlinePaddingTop + HeaderPaddingBottom, bottom: 2.5cm + 1em),
+    margin: (
+      top: style.page.margin.top + style.header.logo-height + style.header.underline-top-padding + style.header.bottom-padding,
+      bottom: style.page.margin.bottom + 1em),
     numbering: (..nums) => {
       let current-page = here().page()
       if current-page == 1{
@@ -84,9 +85,9 @@
           // we need two, so make both half the page width
           columns: (50%, 50%),
           // left align logo of ABB
-          align(left, image("res/ABB.svg", height: LogoHeight)),
+          align(left, image("res/ABB.svg", height: style.header.logo-height)),
           // right align logo of DHBW
-          align(right, image("res/DHBW.svg", height: LogoHeight)))
+          align(right, image("res/DHBW.svg", height: style.header.logo-height)))
 
       } else if query(<end-of-prelude>).first().location().page() <= here().page() {
         let headers-before = query(selector(heading.where(numbering: "1.", level: 1)).before(here()))
@@ -107,24 +108,24 @@
           columns: (1fr, auto),
           align: (horizon, bottom),
           context [ _ #header-title _ ],
-          image("res/DHBW.svg", height: LogoHeight))
+          image("res/DHBW.svg", height: style.header.logo-height))
         
-        v(HeaderUnderlinePaddingTop - 1em)
+        v(style.header.underline-top-padding - 1em)
         line(length: 100%)
       } else {
         grid(
           columns: (1fr, auto),
           align: (horizon, bottom),
           context [ _ #config.thesis.title _ ],
-          image("res/DHBW.svg", height: LogoHeight)
+          image("res/DHBW.svg", height: style.header.logo-height)
         )
-        v(HeaderUnderlinePaddingTop - 1em)
+        v(style.header.underline-top-padding - 1em)
         line(length: 100%)
       }
     })
 
-  #body
-]
+  body
+}
 
 #let content_styled(config: dictionary, body: content) = [
   #set heading(numbering: "1.")
