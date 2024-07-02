@@ -7,6 +7,9 @@ function abort() {
   exit 1
 }
 
+echo "Compiling template..."
+typst compile template/main.typ --root . || abort "template"
+
 echo "Running tests..."
 
 echo "Running test local-import..."
