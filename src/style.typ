@@ -89,7 +89,7 @@
       } else if query(<end-of-prelude>).first().location().page() > current-page {
         numbering("I", nums.pos().first())
       } else if query(<end-of-content>).first().location().page() >= current-page {
-        numbering("1 / 1", ..nums)
+        numbering("1 / 1", nums.pos().first(), counter(page).at(<end-of-content>).last())
       } else {
         numbering("a", nums.pos().first())
       }

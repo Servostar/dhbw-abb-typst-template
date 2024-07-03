@@ -64,8 +64,8 @@
       print-glossary(config.thesis.glossary)
 
       pagebreak(weak: true)
-      counter(page).update(1)
     } 
+    #counter(page).update(1)
 
     // mark end of prelude
     #metadata("prelude terminate") <end-of-prelude>
