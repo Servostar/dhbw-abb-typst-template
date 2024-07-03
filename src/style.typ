@@ -7,6 +7,21 @@
 // Edited: 27.06.2024
 // License: MIT
 
+#let watermark-color = luma(50%).transparentize(70%) 
+
+#let watermark() = rotate(-45deg,
+      rect(radius: 1em, inset: 1em, stroke: watermark-color, {
+        text(size: 48pt, weight: "bold", fill: watermark-color, "DRAFT")
+        linebreak()
+        text(size: 14pt, weight: "bold", fill: watermark-color)[
+          This page is part of a preliminary
+          #linebreak()
+          document version.
+          #linebreak()
+          #text(size: 10pt, "Further usage without the authors consent is not permitted.")
+        ]
+      }))
+
 // global style of document
 #let global_styled_doc(config: dictionary, body: content) = context {
   let thesis = config.thesis
@@ -59,6 +74,9 @@
 
   set heading(numbering: none)
   set page(
+    foreground: if config.draft {
+      watermark()
+    },
     header-ascent: style.header.underline-top-padding + style.header.bottom-padding,
     footer-descent: 1em,
     margin: (

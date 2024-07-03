@@ -45,7 +45,9 @@
     // these will have roman page numbers
     #new_declaration_of_authorship(config)
     #new_confidentiality_statement_page(config)
-    #new_prerelease_note(config)
+    #if config.draft {
+      new_prerelease_note(config)
+    }
     #new_abstract(config)
     #new_outline()
 

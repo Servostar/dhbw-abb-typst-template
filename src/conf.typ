@@ -11,6 +11,7 @@
 #let default-config = (
     lang: "en",
     region: "en",
+    draft: true,
     author: (
       name: "Sven Vogel",
       semester: 4,
