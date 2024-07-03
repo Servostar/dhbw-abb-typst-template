@@ -89,11 +89,25 @@
       } else if query(<end-of-prelude>).first().location().page() > current-page {
         numbering("I", nums.pos().first())
       } else if query(<end-of-content>).first().location().page() >= current-page {
-        numbering("1 / 1", nums.pos().first(), counter(page).at(<end-of-content>).last())
+        numbering("1", nums.pos().first())
       } else {
         numbering("a", nums.pos().first())
       }
     },
+    footer: context [
+      #set align(center)
+      #let page-counter = counter(page).get().first()
+      #let page-number = here().page()
+      #if page-number == 1 {
+        []
+      } else if query(<end-of-prelude>).first().location().page() > page-number {
+        numbering("I", page-counter)
+      } else if query(<end-of-content>).first().location().page() >= page-number {
+        numbering("1 / 1", page-counter, counter(page).at(<end-of-content>).last())
+      } else {
+        numbering("a", page-counter)
+      }
+    ],
     header: context {
       set align(left)
       if here().page() == 1 {
