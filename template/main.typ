@@ -25,6 +25,7 @@
       kind: "T2000",
       summary: summary,
       abstract: abstract,
+      preface: include "preface.typ",
       keywords: ( "IT", "other stuff" ),
       bibliography: bibliography("refs.bib"),
       glossary: glossary,

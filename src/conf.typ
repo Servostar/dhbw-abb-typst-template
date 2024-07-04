@@ -30,6 +30,7 @@
       kind: "T2000",
       summary: none,
       abstract: none,
+      preface: none,
       keywords: ( "IT", "other stuff" ),
       bibliography: none /* bibliography("refs.bib") */,
       glossary: none,

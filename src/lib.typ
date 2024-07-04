@@ -18,6 +18,7 @@
   #import "pages/prerelease-note.typ": new_prerelease_note
   #import "pages/outline.typ": new_outline
   #import "pages/abstract.typ": new_abstract
+  #import "pages/preface.typ": new-preface
   #import "pages/appendix.typ": show-appendix
 
   #let config = validate-config(config)
@@ -49,6 +50,7 @@
       new_prerelease_note(config)
     }
     #new_abstract(config)
+    #new-preface(config)
     #new_outline()
 
     // glossary is built inline here because the links must be 
