@@ -1,0 +1,26 @@
+name: release
+
+on: 
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Create release  
+        id: create-release
+        uses: https://gitea.com/actions/release-action@main
+        with:
+          files: |-
+            src/**
+            template/**
+            LICENSE
+            typst.toml
+            README.md
+            example.pdf
+          api_key: '${{secrets.RELEASE_TOKEN}}'
