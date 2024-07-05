@@ -62,6 +62,8 @@
     code
   }
 
+  show figure: set block(breakable: true)
+
   set block(spacing: 2em)
   set par(
     justify: true,
