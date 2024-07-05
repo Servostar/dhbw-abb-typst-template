@@ -26,6 +26,11 @@ Header and footer do not overlap into this margin in order to conform to univers
 Bibliography is formated with the IEEE style. <br>
 Appendecies make use of an abbreviation of APA style.
 
+Complies with ABB branding guidelines such as:
+- proper usage of the logo
+- respecting the logo safe area
+- brand colors (in syntax highlightning)
+
 ## Fonts
 
 Both fonts used in the document are licensed under the [Open Font License](https://openfontlicense.org/) and can be used for non-commercial as well as commercial purposes. They can be downloaded from google fonts:

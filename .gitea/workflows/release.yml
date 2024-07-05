@@ -14,6 +14,10 @@ jobs:
           fetch-depth: 0
       - name: Install Typst CLI
         run: curl -fsSL https://typst.community/typst-install/install.sh | sh -s "$TYPST_VERSION"
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
       - name: Run CI
         run: bash -c ./run-ci.sh
       - name: Setup go

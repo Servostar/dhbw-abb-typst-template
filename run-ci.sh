@@ -33,6 +33,7 @@ function enter-section() {
   log "INFO" "section $1 completed successfully"
 }
 
+enter-section "BUILD: ABB code theme" "./generate-theme.sh" 0
 enter-section "Compiling template..." "typst compile template/main.typ --root . example.pdf" 0
 enter-section "TEST: local template import" "typst compile tests/local-import/main.typ --root ." 0
 enter-section "TEST: invalid config case 1" "typst compile tests/invalid-config/test-case-1.typ --root ." 1
