@@ -9,7 +9,7 @@
 
 #let watermark-color = luma(50%).transparentize(70%) 
 
-#let watermark() = rotate(-45deg,
+#let watermark() = rotate(-22.5deg,
       rect(radius: 1em, inset: 1em, stroke: watermark-color, {
         text(size: 48pt, weight: "bold", fill: watermark-color, "DRAFT")
         linebreak()
@@ -26,12 +26,6 @@
 #let global_styled_doc(config: dictionary, body: content) = context {
   let thesis = config.thesis
   let style = config.style
-
-  // set page geometry
-  // and paper format
-  set page(
-    paper: style.page.format,
-    margin: style.page.margin)
 
   set text(
     size: style.text.size,
@@ -68,6 +62,7 @@
 
   set heading(numbering: none)
   set page(
+    paper: style.page.format,
     foreground: if config.draft {
       watermark()
     },
@@ -75,7 +70,9 @@
     footer-descent: 1em,
     margin: (
       top: style.page.margin.top + style.header.logo-height + style.header.underline-top-padding + style.header.bottom-padding,
-      bottom: style.page.margin.bottom + 1em),
+      bottom: style.page.margin.bottom + 1em,
+      left: style.page.margin.left,
+      right: style.page.margin.right),
     numbering: (..nums) => {
       let current-page = here().page()
       if current-page == 1{
