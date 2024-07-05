@@ -3,33 +3,32 @@
 #import "glossary.typ": glossary
 #import "abstract.typ": abstract, summary
 
-#show: dhbw-template.with(
-  config: (
-    lang: "en",
-    region: "en",
-    author: (
-      name: "Sven Vogel",
-      semester: 4,
-      program: "Informationtechnology",
-      course: "TINF19IT1",
-      faculty: "Technik",
-      university: "DHBW Mannheim",
-      company: "ABB AG",
-      supervisor: "Benny Goodman",
-      matriculation-number: 123456789),
-    thesis: (
-      title: "Unofficial ABB/DHBW Typst template",
-      subtitle: "for reports and thesises",
-      submission-date: "23rd march 2020",
-      timeframe: "1st january 2020 - 20th march 2020",
-      kind: "T2000",
-      summary: summary,
-      abstract: abstract,
-      preface: include "preface.typ",
-      keywords: ( "IT", "other stuff" ),
-      bibliography: bibliography("refs.bib"),
-      glossary: glossary,
-      appendices: include "appendix.typ")))
+#show: dhbw-template.with((
+  lang: "en",
+  region: "en",
+  author: (
+    name: "Sven Vogel",
+    semester: 4,
+    program: "Informationtechnology",
+    course: "TINF19IT1",
+    faculty: "Technik",
+    university: "DHBW Mannheim",
+    company: "ABB AG",
+    supervisor: "Benny Goodman",
+    matriculation-number: 123456789),
+  thesis: (
+    title: "Unofficial ABB/DHBW Typst template",
+    subtitle: "for reports and thesises",
+    submission-date: "23rd march 2020",
+    timeframe: "1st january 2020 - 20th march 2020",
+    kind: "T2000",
+    summary: summary,
+    abstract: abstract,
+    preface: include "preface.typ",
+    keywords: ( "IT", "other stuff" ),
+    bibliography: bibliography("refs.bib"),
+    glossary: glossary,
+    appendices: include "appendix.typ")))
 
 #import "@preview/wrap-it:0.1.0": wrap-content
 

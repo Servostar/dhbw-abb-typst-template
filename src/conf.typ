@@ -9,9 +9,13 @@
 
 // default configuration
 #let default-config = (
-    lang: "en",
-    region: "en",
+    // language settings used to make decisions about hyphenation and others
+    lang: "en",       // ISO 3166 language code of text: "de", "en"
+    region: "en",     // region code
+    // mark this thesis as draft
+    // Adds preleminarry note page and watermark
     draft: true,
+    // information about author(s)
     author: (
       name: "Sven Vogel",
       semester: 4,
@@ -22,12 +26,14 @@
       company: "ABB AG",
       supervisor: "Benny Goodman",
       matriculation-number: 123456789),
+    // information about thesis
     thesis: (
       title: "Unofficial ABB/DHBW Typst template",
-      subtitle: "for reports and thesises",
+      subtitle: "for reports and thesises",            // subtitle may be none
       submission-date: "23rd march 2020",
       timeframe: "1st january 2020 - 20th march 2020",
       kind: "T2000",
+      // translated version of abstract, only used in case language is not english
       summary: none,
       abstract: none,
       preface: none,
@@ -37,9 +43,11 @@
       appendices: none),
     style: (
       header: (
-        bottom-padding: 1.5em,
+        content-padding: 1.5em,
         underline-top-padding: 0pt,
         logo-height: 3em),
+      footer: (
+        content-padding: 1.5em),
       page: (
         format: "a4",
         margin: (

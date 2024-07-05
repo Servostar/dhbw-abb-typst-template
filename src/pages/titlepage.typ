@@ -1,3 +1,10 @@
+// .--------------------------------------------------------------------------.
+// |                                Titlepage                                 |
+// '--------------------------------------------------------------------------'
+
+// Author: Sven Vogel
+// Edited: 28.06.2024
+// License: MIT
 
 #let new_title_page(config) = context [
 
@@ -45,7 +52,7 @@
     #author.university
   ]
 
-  #set align(bottom + left)
+  #set align(horizon + left)
 
   #if text.lang == "de" [
     #table(
@@ -101,8 +108,7 @@
     #context panic("no translation for language: ", text.lang)
   ]
 
-  #pad(
-    top: 1cm,
+  #align(bottom,
     grid(
       // set width of columns
       // we need two, so make both half the page width
@@ -115,9 +121,7 @@
           #context panic("no translation for language: ", text.lang)
         ]
       ),
-      align(right, {line(length: 6cm)})
-    )
-  )
+      align(right, {line(length: 6cm)})))
 
   #counter(page).update(0)
 ]

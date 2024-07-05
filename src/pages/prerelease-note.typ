@@ -1,47 +1,56 @@
+// .--------------------------------------------------------------------------.
+// |                      Preleminary release Notice                          |
+// '--------------------------------------------------------------------------'
 
-#let new_prerelease_note(config) = context [
+// Author: Sven Vogel
+// Edited: 28.06.2024
+// License: MIT
 
-  #pagebreak(weak: true)
+#let new_prerelease_note(config) = context {
 
-  #let thesis = config.thesis
-  #let author = config.author
+  pagebreak(weak: true)
 
-  #v(2em)
-  #if text.lang == "de" [
-    #text(size: 20pt, weight: "semibold", font: "Montserrat", "Vorabfassung")
+  let thesis = config.thesis
+  let author = config.author
+
+  if text.lang == "de" [
+    #heading("Vorabfassung")
   ] else if text.lang == "en" [
-    #text(size: 20pt, weight: "semibold", font: "Montserrat", "Preliminary version")
+    #heading("Preliminary Version")
   ]
 
-  #v(1em)
+  v(1em)
 
-  #if text.lang == "de" [
+  if text.lang == "de" [
     Bei dieser Ausgabe der Arbeit mit dem Thema
   ] else if text.lang == "en" [
     This edition of the work with the subject
   ]
 
-  #v(1em)
+  v(1em)
 
-  #set align(center)
+  set align(center)
 
-  *#thesis.title*
+  text(weight: "bold", thesis.title)
 
-  #thesis.subtitle
+  if thesis.subtitle != none {
+    linebreak()
+    thesis.subtitle
+  }
 
-  #set align(left)
+  set align(left)
 
-  #v(1em)
+  v(1em)
 
-  #set par(justify: true)
+  set par(justify: true)
 
-  #if text.lang == "de" [
+  if text.lang == "de" [
     handelt es sich _nicht_ um die fertige Fassung. Das Dokument kann Inhaltliche-, Grammatikalische- sowie Format-Fehler enthalten. Das Dokument ist im Rahmen der Aufgabenstellung von Seiten der #author.university nicht zur Bewertung freigegeben und ein anderer Verwendungszweck als eine Vorschau ist nicht gestattet.
   ] else if text.lang == "en" [
     is not the final version. The document may contain errors in content, grammar and formatting. The document may not be released for evaluation to #author.university as part of the assignment, and any use other than a preview is not permitted.
   ]
 
-  #v(1em)
-  #h(1em) #author.name, #datetime.today().display()
-
-]
+  v(1em)
+  h(1em)
+  [#author.name, #datetime.today().display()]
+}

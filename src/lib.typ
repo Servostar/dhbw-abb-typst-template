@@ -7,9 +7,6 @@
 // Edited: 27.06.2024
 // License: MIT
 
-// start of template pages and styles
-#let dhbw-template(config: dictionary, body) = [
-
   #import "conf.typ": validate-config
   #import "style.typ": global_styled_doc, content_styled, end_styled
   #import "pages/titlepage.typ": new_title_page
@@ -21,18 +18,19 @@
   #import "pages/preface.typ": new-preface
   #import "pages/appendix.typ": show-appendix
 
+// start of template pages and styles
+#let dhbw-template(config, body) = [
   #let config = validate-config(config)
-
   #let doc = body
 
-  // set document properties
-  #set document(
-    author: config.author.name,
-    keywords: config.thesis.keywords,
-    title: config.thesis.title)
-
   // apply global style to every element in the argument content
-  #global_styled_doc(config: config, body: [
+  #global_styled_doc(config)[
+
+    // set document properties
+    #set document(
+      author: config.author.name,
+      keywords: config.thesis.keywords,
+      title: config.thesis.title)
 
     // configure text locale
     #set text(
@@ -72,11 +70,11 @@
     // mark end of prelude
     #metadata("prelude terminate") <end-of-prelude>
 
-    #content_styled(config: config, body: doc)
+    #content_styled(config, doc)
 
     #metadata("content terminate") <end-of-content>
 
-    #end_styled(config: config, body: [
+    #end_styled(config)[
       // add bibliography if set
       #if "bibliography" in config.thesis and config.thesis.bibliography != none {
         pagebreak(weak: true)
@@ -87,6 +85,6 @@
 
       // appendix
       #show-appendix(config: config)
-    ])
-  ])
+    ]
+  ]
 ]

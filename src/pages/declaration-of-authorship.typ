@@ -1,52 +1,64 @@
+// .--------------------------------------------------------------------------.
+// |                        Declaration of Authorship                         |
+// '--------------------------------------------------------------------------'
 
-#let new_declaration_of_authorship(config) = context [
+// Author: Sven Vogel
+// Edited: 28.06.2024
+// License: MIT
 
-  #pagebreak(weak: true)
+#let new_declaration_of_authorship(config) = context {
 
-  #let thesis = config.thesis
-  #let author = config.author
+  pagebreak(weak: true)
 
-  #v(2em)
-  #if text.lang == "de" [
-    #text(size: 20pt, weight: "semibold", font: "Montserrat", "Selbständigkeitserklärung")
+  let thesis = config.thesis
+  let author = config.author
+
+  if text.lang == "de" [
+    #heading("Selbständigkeitserklärung")
   ] else if text.lang == "en" [
-    #text(size: 20pt, weight: "semibold", font: "Montserrat", "Declaration of authorship")
+    #heading("Declaration of Authorship")
   ]
 
-  #v(1em)
+  v(1em)
 
-  #if text.lang == "de" [
+  if text.lang == "de" [
     Ich versichere hiermit, dass ich meine Prüfung mit dem Thema
   ] else if text.lang == "en" [
-    I hereby certify that I have passed my examination with the subject
+    I hereby confirm that I have written this thesis with the subject
   ]
 
-  #v(1em)
+  v(1em)
 
-  #set align(center)
+  set align(center)
 
-  *#thesis.title*
+  text(weight: "bold", thesis.title)
 
-  #thesis.subtitle
+  if thesis.subtitle != none {
+    linebreak()
+    thesis.subtitle
+  }
 
-  #set align(left)
+  set align(left)
 
-  #v(1em)
+  v(1em)
 
-  #set par(justify: true)
+  set par(justify: true)
 
-  selbständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe. Ich versichere zudem, dass die eingereichte elektronische Fassung mit der gedruckten Fassung übereinstimmt.
+  if text.lang == "de" [
+    selbständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe. Ich versichere zudem, dass die eingereichte elektronische Fassung mit der gedruckten Fassung übereinstimmt.
+  ] else if text.lang == "en" [
+    independently and have not used any sources or aids other than those specified. I also confirm that the electronic version submitted is identical to the printed version.
+  ]
 
-  #v(25%)
+  set align(horizon)
 
-  #grid(
+  grid(
     // set width of columns
     // we need two, so make both half the page width
     columns: (50%, 50%),
     row-gutter: 0.75em,
     align(left, {line(length: 6cm)}),
     align(left, {line(length: 6cm)}),
-    align(left, if text.lang == "de" [ Ort, Datum ] else if text.lang == "en" [ place, date ] else { panic("no translation for language: ", text.lang) }),
+    align(left, if text.lang == "de" [ Ort, Datum ] else if text.lang == "en" [ Place, Date ] else { panic("no translation for language: ", text.lang) }),
     align(left, if text.lang == "de" [ Unterschrift ] else if text.lang == "en" [ Signature ] else { panic("no translation for language: ", text.lang) }))
-
-]
+}

@@ -9,21 +9,23 @@
 
 #let watermark-color = luma(50%).transparentize(70%) 
 
-#let watermark() = rotate(-22.5deg,
-      rect(radius: 1em, inset: 1em, stroke: watermark-color, {
-        text(size: 48pt, weight: "bold", fill: watermark-color, "DRAFT")
-        linebreak()
-        text(size: 14pt, weight: "bold", fill: watermark-color)[
-          This page is part of a preliminary
-          #linebreak()
-          document version.
-          #linebreak()
-          #text(size: 10pt, "Further usage without the authors consent is not permitted.")
-        ]
-      }))
+#let watermark(config) = if config.draft {
+  rotate(-22.5deg)[
+    #rect(
+    radius: 1em,
+    inset: 1em,
+    stroke: watermark-color)[
+      #text(size: 4em, weight: "bold", fill: watermark-color, "DRAFT")
+      #linebreak()
+      #text(size: 1.25em, weight: "bold", fill: watermark-color)[
+        This page is part of a preliminary
+        #linebreak()
+        document version.
+        #linebreak()
+        #text(size: 0.75em, "Further usage without the authors consent is not permitted.")]]]}
 
 // global style of document
-#let global_styled_doc(config: dictionary, body: content) = context {
+#let global_styled_doc(config, body) = {
   let thesis = config.thesis
   let style = config.style
 
@@ -63,14 +65,12 @@
   set heading(numbering: none)
   set page(
     paper: style.page.format,
-    foreground: if config.draft {
-      watermark()
-    },
-    header-ascent: 0pt,
-    footer-descent: 0pt,
+    foreground: watermark(config),
+    header-ascent: style.header.content-padding,
+    footer-descent: style.header.content-padding,
     margin: (
-      top: style.page.margin.top + style.header.logo-height + style.header.underline-top-padding + style.header.bottom-padding,
-      bottom: style.page.margin.bottom + 1em,
+      top: style.page.margin.top + style.header.logo-height + style.header.underline-top-padding + style.header.content-padding,
+      bottom: style.page.margin.bottom + style.footer.content-padding,
       left: style.page.margin.left,
       right: style.page.margin.right),
     numbering: (..nums) => {
@@ -150,19 +150,14 @@
   body
 }
 
-#let content_styled(config: dictionary, body: content) = [
-  #set heading(numbering: "1.")
+#let content_styled(config, body) = {
+  set heading(numbering: "1.")
 
-  #let thesis = config.thesis
+  body
+}
 
-  #body
-]
+#let end_styled(config, body) = {
+  set heading(numbering: "1.")
 
-#let end_styled(config: dictionary, body: content) = [
-
-  #set heading(numbering: "1.")
-
-  #let thesis = config.thesis
-
-  #body
-]
+  body
+}

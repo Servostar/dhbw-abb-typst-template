@@ -1,3 +1,10 @@
+// .--------------------------------------------------------------------------.
+// |                            Document Outline                              |
+// '--------------------------------------------------------------------------'
+
+// Author: Sven Vogel
+// Edited: 28.06.2024
+// License: MIT
 
 // render an outline of figures
 // with a specific title and filter by a specifc kind of figure
@@ -89,7 +96,7 @@
   show outline.entry.where(
     level: 1,
   ): it => {
-    v(18pt, weak: true)
+    v(1.5em, weak: true)
     strong(it)
   }
 

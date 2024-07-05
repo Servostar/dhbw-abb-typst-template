@@ -1,3 +1,10 @@
+// .--------------------------------------------------------------------------.
+// |                                Appendix                                  |
+// '--------------------------------------------------------------------------'
+
+// Author: Sven Vogel
+// Edited: 28.06.2024
+// License: MIT
 
 #let show-appendix(config: dictionary) = context {
   counter(heading).update(0)
