@@ -15,7 +15,7 @@ jobs:
       - name: Install Typst CLI
         run: curl -fsSL https://typst.community/typst-install/install.sh | sh -s "$TYPST_VERSION"
       - name: Set up Python 3
-        run: apt update && apt install python3-pip
+        run: apt update -y && apt install python3-pip -y
       - name: Run CI
         run: bash -c ./run-ci.sh
       - name: Setup go
