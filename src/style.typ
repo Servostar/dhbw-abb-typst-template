@@ -53,14 +53,6 @@
 
   // set theme for code blocks
   set raw(tab-size: 4, theme: "res/github.tmTheme")
-  show raw.where(block: true): code => {
-    show raw.line: line => {
-      text(fill: gray)[#line.number]
-      h(1em)
-      line.body
-    }
-    code
-  }
 
   show figure: set block(breakable: true)
 
