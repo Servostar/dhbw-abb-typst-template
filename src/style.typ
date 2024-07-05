@@ -66,8 +66,8 @@
     foreground: if config.draft {
       watermark()
     },
-    header-ascent: style.header.underline-top-padding + style.header.bottom-padding,
-    footer-descent: 1em,
+    header-ascent: 0pt,
+    footer-descent: 0pt,
     margin: (
       top: style.page.margin.top + style.header.logo-height + style.header.underline-top-padding + style.header.bottom-padding,
       bottom: style.page.margin.bottom + 1em,
