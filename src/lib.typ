@@ -62,7 +62,9 @@
     #if "glossary" in config.thesis and config.thesis.glossary != none {
       heading(supplement: [outline], "Glossar")
 
-      print-glossary(config.thesis.glossary)
+      print-glossary(
+        disable-back-references: true,
+        config.thesis.glossary)
 
       pagebreak(weak: true)
     } 
