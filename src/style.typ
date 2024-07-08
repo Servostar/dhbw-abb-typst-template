@@ -9,14 +9,15 @@
 
 #import "branding.typ": *
 
-#let watermark-color = luma(50%).transparentize(70%) 
+#let watermark-color = luma(50%).transparentize(70%)
 
 #let watermark(config) = if config.draft {
   rotate(-22.5deg)[
     #rect(
-    radius: 1em,
-    inset: 1em,
-    stroke: watermark-color)[
+      radius: 1em,
+      inset: 1em,
+      stroke: watermark-color,
+    )[
       #text(size: 4em, weight: "bold", fill: watermark-color, "DRAFT")
       #linebreak()
       #text(size: 1.25em, weight: "bold", fill: watermark-color)[
@@ -24,7 +25,11 @@
         #linebreak()
         document version.
         #linebreak()
-        #text(size: 0.75em, "Further usage without the authors consent is not permitted.")]]]}
+        #text(
+          size: 0.75em,
+          "Further usage without the authors consent is not permitted.",
+        )]]]
+}
 
 // global style of document
 #let global_styled_doc(config, body) = {
@@ -37,11 +42,13 @@
     hyphenate: true,
     dir: ltr,
     font: style.text.font,
-    fill: ABB-BLACK)
+    fill: ABB-BLACK,
+  )
 
   show heading: set text(
     font: style.heading.font,
-    weight: "semibold")
+    weight: "semibold",
+  )
 
   set heading(supplement: [chapter])
 
@@ -55,7 +62,8 @@
   // set theme for code blocks
   set raw(
     tab-size: style.code.tab-size,
-    theme: style.code.theme)
+    theme: style.code.theme,
+  )
   show raw: set text(font: style.code.font)
 
   show figure: set block(breakable: true)
@@ -67,8 +75,20 @@
     stroke: (x, y) => (
       left: none,
       right: none,
-      top: if y == 0 { 1.5pt } else if y < 2 { 1pt } else { 0pt },
-      bottom: if y == 0 { 1pt } else { 1.5pt } ))
+      top: if y == 0 {
+        1.5pt
+      } else if y < 2 {
+        1pt
+      } else {
+        0pt
+      },
+      bottom: if y == 0 {
+        1pt
+      } else {
+        1.5pt
+      },
+    ),
+  )
 
   // make table header bold
   show table.cell.where(y: 0): set text(weight: "bold")
@@ -77,7 +97,8 @@
   set par(
     justify: true,
     first-line-indent: 1em,
-    leading: 1em)
+    leading: 1em,
+  )
 
   // give links a color
   show link: set text(fill: style.link.color)
@@ -93,10 +114,11 @@
       top: style.page.margin.top + style.header.logo-height + style.header.underline-top-padding + style.header.content-padding,
       bottom: style.page.margin.bottom + style.footer.content-padding,
       left: style.page.margin.left,
-      right: style.page.margin.right),
+      right: style.page.margin.right,
+    ),
     numbering: (..nums) => {
       let current-page = here().page()
-      if current-page == 1{
+      if current-page == 1 {
         []
       } else if query(<end-of-prelude>).first().location().page() > current-page {
         numbering("I", nums.pos().first())
@@ -115,7 +137,11 @@
       } else if query(<end-of-prelude>).first().location().page() > page-number {
         numbering("I", page-counter)
       } else if query(<end-of-content>).first().location().page() >= page-number {
-        numbering("1 / 1", page-counter, counter(page).at(<end-of-content>).last())
+        numbering(
+          "1 / 1",
+          page-counter,
+          counter(page).at(<end-of-content>).last(),
+        )
       } else {
         numbering("a", page-counter)
       }
@@ -134,14 +160,18 @@
           align(right, image("res/DHBW.svg", height: style.header.logo-height)))
 
       } else if query(<end-of-prelude>).first().location().page() <= here().page() {
-        let headers-before = query(selector(heading.where(numbering: "1.", level: 1)).before(here()))
+        let headers-before = query(
+          selector(heading.where(numbering: "1.", level: 1)).before(here()),
+        )
 
         let header-title = thesis.title
 
         if headers-before.len() > 0 {
           header-title = headers-before.last().body
         } else {
-          let headers-after = query(selector(heading.where(numbering: "1.", level: 1)).after(here()))
+          let headers-after = query(
+            selector(heading.where(numbering: "1.", level: 1)).after(here()),
+          )
 
           if headers-after.len() > 0 {
             header-title = headers-after.first().body
@@ -152,8 +182,9 @@
           columns: (1fr, auto),
           align: (horizon, bottom),
           context [ _ #header-title _ ],
-          image("res/DHBW.svg", height: style.header.logo-height))
-        
+          image("res/DHBW.svg", height: style.header.logo-height),
+        )
+
         v(style.header.underline-top-padding - 1em)
         line(length: 100%)
       } else {
@@ -161,12 +192,13 @@
           columns: (1fr, auto),
           align: (horizon, bottom),
           context [ _ #config.thesis.title _ ],
-          image("res/DHBW.svg", height: style.header.logo-height)
+          image("res/DHBW.svg", height: style.header.logo-height),
         )
         v(style.header.underline-top-padding - 1em)
         line(length: 100%)
       }
-    })
+    },
+  )
 
   body
 }

@@ -7,20 +7,20 @@
 // Edited: 27.06.2024
 // License: MIT
 
-  #import "conf.typ": validate-config
-  #import "branding.typ": *
-  #import "style.typ": global_styled_doc, content_styled, end_styled
-  #import "glossary.typ": glossary
-  #import "pages/titlepage.typ": new_title_page
-  #import "pages/declaration-of-authorship.typ": new_declaration_of_authorship
-  #import "pages/confidentiality-statement.typ": new_confidentiality_statement_page
-  #import "pages/prerelease-note.typ": new_prerelease_note
-  #import "pages/outline.typ": new_outline
-  #import "pages/abstract.typ": new_abstract
-  #import "pages/preface.typ": new-preface
-  #import "pages/appendix.typ": show-appendix
+#import "conf.typ": validate-config
+#import "branding.typ": *
+#import "style.typ": global_styled_doc, content_styled, end_styled
+#import "glossary.typ": glossary
+#import "pages/titlepage.typ": new_title_page
+#import "pages/declaration-of-authorship.typ": new_declaration_of_authorship
+#import "pages/confidentiality-statement.typ": new_confidentiality_statement_page
+#import "pages/prerelease-note.typ": new_prerelease_note
+#import "pages/outline.typ": new_outline
+#import "pages/abstract.typ": new_abstract
+#import "pages/preface.typ": new-preface
+#import "pages/appendix.typ": show-appendix
 
-#let group-break()= {
+#let group-break() = {
   [#pagebreak()]
 }
 
@@ -36,12 +36,14 @@
     #set document(
       author: config.author.name,
       keywords: config.thesis.keywords,
-      title: config.thesis.title)
+      title: config.thesis.title,
+    )
 
     // configure text locale
     #set text(
       lang: config.lang,
-      region: config.region)
+      region: config.region,
+    )
 
     // preppend title page
     #new_title_page(config)
@@ -57,7 +59,7 @@
     #new-preface(config)
     #new_outline()
 
-    // glossary is built inline here because the links must be 
+    // glossary is built inline here because the links must be
     // exposed to the entire document
     #import "glossarium.typ": *
     #show: make-glossary
@@ -68,10 +70,11 @@
       print-glossary(
         disable-back-references: true,
         enable-group-pagebreak: true,
-        glossary(config.thesis.glossary))
+        glossary(config.thesis.glossary),
+      )
 
       pagebreak(weak: true)
-    } 
+    }
     #counter(page).update(1)
 
     // mark end of prelude

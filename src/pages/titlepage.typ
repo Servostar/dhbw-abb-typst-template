@@ -60,24 +60,14 @@
       column-gutter: 1cm,
       align: left,
       stroke: none,
-      
-      [*Verfasser:*],
-      author.name,
-
-      [*Bearbeitungszeitraum:*],
-      thesis.timeframe,
-
+      [*Verfasser:*], author.name,
+      [*Bearbeitungszeitraum:*], thesis.timeframe,
       [*Matrikelnummer, Kurs:*],
       str(author.matriculation-number) + ", " + author.course,
 
-      [*Ausbildungsbetrieb:*],
-      author.company,
-
-      [*Betrieblicher Betreuer:*],
-      author.supervisor,
-
-      [*Abgabedatum:*],
-      thesis.submission-date
+      [*Ausbildungsbetrieb:*], author.company,
+      [*Betrieblicher Betreuer:*], author.supervisor,
+      [*Abgabedatum:*], thesis.submission-date,
     )
   ] else if text.lang == "en" [
     #table(
@@ -85,30 +75,21 @@
       column-gutter: 1cm,
       align: left,
       stroke: none,
-      
-      [*Author:*],
-      author.name,
-
-      [*Editing period:*],
-      thesis.timeframe,
-
+      [*Author:*], author.name,
+      [*Editing period:*], thesis.timeframe,
       [*Matriculation number, course:*],
       str(author.matriculation-number) + ", " + author.course,
 
-      [*Training company:*],
-      author.company,
-
-      [*Company supervisor:*],
-      author.supervisor,
-
-      [*Submission date:*],
-      thesis.submission-date
+      [*Training company:*], author.company,
+      [*Company supervisor:*], author.supervisor,
+      [*Submission date:*], thesis.submission-date,
     )
   ] else [
     #context panic("no translation for language: ", text.lang)
   ]
 
-  #align(bottom,
+  #align(
+    bottom,
     grid(
       // set width of columns
       // we need two, so make both half the page width
@@ -121,7 +102,8 @@
           #context panic("no translation for language: ", text.lang)
         ]
       ),
-      align(right, {line(length: 6cm)})))
+      align(right, {line(length: 6cm)})),
+  )
 
   #counter(page).update(0)
 ]

@@ -53,9 +53,9 @@
       page: (
         format: "a4",
         margin: (
-          left: 3cm, 
-          right: 2.5cm, 
-          top: 2.5cm, 
+          left: 3cm,
+          right: 2.5cm,
+          top: 2.5cm,
           bottom: 2.5cm)),
       text: (
         size: 12pt,
@@ -81,20 +81,20 @@
   }
 
   for (key, val) in base {
-      if key in update {
-        let update_val = update.at(key)
+    if key in update {
+      let update_val = update.at(key)
 
-        if type(val) == dictionary and type(update_val) == dictionary {
-          base.insert(key, deep-insert-checked(val, update_val))
-        } else if val == none or type(val) == type(update_val) {
-          base.insert(key, update_val)
-        } else {
-          panic("missmatched dictionary entry `" + key + "` type: expected `" + type(val) + "` got `" + type(update_val) + "`")
-        }
+      if type(val) == dictionary and type(update_val) == dictionary {
+        base.insert(key, deep-insert-checked(val, update_val))
+      } else if val == none or type(val) == type(update_val) {
+        base.insert(key, update_val)
       } else {
-        base.insert(key, val)
+        panic("missmatched dictionary entry `" + key + "` type: expected `" + type(val) + "` got `" + type(update_val) + "`")
       }
+    } else {
+      base.insert(key, val)
     }
+  }
 
   return base
 }
