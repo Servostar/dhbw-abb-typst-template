@@ -45,6 +45,8 @@
 
   set heading(supplement: [chapter])
 
+  set math.equation(numbering: "(1)")
+
   // Set header spacing
   show heading.where(level: 1): it => v(2em) + it + v(1em)
   show heading.where(level: 2): it => v(1em) + it + v(0.5em)
