@@ -62,6 +62,10 @@
         font: "Open Sans"),
       heading: (
         font: "Montserrat"),
+      code: (
+        theme: "res/abb.tmTheme",
+        font: "FiraCode Nerd Font",
+        tab-size: 4),
       link: (
         color: ABB-GRAY-02)))
 

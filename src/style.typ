@@ -53,7 +53,10 @@
   show heading.where(level: 3): it => v(0.5em) + it + v(0.25em)
 
   // set theme for code blocks
-  set raw(tab-size: 4, theme: "res/abb.tmTheme")
+  set raw(
+    tab-size: style.code.tab-size,
+    theme: style.code.theme)
+  show raw: set text(font: style.code.font)
 
   show figure: set block(breakable: true)
 
