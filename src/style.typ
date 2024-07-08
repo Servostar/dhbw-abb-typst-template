@@ -52,6 +52,19 @@
 
   show figure: set block(breakable: true)
 
+  // APA style table
+  set table(
+    inset: 0.5em,
+    align: left,
+    stroke: (x, y) => (
+      left: none,
+      right: none,
+      top: if y == 0 { 1.5pt } else if y < 2 { 1pt } else { 0pt },
+      bottom: if y == 0 { 1pt } else { 1.5pt } ))
+
+  // make table header bold
+  show table.cell.where(y: 0): set text(weight: "bold")
+
   set block(spacing: 2em)
   set par(
     justify: true,

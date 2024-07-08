@@ -63,8 +63,11 @@ $
 
 #figure(
   table(
-    columns: 2,
-    "Hello", "World"),
+    columns: 3,
+    table.header[Date][Exercise Type][Calories Burned],
+    [2023-03-15], [Swimming], [400],
+    [2023-03-17], [Weightlifting], [250],
+    [2023-03-18], [Yoga], [200]),
     caption: [ Some table ])
 
 #pagebreak()
