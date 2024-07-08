@@ -48,15 +48,15 @@
       } else {
           let group = if "long" in v {
             if (context text.lang) == "de" {
-              "Akronym"
+              "Akronyme"
             } else {
-              "Acronym"
+              "Acronyms"
             }
           } else {
             if (context text.lang) == "de" {
-              "Begriff"
+              "Begriffe"
             } else {
-              "Term"
+              "Terms"
             }
           }
 
