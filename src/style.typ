@@ -7,6 +7,8 @@
 // Edited: 27.06.2024
 // License: MIT
 
+#import "branding.typ": *
+
 #let watermark-color = luma(50%).transparentize(70%) 
 
 #let watermark(config) = if config.draft {
@@ -34,7 +36,8 @@
     ligatures: true,
     hyphenate: true,
     dir: ltr,
-    font: style.text.font)
+    font: style.text.font,
+    fill: ABB-BLACK)
 
   show heading: set text(
     font: style.heading.font,

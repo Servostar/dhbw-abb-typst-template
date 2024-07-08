@@ -8,6 +8,7 @@
 // License: MIT
 
   #import "conf.typ": validate-config
+  #import "branding.typ": *
   #import "style.typ": global_styled_doc, content_styled, end_styled
   #import "pages/titlepage.typ": new_title_page
   #import "pages/declaration-of-authorship.typ": new_declaration_of_authorship

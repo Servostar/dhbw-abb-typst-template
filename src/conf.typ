@@ -7,6 +7,8 @@
 // Edited: 27.06.2024
 // License: MIT
 
+#import "branding.typ": *
+
 // default configuration
 #let default-config = (
     // language settings used to make decisions about hyphenation and others
@@ -61,7 +63,7 @@
       heading: (
         font: "Montserrat"),
       link: (
-        color: red.darken(15%))))
+        color: ABB-GRAY-02)))
 
 // Insert a dictionary `update` into `base` but only the entries of update that also exist in base
 // Runs recursively on all sub dictionaries

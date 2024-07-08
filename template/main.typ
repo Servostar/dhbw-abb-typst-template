@@ -1,4 +1,4 @@
-#import "../src/lib.typ": dhbw-template
+#import "../src/lib.typ": *
 
 #import "glossary.typ": glossary
 #import "abstract.typ": abstract, summary
@@ -33,6 +33,8 @@
 #import "@preview/wrap-it:0.1.0": wrap-content
 
 = Lorem Ipsum
+
+#text(fill: ABB-RED, "Hello ABB branding")
 
 #lorem(25)
 @oidc
