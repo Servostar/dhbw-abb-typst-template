@@ -8,8 +8,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Setup Nix Shell
-      - uses: cachix/install-nix-action@v18
+      - name: Setup Nix
+        uses: cachix/install-nix-action@v18
         with:
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Run CI
