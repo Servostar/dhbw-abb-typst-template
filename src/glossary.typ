@@ -46,7 +46,21 @@
           type(v.group) == str,
           message: "The optional group of glossary entry `" + k + "` is not a string")
       } else {
-          panic("Missing group for glossary entry: `" + k + "`")
+          let group = if "long" in v {
+            if (context text.lang) == "de" {
+              "Akronym"
+            } else {
+              "Acronym"
+            }
+          } else {
+            if (context text.lang) == "de" {
+              "Begriff"
+            } else {
+              "Term"
+            }
+          }
+
+          entries.at(k).group = group
       }
     }
 
