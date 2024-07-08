@@ -63,7 +63,7 @@
   
   pagebreak(weak: true)
   outline(
-      target: heading,
+      target: heading.where(supplement: [chapter]),
       title: title,
       indent: auto)
 }
