@@ -19,7 +19,7 @@
   if count > 0 {
     pagebreak(weak: true)
     outline(
-      title: heading(level: 3, title),
+      title: title,
       target: figure.where(kind: kind))
   }
 }
@@ -63,8 +63,8 @@
   
   pagebreak(weak: true)
   outline(
-      target: heading.where(supplement: [chapter]),
-      title: heading(level: 3, title),
+      target: heading,
+      title: title,
       indent: auto)
 }
 
@@ -85,7 +85,7 @@
     pagebreak(weak: true)
     outline(
         target: heading.where(supplement: supplement),
-        title: heading(level: 3, title),
+        title: title,
         indent: auto)
   }
 }
@@ -100,6 +100,8 @@
     strong(it)
   }
 
+  render_heading_outline()
+
   render_figures_outline()
 
   render_table_outline()
@@ -107,6 +109,4 @@
   render_raw_outline()
 
   render_appendix_outline()
-
-  render_heading_outline()
 }

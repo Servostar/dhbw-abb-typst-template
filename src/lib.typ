@@ -19,6 +19,10 @@
   #import "pages/preface.typ": new-preface
   #import "pages/appendix.typ": show-appendix
 
+#let group-break()= {
+  [#pagebreak()]
+}
+
 // start of template pages and styles
 #let dhbw-template(config, body) = [
   #let config = validate-config(config)
@@ -54,16 +58,15 @@
 
     // glossary is built inline here because the links must be 
     // exposed to the entire document
-    #import "@preview/glossarium:0.4.1": make-glossary, print-glossary
+    #import "glossarium.typ": *
     #show: make-glossary
 
     #pagebreak(weak: true)
 
     #if "glossary" in config.thesis and config.thesis.glossary != none {
-      heading(supplement: [outline], "Glossar")
-
       print-glossary(
         disable-back-references: true,
+        enable-group-pagebreak: true,
         config.thesis.glossary)
 
       pagebreak(weak: true)

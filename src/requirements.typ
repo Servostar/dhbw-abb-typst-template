@@ -7,4 +7,4 @@
 // Edited: 05.07.2024
 // License: MIT
 
-#import "@preview/glossarium:0.4.1": *
+#import "glossary.typ": *
