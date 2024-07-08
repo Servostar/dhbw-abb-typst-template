@@ -10,6 +10,7 @@
   #import "conf.typ": validate-config
   #import "branding.typ": *
   #import "style.typ": global_styled_doc, content_styled, end_styled
+  #import "glossary.typ": glossary
   #import "pages/titlepage.typ": new_title_page
   #import "pages/declaration-of-authorship.typ": new_declaration_of_authorship
   #import "pages/confidentiality-statement.typ": new_confidentiality_statement_page
@@ -67,7 +68,7 @@
       print-glossary(
         disable-back-references: true,
         enable-group-pagebreak: true,
-        config.thesis.glossary)
+        glossary(config.thesis.glossary))
 
       pagebreak(weak: true)
     } 

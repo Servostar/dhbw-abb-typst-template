@@ -1,6 +1,5 @@
 #import "../src/lib.typ": *
 
-#import "glossary.typ": glossary
 #import "abstract.typ": abstract, summary
 
 #show: dhbw-template.with((
@@ -27,7 +26,7 @@
     preface: include "preface.typ",
     keywords: ( "IT", "other stuff" ),
     bibliography: bibliography("refs.bib"),
-    glossary: glossary,
+    glossary: yaml("glossary.yml"),
     appendices: include "appendix.typ")))
 
 #import "@preview/wrap-it:0.1.0": wrap-content
