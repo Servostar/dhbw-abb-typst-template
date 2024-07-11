@@ -141,7 +141,7 @@
         if headers-before.len() > 0 {
           header-title = headers-before.last().body
         } else {
-          let headers-after = query(selector(heading.where(numbering: "1.", level: 1)).after(here()))
+          let headers-after = query(selector(heading.where(numbering: "1.1.1", level: 1)).after(here()))
 
           if headers-after.len() > 0 {
             header-title = headers-after.first().body
