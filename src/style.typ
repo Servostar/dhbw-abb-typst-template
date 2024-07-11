@@ -67,7 +67,7 @@
     stroke: (x, y) => (
       left: none,
       right: none,
-      top: if y == 0 { 1.5pt } else if y < 2 { 1pt } else { 0pt },
+      top: if y == 0 { 1.5pt } else if y < 2 { 1pt } else { 0.5pt },
       bottom: if y == 0 { 1pt } else { 1.5pt } ))
 
   // make table header bold
