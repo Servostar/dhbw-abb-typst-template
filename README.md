@@ -19,6 +19,10 @@
 This template includes designs for a titlepage, confidantiality statement, declaration of authorship and more with a consistent design inspired by various unofficial works made by students at DHBW. Layout and the choise fonts are based on the unofficial [supercharged-dhbw](https://github.com/DannySeidel/typst-dhbw-template) Typst template. It comes with automatic generation of outlines for figures, tables, code snippets and appendices.
 The template can generate sections for a glossary, combinging acronyms and technical terms into a singular section.
 
+## DHBW DOCX template
+
+The official [DHBW template for Word](https://blog.fakultaet-technik.de/wp-content/uploads/2015/06/Studienarbeitsvorlage.docx) was used a strong inspiration but not as base template.
+
 ## Format
 All pages have a margin of 2.5cm between header/footer/content and the page border.
 Header and footer do not overlap into this margin in order to conform to university requirements.
