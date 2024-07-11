@@ -172,13 +172,13 @@
 }
 
 #let content_styled(config, body) = {
-  set heading(numbering: "1.")
+  set heading(numbering: "1.1.1")
 
   body
 }
 
 #let end_styled(config, body) = {
-  set heading(numbering: "1.")
+  set heading(numbering: "1.1.1")
 
   body
 }
