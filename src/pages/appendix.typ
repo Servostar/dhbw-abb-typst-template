@@ -18,8 +18,10 @@
   if "appendices" in config.thesis {
     pagebreak(weak: true)
 
+    // appendix will be invisible on the appendecies page
+    // but still listed in the ToC
+    show heading: it => []
     heading(level: 1, numbering: none, title)
-    v(-2em)
 
     // APA style appendix
     show heading: it => {
