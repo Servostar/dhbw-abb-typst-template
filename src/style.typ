@@ -11,13 +11,17 @@
 
 #let watermark-color = luma(50%).transparentize(70%) 
 
+#let watermark-pattern = pattern(size: (5pt, 5pt))[
+  #place(line(start: (50%, 0%), end: (50%, 100%), stroke: (paint: watermark-color, thickness: 3pt)))
+]
+
 #let watermark(config) = if config.draft {
   rotate(-22.5deg)[
     #rect(
     radius: 1em,
     inset: 1em,
     stroke: watermark-color)[
-      #text(size: 4em, weight: "bold", fill: watermark-color, "DRAFT")
+      #text(size: 4em, weight: "bold", fill: watermark-pattern, "DRAFT")
       #linebreak()
       #text(size: 1.25em, weight: "bold", fill: watermark-color)[
         This page is part of a preliminary
@@ -110,6 +114,12 @@
       #set align(center)
       #let page-counter = counter(page).get().first()
       #let page-number = here().page()
+
+      #if page-number > 1 {
+        line(length: 100%)
+        v(style.header.underline-top-padding - 1em)
+      }
+
       #if page-number == 1 {
         []
       } else if query(<end-of-prelude>).first().location().page() > page-number {
