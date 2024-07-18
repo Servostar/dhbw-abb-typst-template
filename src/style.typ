@@ -82,6 +82,28 @@
 
   show figure: set block(breakable: true)
 
+  // make figure supplements bold
+  // based on: https://github.com/typst/typst/discussions/3871
+  show figure.caption: c => [
+    #if c.body.fields().len() > 0 {
+      text(weight: "semibold")[
+        #c.supplement #c.counter.display("1.1.1")
+      ]
+      c.separator
+    }
+    #c.body
+  ]
+
+  // change the display supplement according to the text langugae
+  // based on: https://github.com/typst/typst/issues/3273
+  show figure.where(kind: raw): set figure(supplement: context {
+    if text.lang == "de" {
+      "Quelltext"
+    } else {
+      "Listing"
+    }
+  })
+
   // APA style table
   set table(
     inset: 0.5em,
