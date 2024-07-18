@@ -1,15 +1,32 @@
 
-# DHBW-ABB Typst template 📃
+<div align="center">
+    <h1>DHBW-ABB template for Typst</h1>
+    <img src="https://img.shields.io/gitea/last-commit/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de">
+    <img src="https://img.shields.io/gitea/v/release/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de&display_name=release">
+    <img src="https://img.shields.io/badge/Typst-2B9CB0">
+    <img src="https://img.shields.io/gitea/languages/count/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de">
+    <img src="https://img.shields.io/badge/license-MIT-ff0000">
+    <br>
+    <br>
+    <b>Unofficial</b> but feature rich Typst template for writing a thesis or report at DHBW<br>
+    with according ABB AG branding in mind.
+    <br>
+    <img width="1000pt" src="./assets/banner.png">
+</div>
 
-![last-commit-bade](https://img.shields.io/gitea/last-commit/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de)
-![release-badge](https://img.shields.io/gitea/v/release/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de&display_name=release)
-![typst-badge](https://img.shields.io/badge/Typst-2B9CB0)
-![language-count-badge](https://img.shields.io/gitea/languages/count/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de)
-![license-badge](https://img.shields.io/badge/license-MIT-ff0000)
+## Table of Contents
 
-**Unofficial** but feature rich Typst template for writing a thesis or report at DHBW with according ABB AG branding in mind.
-
-![thumbnail](https://git.montehaselino.de/DHBW/dhbw-abb-typst-template/raw/commit/cd325b7076da91e58849512539460a481e48ef4e/assets/thumbnail.png)
+1. [Features](#features)
+2. [Usage](#usage)
+2. [Preview of pages](#preview)
+3. [Relation to DHBW docx template](#dhbw-docx-template)
+4. [Format and branding conformance](#format)
+5. [Fonts](#fonts)
+6. [Legal](#legal)
+7. [For LaTeX users](#for-users-jumping-over-from-latex)
+8. [FAQ](#faq)
+    1. [Typst vs LaTeX](#why-typst-instead-of-latex)
+    2. [Source of logos](#where-are-the-logos-from)
 
 ## Features
 
@@ -18,6 +35,74 @@
 
 This template includes designs for a titlepage, confidantiality statement, declaration of authorship and more with a consistent design inspired by various unofficial works made by students at DHBW. Layout and the choise fonts are based on the unofficial [supercharged-dhbw](https://github.com/DannySeidel/typst-dhbw-template) Typst template. It comes with automatic generation of outlines for figures, tables, code snippets and appendices.
 The template can generate sections for a glossary, combinging acronyms and technical terms into a singular section.
+
+A short overview of all features the template is capable of:
+- Acronyms
+- Glossary
+- Table of Contents for: headings, figures, tables and listings and appendecis
+- Appendix
+- Extra page for:
+    - Declaration of Authorship
+    - Confidentiality Statement
+    - Preleminary notice
+- Watermark for draft versions
+- Automatic form filling for data provided via configuration
+- Styles for captions, tables and equations
+- ABB branding inspired code theme 
+
+## Preview
+
+![](./assets/page-preview.png)
+
+## Usage
+
+### Without Typst package manager
+
+Clone the repository into a subfolder of your project or add it a git submodule. The you can import the `lib.typ` file from `src`.
+Once thats done calling the following snippet `#show: dhbw-template.with(conf)` will setup the template. You can provide a configuration for the template to use.
+The default configuration can be found in `src/conf.typ`.
+
+```typst
+#import "src/lib.typ": *
+
+#show: dhbw-template.with((
+  lang: "en",
+  region: "en",
+  author: (
+    name: "Sven Vogel",
+    semester: 4,
+    program: "Informationtechnology",
+    course: "TINF19IT1",
+    faculty: "Technik",
+    university: "DHBW Mannheim",
+    company: "ABB AG",
+    supervisor: "Benny Goodman",
+    matriculation-number: 123456789),
+  thesis: (
+    title: "Unofficial ABB/DHBW Typst template",
+    subtitle: "for reports and thesises",
+    submission-date: "23rd march 2020",
+    timeframe: "1st january 2020 - 20th march 2020",
+    kind: "T2000",
+    summary: summary,
+    abstract: abstract,
+    preface: include "preface.typ",
+    keywords: ( "IT", "other stuff" ),
+    bibliography: bibliography("refs.bib"),
+    glossary: yaml("glossary.yml"),
+    appendices: include "appendix.typ")))
+
+// Your document code goes here!
+
+= Introduction
+
+lorem(50)
+
+= Chapter 1
+
+#lorem(230)
+
+```
 
 ## DHBW DOCX template
 
