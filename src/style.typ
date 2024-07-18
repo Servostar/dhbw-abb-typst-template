@@ -87,7 +87,7 @@
   show figure.caption: c => [
     #if c.body.fields().len() > 0 {
       text(weight: "semibold")[
-        #c.supplement #c.counter.display()
+        #c.supplement #c.counter.display("1.1.1")
       ]
       c.separator
     }
