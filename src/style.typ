@@ -131,6 +131,7 @@
     footer: context [
       #let page-counter = counter(page).get().first()
       #let page-number = here().page()
+      #set align(center)
 
       #if page-number == 1 {
         []
