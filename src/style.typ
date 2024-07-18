@@ -163,7 +163,7 @@
         let heading = currentH()
 
         heading.at(0)
-        h(1em)
+        h(0.5em)
         heading.at(1)
         v(style.header.underline-top-padding - 1em)
         line(length: 100%)
