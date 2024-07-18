@@ -50,6 +50,10 @@ A short overview of all features the template is capable of:
 - Styles for captions, tables and equations
 - ABB branding inspired code theme 
 
+## Preview
+
+![](./assets/page-preview.png)
+
 ## Usage
 
 ### Without Typst package manager
@@ -99,10 +103,6 @@ lorem(50)
 #lorem(230)
 
 ```
-
-## Preview
-
-![](./assets/page-preview.png)
 
 ## DHBW DOCX template
 
