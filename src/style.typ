@@ -82,6 +82,18 @@
 
   show figure: set block(breakable: true)
 
+  // make figure supplements bold
+  // based on: https://github.com/typst/typst/discussions/3871
+  show figure.caption: c => [
+    #if c.body.fields().len() > 0 {
+      text(weight: "semibold")[
+        #c.supplement #c.counter.display()
+      ]
+      c.separator
+    }
+    #c.body
+  ]
+
   // APA style table
   set table(
     inset: 0.5em,
