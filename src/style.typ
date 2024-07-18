@@ -30,6 +30,24 @@
         #linebreak()
         #text(size: 0.75em, "Further usage without the authors consent is not permitted.")]]]}
 
+#let numberingH(c)={
+  return numbering(c.numbering,..counter(heading).at(c.location()))
+}
+
+#let currentH(level: 1)={
+  let elems = query(selector(heading.where(level: level)).after(here()))
+
+  if elems.len() != 0 and elems.first().location().page() == here().page() {
+    return (numberingH(elems.first()), elems.first().body)
+  } else {
+    elems = query(selector(heading.where(level: level)).before(here()))
+    if elems.len() != 0 {
+      return (numberingH(elems.last()), elems.last().body)
+    }
+  }
+  return ""
+}
+
 // global style of document
 #let global_styled_doc(config, body) = {
   let thesis = config.thesis
@@ -94,7 +112,7 @@
     header-ascent: style.header.content-padding,
     footer-descent: style.header.content-padding,
     margin: (
-      top: style.page.margin.top + style.header.logo-height + style.header.underline-top-padding + style.header.content-padding,
+      top: style.page.margin.top + style.header.underline-top-padding + style.header.content-padding,
       bottom: style.page.margin.bottom + style.footer.content-padding,
       left: style.page.margin.left,
       right: style.page.margin.right),
@@ -111,18 +129,14 @@
       }
     },
     footer: context [
-      #set align(center)
       #let page-counter = counter(page).get().first()
       #let page-number = here().page()
-
-      #if page-number > 1 {
-        line(length: 100%)
-        v(style.header.underline-top-padding - 1em)
-      }
+      #set align(center)
 
       #if page-number == 1 {
         []
       } else if query(<end-of-prelude>).first().location().page() > page-number {
+        set align(center)
         numbering("I", page-counter)
       } else if query(<end-of-content>).first().location().page() >= page-number {
         numbering("1 / 1", page-counter, counter(page).at(<end-of-content>).last())
@@ -132,7 +146,9 @@
     ],
     header: context {
       set align(left)
-      if here().page() == 1 {
+      let current-page = here().page()
+
+      if current-page == 1 {
         // logo of ABB and DHBW
         grid(
           // set width of columns
@@ -143,36 +159,16 @@
           // right align logo of DHBW
           align(right, image("res/DHBW.svg", height: style.header.logo-height)))
 
-      } else if query(<end-of-prelude>).first().location().page() <= here().page() {
-        let headers-before = query(selector(heading.where(numbering: "1.", level: 1)).before(here()))
+      } else if query(<end-of-content>).first().location().page() >= current-page and query(<end-of-prelude>).first().location().page() < current-page + 1 {
+        let heading = currentH()
 
-        let header-title = thesis.title
-
-        if headers-before.len() > 0 {
-          header-title = headers-before.last().body
-        } else {
-          let headers-after = query(selector(heading.where(numbering: "1.1.1", level: 1)).after(here()))
-
-          if headers-after.len() > 0 {
-            header-title = headers-after.first().body
-          }
-        }
-
-        grid(
-          columns: (1fr, auto),
-          align: (horizon, bottom),
-          context [ _ #header-title _ ],
-          image("res/DHBW.svg", height: style.header.logo-height))
-        
+        heading.at(0)
+        h(0.5em)
+        heading.at(1)
         v(style.header.underline-top-padding - 1em)
         line(length: 100%)
       } else {
-        grid(
-          columns: (1fr, auto),
-          align: (horizon, bottom),
-          context [ _ #config.thesis.title _ ],
-          image("res/DHBW.svg", height: style.header.logo-height)
-        )
+        config.thesis.title
         v(style.header.underline-top-padding - 1em)
         line(length: 100%)
       }
