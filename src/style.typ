@@ -94,6 +94,16 @@
     #c.body
   ]
 
+  // change the display supplement according to the text langugae
+  // based on: https://github.com/typst/typst/issues/3273
+  show figure.where(kind: raw): set figure(supplement: context {
+    if text.lang == "de" {
+      "Quelltext"
+    } else {
+      "Listing"
+    }
+  })
+
   // APA style table
   set table(
     inset: 0.5em,
