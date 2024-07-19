@@ -78,7 +78,59 @@
   set raw(
     tab-size: style.code.tab-size,
     theme: style.code.theme)
-  show raw: set text(font: style.code.font)
+  show raw: set text(font: style.code.font, size: style.code.size)
+  show figure.where(kind: raw): it => align(left)[
+    #let content = it.body
+    #block(
+        width: 100%,
+        fill: ABB-GRAY-06,
+        stroke: none,
+        radius: 0.5em,
+        inset: 0.75em,
+        clip: false,
+        {
+          let (columns, align, make_row) = {
+            if style.code.lines {(
+              (auto, 1fr),
+              (right + top, left),
+              e => {
+                let (i, l) = e
+                let n = i + 1
+                let n_str = if (calc.rem(n, 1) == 0) or (true and i == 0) { text(font: style.code.font, size: style.code.size, fill: ABB-BLACK, str(n)) } else { none }
+                (n_str + h(0.5em), raw(lang: content.lang, l))
+              })
+            }
+            else {
+                  ( ( 1fr, ),
+                    ( left, ),
+                    e => {
+                      let (i, l) = e
+                      raw( lang:content.lang, l)
+                    }
+                  )
+              }
+          }
+          grid(
+              stroke: none,
+              columns: columns,
+              rows: (auto,),
+              gutter: 0pt,
+              inset: 0.25em,
+              align: (col, _) => align.at(col),
+              fill: ABB-GRAY-06,
+              ..content
+                  .text
+                  .split("\n")
+                  .enumerate()
+                  .map(make_row)
+                  .flatten()
+                  .map(c => if c.has("text") and c.text == "" { v(1em) } else { c })
+          )
+      }
+    )
+    #v(-1em)
+    #align(center + top, it.caption)
+  ]
 
   show figure: set block(breakable: true)
 

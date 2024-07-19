@@ -65,6 +65,8 @@
       code: (
         theme: "res/abb.tmTheme",
         font: "FiraCode Nerd Font",
+        lines: false,
+        size: 10pt,
         tab-size: 4),
       link: (
         color: ABB-GRAY-02)))

@@ -5,6 +5,7 @@
 #show: dhbw-template.with((
   lang: "en",
   region: "en",
+  draft: false,
   author: (
     name: "Sven Vogel",
     semester: 4,
@@ -80,6 +81,8 @@ $
 
 #pagebreak()
 
+#lorem(100)
+
 #figure(
   ```rust
 use std::env;
@@ -87,36 +90,11 @@ use std::fs::OpenOptions;
 use std::io::Write;
 
 fn main() {
-    // Get the file path from the environment variable
-    let file_path = match env::var("OUTPUT_FILE") {
-        Ok(path) => path,
-        Err(_) => {
-            eprintln!("Error: OUTPUT_FILE environment variable is not set");
-            return;
-        }
-    };
-
-    // Open the file in append mode, create it if it doesn't exist
-    let mut file = match OpenOptions::new()
-        .append(true)
-        .create(true)
-        .open(&file_path)
-    {
-        Ok(file) => file,
-        Err(e) => {
-            eprintln!("Error opening file {}: {}", file_path, e);
-            return;
-        }
-    };
-
-    // Write "Hello, World" to the file
-    if let Err(e) = writeln!(file, "Hello, World") {
-        eprintln!("Error writing to file: {}", e);
-    } else {
-        println!("Successfully appended 'Hello, World' to {}", file_path);
-    }
+    println!("Hello, World!!!");
 }
   ```, caption: [Some code])
+
+#lorem(100)
 
 #pagebreak()
 
