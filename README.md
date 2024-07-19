@@ -2,20 +2,23 @@
 <div align="center">
     <h1>DHBW-ABB template for Typst</h1>
     <img src="https://img.shields.io/gitea/last-commit/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de">
+    <img src="https://img.shields.io/github/actions/workflow/status/Servostar/dhbw-abb-typst-template/ci.yml?label=build">
     <img src="https://img.shields.io/gitea/v/release/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de&display_name=release">
+    <img src="https://img.shields.io/badge/license-MIT-ff0000">
     <img src="https://img.shields.io/badge/Typst-2B9CB0">
     <img src="https://img.shields.io/gitea/languages/count/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de">
-    <img src="https://img.shields.io/badge/license-MIT-ff0000">
     <br>
     <br>
     <b>Unofficial</b> but feature rich Typst template for writing a thesis or report at DHBW<br>
     with according ABB AG branding in mind.
+    <br>
     <br>
     <img width="1000pt" src="./assets/banner.png">
 </div>
 
 ## Table of Contents
 
+1. [Contribution](#contribution)
 1. [Features](#features)
 2. [Usage](#usage)
 2. [Preview of pages](#preview)
@@ -27,6 +30,12 @@
 8. [FAQ](#faq)
     1. [Typst vs LaTeX](#why-typst-instead-of-latex)
     2. [Source of logos](#where-are-the-logos-from)
+
+## Contribution
+
+> ⚠️ **Important** <br>
+> Development happens at an external site [here](https://git.montehaselino.de/DHBW/dhbw-abb-typst-template).
+> The GitHub repository is only a push mirror, but issues are still welcome at any time!
 
 ## Features
 
