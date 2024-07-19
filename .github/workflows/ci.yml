@@ -1,0 +1,20 @@
+name: GitHub Action for checking typst compilation
+run-name: Performing Typst compilation
+on: [push]
+
+jobs:
+  run-ci-linux:
+    runs-on: ubuntu-latest
+    env:
+      TYPST_INSTALL: $HOME/.typst
+      TYPST_VERSION: 0.11.1
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install Typst CLI
+        run: curl -fsSL https://typst.community/typst-install/install.sh | sh -s "$TYPST_VERSION"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' 
+      - name: Run CI
+        run: export PATH="$TYPST_INSTALL/bin:$PATH" && bash -c ./run-ci.sh
