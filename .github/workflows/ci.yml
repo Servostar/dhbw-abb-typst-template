@@ -6,7 +6,7 @@ jobs:
   run-ci-linux:
     runs-on: ubuntu-latest
     env:
-      TYPST_INSTALL: /usr/local
+      TYPST_INSTALL: $HOME/.typst
       TYPST_VERSION: 0.11.1
     steps:
       - name: Check out repository code
@@ -16,4 +16,4 @@ jobs:
       - name: Set up Python 3
         run: apt update -y && apt install python3-pip -y
       - name: Run CI
-        run: bash -c ./run-ci.sh
+        run: export PATH="$TYPST_INSTALL/bin:$PATH" && bash -c ./run-ci.sh
