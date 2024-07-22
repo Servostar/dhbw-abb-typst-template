@@ -7,3 +7,8 @@
 == More raw data 
 
 #lorem(50)
+
+#figure(
+  ```
+  ```
+)

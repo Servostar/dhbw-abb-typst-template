@@ -81,6 +81,11 @@
   show raw: set text(font: style.code.font, size: style.code.size)
   show figure.where(kind: raw): it => align(left)[
     #let content = it.body
+    #let lang = if content.has("lang") {
+      it.body.lang
+    } else {
+      none
+    }
     #block(
         width: 100%,
         fill: ABB-GRAY-06,
@@ -97,7 +102,7 @@
                 let (i, l) = e
                 let n = i + 1
                 let n_str = if (calc.rem(n, 1) == 0) or (true and i == 0) { text(font: style.code.font, size: style.code.size, fill: ABB-BLACK, str(n)) } else { none }
-                (n_str + h(0.5em), raw(lang: content.lang, l))
+                (n_str + h(0.5em), raw(lang: lang, l))
               })
             }
             else {
@@ -105,7 +110,7 @@
                     ( left, ),
                     e => {
                       let (i, l) = e
-                      raw( lang:content.lang, l)
+                      raw( lang: lang, l)
                     }
                   )
               }
