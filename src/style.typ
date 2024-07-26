@@ -78,7 +78,7 @@
   set raw(
     tab-size: style.code.tab-size,
     theme: style.code.theme)
-  show raw: set text(font: style.code.font, size: style.code.size)
+  show raw.where(block: false): it => box(stroke: 1pt + ABB-GRAY-05, radius: 2pt, inset: (left: 2pt, right: 2pt), outset: (top: 4pt, bottom: 4pt), fill: ABB-GRAY-06, text(font: style.code.font, size: style.code.size, it.text))
   show figure.where(kind: raw): it => align(left)[
     #let content = it.body
     #let lang = if content.has("lang") {
@@ -89,7 +89,7 @@
     #block(
         width: 100%,
         fill: ABB-GRAY-06,
-        stroke: none,
+        stroke: 1pt + ABB-GRAY-05,
         radius: 0.5em,
         inset: 0.75em,
         clip: false,
@@ -102,7 +102,7 @@
                 let (i, l) = e
                 let n = i + 1
                 let n_str = if (calc.rem(n, 1) == 0) or (true and i == 0) { text(font: style.code.font, size: style.code.size, fill: ABB-BLACK, str(n)) } else { none }
-                (n_str + h(0.5em), raw(lang: lang, l))
+                (n_str + h(0.5em), raw(block: true, lang: lang, l))
               })
             }
             else {
@@ -110,7 +110,7 @@
                     ( left, ),
                     e => {
                       let (i, l) = e
-                      raw( lang: lang, l)
+                      raw(block: true, lang: lang, l)
                     }
                   )
               }

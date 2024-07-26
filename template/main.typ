@@ -50,7 +50,7 @@
 
 = Lorem Ipsum 3
 
-#lorem(15)
+#lorem(15) t `Hello, World!` #lorem(50)
 
 $
   angle.l a, b angle.r &= arrow(a) dot arrow(b) \
