@@ -7,7 +7,7 @@
 // Edited: 27.06.2024
 // License: MIT
 
-  #import "conf.typ": validate-config
+  #import "conf.typ": validate-config, default-config
   #import "branding.typ": *
   #import "style.typ": global_styled_doc, content_styled, end_styled
   #import "glossary.typ": glossary
@@ -22,6 +22,21 @@
 
 #let group-break()= {
   [#pagebreak()]
+}
+
+#let inline-color(color, content) = {
+  box(
+    stroke: 1pt + ABB-GRAY-05,
+    radius: 2pt,
+    inset: (left: 2pt, right: 2pt),
+    outset: (top: 4pt, bottom: 4pt),
+    fill: ABB-GRAY-06,
+    [#box(fill: rgb(color), radius: 2pt, inset: 0pt, width: 0.75em, height: 0.75em) #text(
+        font: default-config.style.code.font,
+        size: default-config.style.code.size,
+        content,
+      )],
+  )
 }
 
 // start of template pages and styles
@@ -57,7 +72,7 @@
     #new-preface(config)
     #new_outline()
 
-    // glossary is built inline here because the links must be 
+    // glossary is built inline here because the links must be
     // exposed to the entire document
     #import "glossarium.typ": *
     #show: make-glossary
@@ -71,7 +86,7 @@
         glossary(config.thesis.glossary))
 
       pagebreak(weak: true)
-    } 
+    }
     #counter(page).update(1)
 
     // mark end of prelude
