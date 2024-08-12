@@ -9,7 +9,7 @@
 
 #import "branding.typ": *
 
-#let watermark-color = luma(50%).transparentize(70%) 
+#let watermark-color = luma(50%).transparentize(70%)
 
 #let watermark-pattern = pattern(size: (5pt, 5pt))[
   #place(line(start: (50%, 0%), end: (50%, 100%), stroke: (paint: watermark-color, thickness: 3pt)))
@@ -76,8 +76,7 @@
 
   // set theme for code blocks
   set raw(
-    tab-size: style.code.tab-size,
-    theme: style.code.theme)
+    tab-size: style.code.tab-size)
   show raw.where(block: false): it => box(stroke: 1pt + ABB-GRAY-05, radius: 2pt, inset: (left: 2pt, right: 2pt), outset: (top: 4pt, bottom: 4pt), fill: ABB-GRAY-06, text(font: style.code.font, size: style.code.size, it.text))
   show figure.where(kind: raw): it => align(left)[
     #let content = it.body
