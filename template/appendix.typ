@@ -4,11 +4,9 @@
 
 #lorem(50)
 
-== More raw data 
+== More raw data
 
 #lorem(50)
 
-#figure(
-  ```
-  ```
-)
+#figure(```
+```)
