@@ -88,7 +88,7 @@ $
 #pagebreak()
 
 #lorem(100)
-#inline-color("#ff0000", "red")
+#inline-color("#ff0000", "red") @HTTP
 
 #figure(
   ```rust

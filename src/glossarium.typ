@@ -171,22 +171,21 @@ SOFTWARE.*/
             caption: {
               context {
                 let term_references = __query_labels_with_key(here(), entry.key)
-                if term_references.len() != 0 or show-all {
-                  let desc = entry.at("desc", default: "")
-                  let long = entry.at("long", default: "")
-                  let hasLong = long != "" and long != []
-                  let hasDesc = desc != "" and desc != []
-                  grid(
-                    columns: 2,
-                    column-gutter: 1em,
-                    text(weight: "bold", entry.short),
-                    {
-                      if hasLong {
-                        text(weight: "bold", entry.long)
+                if term_references.len() != 0 or show-all [
+                  #let desc = entry.at("desc", default: "")
+                  #let long = entry.at("long", default: "")
+                  #let hasLong = long != "" and long != []
+                  #let hasDesc = desc != "" and desc != []
+
+                  #block(
+                    par(hanging-indent: 1em)[
+                      #text(weight: "bold", entry.short)
+                      #if hasLong {
+                        text(entry.long)
                       }
-                      if hasLong and hasDesc [:]
-                      if hasDesc [ #desc ] else [. ]
-                      if disable-back-references != true {
+                      #if hasLong and hasDesc [:]
+                      #if hasDesc [ #desc ]
+                      #if disable-back-references != true {
                         term_references
                           .map(x => x.location())
                           .sorted(key: x => x.page())
@@ -211,13 +210,12 @@ SOFTWARE.*/
                           )
                           .join(", ")
                       }
-                    },
+                    ],
                   )
-                }
+                ]
               }
             },
           )[] #label(entry.key)
-          #parbreak()
         ]
       }
     }

@@ -83,6 +83,7 @@
 
     #if "glossary" in config.thesis and config.thesis.glossary != none {
       print-glossary(
+        show-all: true,
         disable-back-references: true,
         enable-group-pagebreak: true,
         glossary(config.thesis.glossary),

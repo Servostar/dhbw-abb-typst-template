@@ -7,3 +7,7 @@ oidc:
 potato:
   short: potato
   desc: "#lorem(50)"
+
+HTTP:
+  short: HTTP
+  long: Hyper Text Transfer Protocol
