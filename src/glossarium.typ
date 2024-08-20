@@ -40,7 +40,7 @@ SOFTWARE.*/
 
 // key not found error
 #let __not-found-panic-error-msg(key) = {
- __glossarium_error_prefix+"key '"+key+"' not found"
+  __glossarium_error_prefix + "key '" + key + "' not found"
 }
 
 // Reference a term
@@ -49,9 +49,9 @@ SOFTWARE.*/
     let __glossary_entries = __glossary_entries.final(here())
     if key in __glossary_entries {
       let entry = __glossary_entries.at(key)
-       
+
       let gloss = __query_labels_with_key(here(), key, before: true)
-       
+
       let is_first = gloss == ()
       let entlong = entry.at("long", default: "")
       let textLink = if display != none {
@@ -61,7 +61,7 @@ SOFTWARE.*/
       } else {
         [#entry.short#suffix]
       }
-       
+
       [#link(label(entry.key), textLink)#label(__glossary_label_prefix + entry.key)]
     } else {
       panic(__not-found-panic-error-msg(key))
@@ -76,14 +76,14 @@ SOFTWARE.*/
     let __glossary_entries = __glossary_entries.final(here())
     if key in __glossary_entries {
       let entry = __glossary_entries.at(key)
-       
+
       let gloss = __query_labels_with_key(here(), key, before: true)
-       
+
       let is_first = gloss == ()
-      let entlongplural = entry.at("longplural", default: "");
+      let entlongplural = entry.at("longplural", default: "")
       let entlong = if entlongplural == [] or entlongplural == "" {
         // if the entry long plural is not provided, then fallback to adding 's' suffix
-        let entlong = entry.at("long", default: "");
+        let entlong = entry.at("long", default: "")
         if entlong != [] and entlong != "" {
           [#entlong#suffix]
         } else {
@@ -92,20 +92,20 @@ SOFTWARE.*/
       } else {
         [#entlongplural]
       }
-       
-      let entplural = entry.at("plural", default: "");
+
+      let entplural = entry.at("plural", default: "")
       let short = if entplural == [] or entplural == "" {
         [#entry.short#suffix]
       } else {
         [#entplural]
       }
-       
+
       let textLink = if (is_first or long == true) and entlong != [] and entlong != "" and long != false {
         [#entlong (#short)]
       } else {
         [#short]
       }
-       
+
       [#link(label(entry.key), textLink)#label(__glossary_label_prefix + entry.key)]
     } else {
       panic(__not-found-panic-error-msg(key))
@@ -152,42 +152,44 @@ SOFTWARE.*/
     for entry in entry_list {
       x.insert(entry.key, entry)
     }
-     
+
     x
   })
 
   let groups = entries.map(x => x.at("group")).dedup()
-   
+
   for group in groups.sorted() {
     if group != "" [#heading(group, level: 1, outlined: false) ]
     for entry in entries.sorted(key: x => x.key) {
       if entry.group == group {
         [
           #show figure.where(kind: __glossarium_figure): it => it.caption
-            #figure(
-              supplement: "",
-              kind: __glossarium_figure,
-              numbering: none,
-              caption: {
-                context {
-                  let term_references = __query_labels_with_key(here(), entry.key)
-                  if term_references.len() != 0 or show-all {
-                    let desc = entry.at("desc", default: "")
-                    let long = entry.at("long", default: "")
-                    let hasLong = long != "" and long != []
-                    let hasDesc = desc != "" and desc != []
-                    grid(
-                      columns: 2,
-                      column-gutter: 1em,
-                      text(weight: "bold", entry.short),
-                      {
-                        if hasLong {
-                          text(weight: "bold", entry.long)
-                        }
-                        if hasLong and hasDesc [:]
-                        if hasDesc [ #desc ] else [. ]
-                        if disable-back-references != true {
-                          term_references.map(x => x.location()).sorted(key: x => x.page()).fold(
+          #figure(
+            supplement: "",
+            kind: __glossarium_figure,
+            numbering: none,
+            caption: {
+              context {
+                let term_references = __query_labels_with_key(here(), entry.key)
+                if term_references.len() != 0 or show-all [
+                  #let desc = entry.at("desc", default: "")
+                  #let long = entry.at("long", default: "")
+                  #let hasLong = long != "" and long != []
+                  #let hasDesc = desc != "" and desc != []
+
+                  #block(
+                    par(hanging-indent: 1em)[
+                      #text(weight: "bold", entry.short)
+                      #if hasLong {
+                        text(entry.long)
+                      }
+                      #if hasLong and hasDesc [:]
+                      #if hasDesc [ #desc ]
+                      #if disable-back-references != true {
+                        term_references
+                          .map(x => x.location())
+                          .sorted(key: x => x.page())
+                          .fold(
                             (values: (), pages: ()),
                             ((values, pages), x) => if pages.contains(x.page()) {
                               (values: values, pages: pages)
@@ -196,25 +198,29 @@ SOFTWARE.*/
                               pages.push(x.page())
                               (values: values, pages: pages)
                             },
-                          ).values.map(x => {
-                            let page-numbering = x.page-numbering();
+                          )
+                          .values
+                          .map(x => {
+                              let page-numbering = x.page-numbering()
                               if page-numbering == none {
                                 page-numbering = "1"
                               }
                               link(x)[#numbering(page-numbering, ..counter(page).at(x))]
                             }
-                          ).join(", ")
-                        }
+                          )
+                          .join(", ")
                       }
-                    )
-                  }
-                }
-              },
-            )[] #label(entry.key)
-          #parbreak()
+                    ],
+                  )
+                ]
+              }
+            },
+          )[] #label(entry.key)
         ]
       }
     }
-    if enable-group-pagebreak { pagebreak(weak: true) }
+    if enable-group-pagebreak {
+      pagebreak(weak: true)
+    }
   }
 };

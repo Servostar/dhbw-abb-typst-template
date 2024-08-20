@@ -9,66 +9,86 @@
 
 #let glossary(entries) = {
 
+  assert(
+    type(entries) == dictionary,
+    message: "The glossary is not a dictionary",
+  )
+
+  let processed_glossary = (:)
+
+  for (k, v) in entries.pairs() {
     assert(
-      type(entries) == dictionary,
-      message: "The glossary is not a dictionary",
+      type(v) == dictionary,
+      message: "The glossary entry `" + k + "` is not a dictionary",
     )
 
-    for (k, v) in entries.pairs() {
+    for key in v.keys() {
       assert(
-        type(v) == dictionary,
-        message: "The glossary entry `" + k + "` is not a dictionary")
-
-      for key in v.keys() {
-        assert(
-          key in ("short", "long", "desc", "group"),
-          message: "Found unexpected key `" + key + "` in glossary entry `" + k)
-      }
-
-      assert(
-        type(v.short) == str,
-        message: "The short form of glossary entry `" + k + "` is not a string")
-
-      if "long" in v {
-        assert(
-          type(v.long) == str,
-          message: "The long form of glossary entry `" + k + "` is not a string")
-      }
-
-      if "desc" in v {
-        assert(
-          type(v.desc) == str,
-          message: "The description of glossary entry `" + k + "` is not a string")
-      }
-      
-      if "group" in v {
-        assert(
-          type(v.group) == str,
-          message: "The optional group of glossary entry `" + k + "` is not a string")
-      } else {
-          let group = if "long" in v {
-            if (context text.lang) == "de" {
-              "Akronyme"
-            } else {
-              "Acronyms"
-            }
-          } else {
-            if (context text.lang) == "de" {
-              "Begriffe"
-            } else {
-              "Terms"
-            }
-          }
-
-          entries.at(k).group = group
-      }
+        key in ("short", "long", "desc", "group"),
+        message: "Found unexpected key `" + key + "` in glossary entry `" + k,
+      )
     }
 
-  return entries.pairs().map(((key, entry)) => (
-      key: key,
-      short: eval(entry.short, mode: "markup"),
-      long: eval(entry.at("long", default: ""), mode: "markup"),
-      desc: eval(entry.at("desc", default: ""), mode: "markup"),
-      group: entry.at("group", default: "")
-    ))
+    assert(
+      type(v.short) == str,
+      message: "The short form of glossary entry `" + k + "` is not a string",
+    )
+
+    if "long" in v {
+      assert(
+        type(v.long) == str,
+        message: "The long form of glossary entry `" + k + "` is not a string",
+      )
+    }
+
+    if "desc" in v {
+      assert(
+        type(v.desc) == str,
+        message: "The description of glossary entry `" + k + "` is not a string",
+      )
+    }
+
+    if "group" in v {
+      assert(
+        type(v.group) == str,
+        message: "The optional group of glossary entry `" + k + "` is not a string",
+      )
+    } else {
+      let acronym_group = if (context text.lang) == "de" {
+        "Akronyme"
+      } else {
+        "Acronyms"
+      }
+
+      let glossary_group = if (context text.lang) == "de" {
+        "Begriffe"
+      } else {
+        "Glossary"
+      }
+
+      let group = if "long" in v {
+        acronym_group
+      } else {
+        glossary_group
+      }
+
+      // create dedicated entries for
+      // acronym and glossary
+      if "long" in v and "desc" in v {
+        processed_glossary.insert(k, (short: v.short, long: v.long, group: acronym_group))
+        processed_glossary.insert(k + "__glossary_entry", (short: v.short, desc: v.desc, group: glossary_group))
+      } else {
+        processed_glossary.insert(k, v)
+        processed_glossary.at(k).group = group
+      }
+    }
+  }
+
+  return processed_glossary.pairs().map(((key, entry)) => (
+    key: key,
+    short: entry.short,
+    long: eval(entry.at("long", default: ""), mode: "markup"),
+    desc: eval(entry.at("desc", default: ""), mode: "markup"),
+    group: entry.at("group", default: ""),
+  ))
 }

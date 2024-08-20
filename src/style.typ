@@ -111,46 +111,37 @@
               e => {
                 let (i, l) = e
                 let n = i + 1
-                let n_str = if (calc.rem(n, 1) == 0) or (true and i == 0) {
-                  text(font: style.code.font, size: style.code.size, fill: ABB-BLACK, str(n))
-                } else {
-                  none
-                }
+                let n_str = if (calc.rem(n, 1) == 0) or (true and i == 0) { text(font: style.code.font, size: style.code.size, fill: ABB-BLACK, str(n)) } else { none }
                 (n_str + h(0.5em), raw(block: true, lang: lang, l))
-              },
-            )
-          } else {
-            (
-              (1fr,),
-              (left,),
-              e => {
-                let (i, l) = e
-                raw(block: true, lang: lang, l)
-              },
-            )
+              })
+            }
+            else {
+                  ( ( 1fr, ),
+                    ( left, ),
+                    e => {
+                      let (i, l) = e
+                      raw(block: true, lang: lang, l)
+                    }
+                  )
+              }
           }
-        }
-        grid(
-          stroke: none,
-          columns: columns,
-          rows: (auto,),
-          gutter: 0pt,
-          inset: 0.25em,
-          align: (col, _) => align.at(col),
-          fill: ABB-GRAY-06,
-          ..content.text.split("\n").enumerate().map(make_row).flatten().map(c => if c.has("text") and c.text == "" {
-            v(1em)
-          } else {
-            c
-          })
-        )
-        if lang != none {
-          place(
-            top + right,
-            text(font: style.code.font, size: style.code.size, ligatures: true, fill: ABB-GRAY-03, lang),
+          grid(
+              stroke: none,
+              columns: columns,
+              rows: (auto,),
+              gutter: 0pt,
+              inset: 0.25em,
+              align: (col, _) => align.at(col),
+              fill: ABB-GRAY-06,
+              ..content
+                  .text
+                  .split("\n")
+                  .enumerate()
+                  .map(make_row)
+                  .flatten()
+                  .map(c => if c.has("text") and c.text == "" { v(1em) } else { c })
           )
-        }
-      },
+      }
     )
     #v(-1em)
     #align(center + top, it.caption)
@@ -187,20 +178,8 @@
     stroke: (x, y) => (
       left: none,
       right: none,
-      top: if y == 0 {
-        1.5pt
-      } else if y < 2 {
-        1pt
-      } else {
-        0.5pt
-      },
-      bottom: if y == 0 {
-        1pt
-      } else {
-        1.5pt
-      },
-    ),
-  )
+      top: if y == 0 { 1.5pt } else if y < 2 { 1pt } else { 0.5pt },
+      bottom: if y == 0 { 1pt } else { 1.5pt } ))
 
   // make table header bold
   show table.cell.where(y: 0): set text(weight: "bold")
@@ -209,8 +188,7 @@
   set par(
     justify: true,
     first-line-indent: 1em,
-    leading: 1em,
-  )
+    leading: 1em)
 
   // give links a color
   show link: set text(fill: style.link.color)
@@ -226,11 +204,10 @@
       top: style.page.margin.top + style.header.underline-top-padding + style.header.content-padding,
       bottom: style.page.margin.bottom + style.footer.content-padding,
       left: style.page.margin.left,
-      right: style.page.margin.right,
-    ),
+      right: style.page.margin.right),
     numbering: (..nums) => {
       let current-page = here().page()
-      if current-page == 1 {
+      if current-page == 1{
         []
       } else if query(<end-of-prelude>).first().location().page() > current-page {
         numbering("I", nums.pos().first())
@@ -271,10 +248,7 @@
           // right align logo of DHBW
           align(right, image("res/DHBW.svg", height: style.header.logo-height)))
 
-      } else if query(<end-of-content>).first().location().page() >= current-page and query(<end-of-prelude>)
-        .first()
-        .location()
-        .page() < current-page + 1 {
+      } else if query(<end-of-content>).first().location().page() >= current-page and query(<end-of-prelude>).first().location().page() < current-page + 1 {
         let heading = currentH()
 
         heading.at(0)
@@ -287,8 +261,7 @@
         v(style.header.underline-top-padding - 1em)
         line(length: 100%)
       }
-    },
-  )
+    })
 
   body
 }

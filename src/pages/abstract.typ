@@ -6,22 +6,24 @@
 // Edited: 28.06.2024
 // License: MIT
 
-#let new_abstract(config) = context {
-  
-  set align(center + horizon)
+#let new_abstract(config) = (
+  context {
 
-  // only include summary when a language other than english is used
-  if text.lang == "de" [
-    // Summary is supposed to be on separate page
-    #pagebreak(weak: true)
+    set align(center + horizon)
 
-    = Zusammenfassung
-    #config.thesis.summary
-  ]
+    // only include summary when a language other than english is used
+    if text.lang == "de" [
+      // Summary is supposed to be on separate page
+      #pagebreak(weak: true)
 
-  // abstract is supposed to be on separate page
-  pagebreak(weak: true)
+      = Zusammenfassung
+      #config.thesis.summary
+    ]
 
-  heading("Abstract")
-  config.thesis.abstract
-}
+    // abstract is supposed to be on separate page
+    pagebreak(weak: true)
+
+    heading("Abstract")
+    config.thesis.abstract
+  }
+)
