@@ -27,11 +27,11 @@
   // faculty
   #pad(top: 0.5cm)[
     #if text.lang == "de" [
-      Praxisphase des #author.semester Studienjahrs an der Fakultät für #author.faculty
+      Praxisphase des #author.semester Semesters an der Fakultät für #author.faculty
       #linebreak()
       im Studiengang #author.program
     ] else if text.lang == "en" [
-      Practical phase of the #author.semester academic year at the Faculty of #author.faculty
+      Practical phase of the #author.semester semester at the Faculty of #author.faculty
       #linebreak()
       in the degree program #author.program
     ] else [
