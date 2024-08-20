@@ -68,6 +68,10 @@ $
   lorem(200),
 )
 
+#url("https://github.com", "text (github.com)") 
+
+#lorem(50)
+
 #figure(
   table(
     columns: 3,

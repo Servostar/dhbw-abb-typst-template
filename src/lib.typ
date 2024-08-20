@@ -39,6 +39,10 @@
   )
 }
 
+#let url(label, content) = {
+  link(label)[#underline(offset: 2pt, stroke: 0.5pt + blue, text(fill: blue, content))]
+}
+
 // start of template pages and styles
 #let dhbw-template(config, body) = [
   #let config = validate-config(config)
