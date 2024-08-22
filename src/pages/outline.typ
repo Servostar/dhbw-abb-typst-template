@@ -16,6 +16,15 @@
     let elems = query(figure.where(kind: kind), here())
     let count = elems.len()
 
+    show outline.entry: it => {
+      link(it.element.location())[
+        #v(12pt, weak: true)
+        #text(weight: "regular", it.body)
+        #box(width: 1fr, it.fill)
+        #[ #it.page]
+      ]
+    }
+
     // only show outline if there is something to list
     if count > 0 {
       pagebreak(weak: true)
