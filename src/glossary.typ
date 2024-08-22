@@ -76,7 +76,7 @@
       // acronym and glossary
       if "long" in v and "desc" in v {
         processed_glossary.insert(k, (short: v.short, long: v.long, group: acronym_group))
-        processed_glossary.insert(k + "__glossary_entry", (short: v.short, desc: v.desc, group: glossary_group))
+        processed_glossary.insert(k + "__glossary_entry", (short: v.short, desc: v.desc, long: v.long, group: glossary_group))
       } else {
         processed_glossary.insert(k, v)
         processed_glossary.at(k).group = group

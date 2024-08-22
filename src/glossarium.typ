@@ -180,10 +180,12 @@ SOFTWARE.*/
                   #block(
                     par(hanging-indent: 1em)[
                       #text(weight: "bold", entry.short)
-                      #if hasLong {
+                      #if hasLong and hasDesc [
+                        (#text(entry.long))
+                      ] else if hasLong {
                         text(entry.long)
                       }
-                      #if hasLong and hasDesc [:]
+                      #if hasDesc [ #sym.dash.en ]
                       #if hasDesc [ #desc ]
                       #if disable-back-references != true {
                         term_references
