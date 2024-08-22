@@ -40,7 +40,13 @@
 }
 
 #let url(label, content) = {
-  link(label)[#underline(offset: 2pt, stroke: 0.5pt + blue, text(fill: blue, content))]
+  link(label)[#underline(offset: 2pt, stroke: 0.5pt + blue, text(fill: blue)[
+    #content
+    #let domain = label.find(regex("\w+\.\w+(?:\.\w+)*"))
+    #if domain.len() > 0 [
+      (#domain)
+    ]
+  ])]
 }
 
 // start of template pages and styles

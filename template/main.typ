@@ -68,7 +68,7 @@ $
   lorem(200),
 )
 
-#url("https://github.com", "text (github.com)") 
+#url("https://github.com", "text") 
 
 #lorem(50)
 
