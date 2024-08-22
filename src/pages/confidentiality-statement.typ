@@ -15,9 +15,9 @@
     let author = config.author
 
     if text.lang == "de" [
-      #heading(level: 1, "Sperrvermerk", supplement: [special])
+      #heading(level: 1, "Sperrvermerk")
     ] else if text.lang == "en" [
-      #heading(level: 1, "Confidentiality Statement", supplement: [special])
+      #heading(level: 1, "Confidentiality Statement")
     ]
 
     if text.lang == "de" [
