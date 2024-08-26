@@ -170,7 +170,13 @@ SOFTWARE.*/
             numbering: none,
             caption: {
               context {
-                let term_references = __query_labels_with_key(here(), entry.key)
+                let key = if entry.key.ends-with("__glossary_entry") {
+                  entry.key.replace("__glossary_entry", "")
+                } else {
+                  entry.key
+                }
+
+                let term_references = __query_labels_with_key(here(), key)
                 if term_references.len() != 0 or show-all [
                   #let desc = entry.at("desc", default: "")
                   #let long = entry.at("long", default: "")
