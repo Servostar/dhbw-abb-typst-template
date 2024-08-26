@@ -178,6 +178,7 @@ SOFTWARE.*/
                   #let hasDesc = desc != "" and desc != []
 
                   #block(
+                    below: 1.5em,
                     par(hanging-indent: 1em)[
                       #text(weight: "bold", entry.short)
                       #if hasLong and hasDesc [
