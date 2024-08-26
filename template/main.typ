@@ -3,8 +3,8 @@
 #import "abstract.typ": abstract, summary
 
 #show: dhbw-template.with((
-  lang: "en",
-  region: "en",
+  lang: "de",
+  region: "de",
   draft: false,
   author: (
     name: "Sven Vogel",

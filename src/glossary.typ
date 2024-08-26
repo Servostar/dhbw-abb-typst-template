@@ -7,7 +7,7 @@
 // Edited: 08.07.2024
 // License: MIT
 
-#let glossary(entries) = {
+#let glossary(entries, config) = {
 
   assert(
     type(entries) == dictionary,
@@ -54,13 +54,13 @@
         message: "The optional group of glossary entry `" + k + "` is not a string",
       )
     } else {
-      let acronym_group = if (context text.lang) == "de" {
-        "Akronyme"
+      let acronym_group = if config.lang == "de" {
+        "Abkürzungsverzeichnis"
       } else {
-        "Acronyms"
+        "List of Acronyms"
       }
 
-      let glossary_group = if (context text.lang) == "de" {
+      let glossary_group = if config.lang == "de" {
         "Begriffe"
       } else {
         "Glossary"

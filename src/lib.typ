@@ -96,7 +96,7 @@
         show-all: true,
         disable-back-references: true,
         enable-group-pagebreak: true,
-        glossary(config.thesis.glossary),
+        glossary(config.thesis.glossary, config),
       )
 
       pagebreak(weak: true)
