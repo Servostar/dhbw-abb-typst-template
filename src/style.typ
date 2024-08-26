@@ -69,7 +69,13 @@
     weight: "semibold",
   )
 
-  set heading(supplement: [chapter])
+  let header-supplement = if config.lang == "de" {
+    "Kapitel"
+  } else {
+    "chapter"
+  }
+
+  set heading(supplement: [#header-supplement])
 
   set math.equation(numbering: "(1)")
 

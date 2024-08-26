@@ -51,7 +51,7 @@
 #lorem(200)
 @einstein
 
-= Lorem Ipsum 3
+= Lorem Ipsum 3 <sec:hello>
 
 #lorem(15) t `Hello, World!` #lorem(50)
 
@@ -68,7 +68,7 @@ $
   lorem(200),
 )
 
-#url("https://github.com", "text") 
+#url("https://github.com", "text") @sec:hello
 
 #lorem(50)
 

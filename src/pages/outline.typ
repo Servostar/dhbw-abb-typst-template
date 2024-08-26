@@ -80,9 +80,15 @@
       "Table of Contents"
     }
 
+    let header-supplement = if (text.lang == "de") {
+      "Kapitel"
+    } else {
+      "chapter"
+    }
+
     pagebreak(weak: true)
     outline(
-      target: heading.where(supplement: [chapter]),
+      target: heading.where(supplement: [#header-supplement]),
       title: title,
       indent: auto,
     )
