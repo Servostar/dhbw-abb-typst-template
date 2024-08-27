@@ -8,6 +8,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: Install dependencies for Nix setup action
+        run: |
+          apt update -y
+          apt install sudo -y
       - name: Setup Nix
         uses: cachix/install-nix-action@v27
         with:
