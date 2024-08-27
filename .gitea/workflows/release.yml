@@ -1,28 +1,31 @@
 name: release
 
-on: 
+on:
   push:
     tags:
-      - '*'
+      - 'v*.*.*'
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install dependencies for Nix setup action
+        run: |
+          apt update -y
+          apt install sudo -y
+      - name: Setup Nix
+        uses: cachix/install-nix-action@v27
         with:
-          fetch-depth: 0
-      - name: Install Typst CLI
-        run: curl -fsSL https://typst.community/typst-install/install.sh | sh -s "$TYPST_VERSION"
-      - name: Set up Python 3
-        run: apt update -y && apt install python3-pip -y
+          nix_path: nixpkgs=channel:nixos-unstable
       - name: Run CI
-        run: bash -c ./run-ci.sh
+        run: nix-shell --run ./run-ci.sh
       - name: Setup go
         uses: https://github.com/actions/setup-go@v4
         with:
           go-version: '>=1.20.1'
-      - name: Create release  
+      - name: Create release
         id: create-release
         uses: https://gitea.com/actions/release-action@main
         with:
