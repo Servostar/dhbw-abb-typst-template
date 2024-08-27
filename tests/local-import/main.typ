@@ -1,7 +1,7 @@
 
 #import "../../src/lib.typ": dhbw-template
 
-#show: dhbw-template((
+#show: dhbw-template.with((
   lang: "en",
   region: "en",
   author: (
@@ -23,6 +23,4 @@
     glossary: none,
     appendices: none,
   ),
-))[
-  test
-]
+))
