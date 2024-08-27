@@ -30,7 +30,10 @@ SOFTWARE.*/
 #let __query_labels_with_key(loc, key, before: false) = {
   if before {
     query(
-      selector(label(__glossary_label_prefix + key)).before(loc, inclusive: false),
+      selector(label(__glossary_label_prefix + key)).before(
+        loc,
+        inclusive: false,
+      ),
       loc,
     )
   } else {
@@ -56,13 +59,18 @@ SOFTWARE.*/
       let entlong = entry.at("long", default: "")
       let textLink = if display != none {
         [#display]
-      } else if (is_first or long == true) and entlong != [] and entlong != "" and long != false {
+      } else if (
+        is_first or long == true
+      ) and entlong != [] and entlong != "" and long != false {
         [#entlong (#entry.short#suffix)]
       } else {
         [#entry.short#suffix]
       }
 
-      [#link(label(entry.key), textLink)#label(__glossary_label_prefix + entry.key)]
+      [#link(
+          label(entry.key),
+          textLink,
+        )#label(__glossary_label_prefix + entry.key)]
     } else {
       panic(__not-found-panic-error-msg(key))
     }
@@ -100,13 +108,18 @@ SOFTWARE.*/
         [#entplural]
       }
 
-      let textLink = if (is_first or long == true) and entlong != [] and entlong != "" and long != false {
+      let textLink = if (
+        is_first or long == true
+      ) and entlong != [] and entlong != "" and long != false {
         [#entlong (#short)]
       } else {
         [#short]
       }
 
-      [#link(label(entry.key), textLink)#label(__glossary_label_prefix + entry.key)]
+      [#link(
+          label(entry.key),
+          textLink,
+        )#label(__glossary_label_prefix + entry.key)]
     } else {
       panic(__not-found-panic-error-msg(key))
     }
@@ -116,7 +129,9 @@ SOFTWARE.*/
 // show rule to make the references for glossarium
 #let make-glossary(body) = {
   show ref: r => {
-    if r.element != none and r.element.func() == figure and r.element.kind == __glossarium_figure {
+    if r.element != none and r.element.func() == figure and r
+      .element
+      .kind == __glossarium_figure {
       // call to the general citing function
       gls(str(r.target), suffix: r.citation.supplement)
     } else {
@@ -200,7 +215,9 @@ SOFTWARE.*/
                           .sorted(key: x => x.page())
                           .fold(
                             (values: (), pages: ()),
-                            ((values, pages), x) => if pages.contains(x.page()) {
+                            ((values, pages), x) => if pages.contains(
+                              x.page(),
+                            ) {
                               (values: values, pages: pages)
                             } else {
                               values.push(x)
@@ -214,7 +231,10 @@ SOFTWARE.*/
                               if page-numbering == none {
                                 page-numbering = "1"
                               }
-                              link(x)[#numbering(page-numbering, ..counter(page).at(x))]
+                              link(x)[#numbering(
+                                  page-numbering,
+                                  ..counter(page).at(x),
+                                )]
                             }
                           )
                           .join(", ")

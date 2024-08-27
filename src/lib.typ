@@ -31,7 +31,13 @@
     inset: (left: 2pt, right: 2pt),
     outset: (top: 4pt, bottom: 4pt),
     fill: ABB-GRAY-06,
-    [#box(fill: rgb(color), radius: 2pt, inset: 0pt, width: 0.75em, height: 0.75em) #text(
+    [#box(
+        fill: rgb(color),
+        radius: 2pt,
+        inset: 0pt,
+        width: 0.75em,
+        height: 0.75em,
+      ) #text(
         font: default-config.style.code.font,
         size: default-config.style.code.size,
         content,
@@ -40,13 +46,17 @@
 }
 
 #let url(label, content) = {
-  link(label)[#underline(offset: 2pt, stroke: 0.5pt + blue, text(fill: blue)[
-    #content
-    #let domain = label.find(regex("\w+\.\w+(?:\.\w+)*"))
-    #if domain.len() > 0 [
-      (#domain)
-    ]
-  ])]
+  link(label)[#underline(
+      offset: 2pt,
+      stroke: 0.5pt + blue,
+      text(fill: blue)[
+        #content
+        #let domain = label.find(regex("\w+\.\w+(?:\.\w+)*"))
+        #if domain.len() > 0 [
+          (#domain)
+        ]
+      ],
+    )]
 }
 
 // start of template pages and styles

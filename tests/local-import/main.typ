@@ -1,8 +1,7 @@
 
 #import "../../src/lib.typ": dhbw-template
 
-#show: dhbw-template.with(
-  config: (
+#show: dhbw-template.with((
     lang: "en",
     region: "en",
     author: (
@@ -27,3 +26,5 @@
       bibliography: none,
       glossary: none,
       appendices: none)))
+
+= Heading

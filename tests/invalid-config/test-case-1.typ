@@ -1,8 +1,7 @@
 
 #import "../../src/lib.typ": dhbw-template
 
-#show: dhbw-template.with(
-  config: (
+#show: dhbw-template.with((
     lang: none,
     region: "en",
     author: (
