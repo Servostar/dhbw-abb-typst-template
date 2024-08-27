@@ -25,7 +25,8 @@ function enter-section() {
   printf "\\n"
 
   eval "$2"
-  if [ $? -neq $3 ]; then
+  exit_status=$?
+  if ! [ $exit_status -eq $3 ]; then
     abort "command: $2 failed in section: $1"
   fi
 
