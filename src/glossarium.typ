@@ -129,7 +129,9 @@ SOFTWARE.*/
 // show rule to make the references for glossarium
 #let make-glossary(body) = {
   show ref: r => {
-    if r.element != none and r.element.func() == figure and r.element.kind == __glossarium_figure {
+    if r.element != none and r.element.func() == figure and r
+      .element
+      .kind == __glossarium_figure {
       // call to the general citing function
       gls(str(r.target), suffix: r.citation.supplement)
     } else {
@@ -200,25 +202,33 @@ SOFTWARE.*/
                       if hasLong and hasDesc [:]
                       if hasDesc [ #desc ] else [. ]
                       if disable-back-references != true {
-                        term_references.map(x => x.location()).sorted(key: x => x.page()).fold(
-                          (values: (), pages: ()),
-                          ((values, pages), x) => if pages.contains(x.page()) {
-                            (values: values, pages: pages)
-                          } else {
-                            values.push(x)
-                            pages.push(x.page())
-                            (values: values, pages: pages)
-                          },
-                        ).values.map(x => {
-                          let page-numbering = x.page-numbering()
-                          if page-numbering == none {
-                            page-numbering = "1"
-                          }
-                          link(x)[#numbering(
-                              page-numbering,
-                              ..counter(page).at(x),
-                            )]
-                        }).join(", ")
+                        term_references
+                          .map(x => x.location())
+                          .sorted(key: x => x.page())
+                          .fold(
+                            (values: (), pages: ()),
+                            ((values, pages), x) => if pages.contains(
+                              x.page(),
+                            ) {
+                              (values: values, pages: pages)
+                            } else {
+                              values.push(x)
+                              pages.push(x.page())
+                              (values: values, pages: pages)
+                            },
+                          )
+                          .values
+                          .map(x => {
+                              let page-numbering = x.page-numbering()
+                              if page-numbering == none {
+                                page-numbering = "1"
+                              }
+                              link(x)[#numbering(
+                                  page-numbering,
+                                  ..counter(page).at(x),
+                                )]
+                            })
+                          .join(", ")
                       }
                     },
                   )

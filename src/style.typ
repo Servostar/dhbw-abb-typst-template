@@ -111,7 +111,9 @@
     header-ascent: style.header.content-padding,
     footer-descent: style.header.content-padding,
     margin: (
-      top: style.page.margin.top + style.header.logo-height + style.header.underline-top-padding + style.header.content-padding,
+      top: style.page.margin.top + style.header.logo-height + style
+        .header
+        .underline-top-padding + style.header.content-padding,
       bottom: style.page.margin.bottom + style.footer.content-padding,
       left: style.page.margin.left,
       right: style.page.margin.right,
@@ -120,9 +122,15 @@
       let current-page = here().page()
       if current-page == 1 {
         []
-      } else if query(<end-of-prelude>).first().location().page() > current-page {
+      } else if query(<end-of-prelude>)
+        .first()
+        .location()
+        .page() > current-page {
         numbering("I", nums.pos().first())
-      } else if query(<end-of-content>).first().location().page() >= current-page {
+      } else if query(<end-of-content>)
+        .first()
+        .location()
+        .page() >= current-page {
         numbering("1", nums.pos().first())
       } else {
         numbering("a", nums.pos().first())
@@ -159,7 +167,10 @@
           // right align logo of DHBW
           align(right, image("res/DHBW.svg", height: style.header.logo-height)))
 
-      } else if query(<end-of-prelude>).first().location().page() <= here().page() {
+      } else if query(<end-of-prelude>)
+        .first()
+        .location()
+        .page() <= here().page() {
         let headers-before = query(
           selector(heading.where(numbering: "1.", level: 1)).before(here()),
         )
