@@ -16,7 +16,8 @@
 
     // title
     #v(2cm)
-    #text(size: 2em, weight: "semibold", thesis.title)
+    #set par(justify: false)
+    #text(size: 2em, weight: "semibold", hyphenate: false, thesis.title)
 
     // subtitle
     #text(size: 1.5em, thesis.subtitle)
