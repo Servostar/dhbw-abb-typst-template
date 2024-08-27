@@ -1,32 +1,34 @@
+name: release
+
 on:
   push:
-    # Sequence of patterns matched against refs/tags
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-
-name: Create Release
+      - 'v*.*.*'
 
 jobs:
-  build:
-    name: Create Release
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Install Typst CLI
-        run: curl -fsSL https://typst.community/typst-install/install.sh | sh -s "$TYPST_VERSION"
-      - uses: actions/setup-python@v5
+      - name: Install dependencies for Nix setup action
+        run: |
+          apt update -y
+          apt install sudo -y
+      - name: Setup Nix
+        uses: cachix/install-nix-action@v27
         with:
-          python-version: '3.11' 
+          nix_path: nixpkgs=channel:nixos-unstable
       - name: Run CI
-        run: export PATH="$TYPST_INSTALL/bin:$PATH" && bash -c ./run-ci.sh
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+        run: nix-shell --run ./run-ci.sh
+      - name: Setup go
+        uses: https://github.com/actions/setup-go@v4
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
+          go-version: '>=1.20.1'
+      - name: Create release
+        id: create-release
+        uses: https://gitea.com/actions/release-action@main
+        with:
+          files: |-
+            example.pdf
+          api_key: '${{secrets.RELEASE_TOKEN}}'
