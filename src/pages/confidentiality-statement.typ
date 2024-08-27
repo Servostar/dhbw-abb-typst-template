@@ -21,7 +21,7 @@
     ]
 
     if text.lang == "de" [
-      Der Inhalt der dieser Arbeit mit dem Thema
+      Der Inhalt dieser Arbeit mit dem Thema
     ] else if text.lang == "en" [
       The content of this work with the topic
     ]
