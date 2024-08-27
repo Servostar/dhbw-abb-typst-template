@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function format() {
     # format file
@@ -16,7 +16,7 @@ function format() {
         echo "failed format validation: $1"
         exit 1
     fi
-    
+
     local imports=$(rg "#import \"([a-z0-9/\-]+\.typ)\"" -Nor '$1' "$1")
 
     # format all included files
