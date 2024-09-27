@@ -59,9 +59,9 @@
           bottom: 2.5cm)),
       text: (
         size: 12pt,
-        font: "Open Sans"),
+        font: "Fira Sans"),
       heading: (
-        font: "Montserrat"),
+      font: "Fira Sans"),
       code: (
         theme: "res/abb.tmTheme",
         font: "FiraCode Nerd Font",

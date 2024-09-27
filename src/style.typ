@@ -75,7 +75,7 @@
 
   show heading: set text(
     font: style.heading.font,
-    weight: "semibold",
+    weight: "bold"
   )
 
   let header-supplement = if config.lang == "de" {
@@ -87,6 +87,7 @@
   set heading(supplement: [#header-supplement])
 
   set math.equation(numbering: "(1)")
+  show math.equation: set text(font: "Fira Math", size: 12pt)
 
   // Set header spacing
   show heading.where(level: 1): it => v(2em) + it + v(1em)
@@ -182,7 +183,7 @@
   // based on: https://github.com/typst/typst/discussions/3871
   show figure.caption: c => [
     #if c.body.fields().len() > 0 {
-      text(weight: "semibold")[
+      text(weight: "medium")[
         #c.supplement #c.counter.display("1.1.1")
       ]
       c.separator
