@@ -40,7 +40,7 @@
 ## Features
 
 > ⚠️ **Notice** <br>
-> Typst ist under active development and thus may lack features an experienced LaTeX is used to. 
+> Typst ist under active development and thus may lack features an experienced LaTeX is used to.
 
 This template includes designs for a titlepage, confidantiality statement, declaration of authorship and more with a consistent design inspired by various unofficial works made by students at DHBW. Layout and the choise fonts are based on the unofficial [supercharged-dhbw](https://github.com/DannySeidel/typst-dhbw-template) Typst template. It comes with automatic generation of outlines for figures, tables, code snippets and appendices.
 The template can generate sections for a glossary, combinging acronyms and technical terms into a singular section.
@@ -57,7 +57,7 @@ A short overview of all features the template is capable of:
 - Watermark for draft versions
 - Automatic form filling for data provided via configuration
 - Styles for captions, tables and equations
-- ABB branding inspired code theme 
+- ABB branding inspired code theme
 
 ## Preview
 
@@ -131,9 +131,10 @@ Complies with ABB branding guidelines such as:
 
 ## Fonts
 
-Both fonts used in the document are licensed under the [Open Font License](https://openfontlicense.org/) and can be used for non-commercial as well as commercial purposes. They can be downloaded from google fonts:
-- [Montserrat](https://fonts.google.com/specimen/Montserrat)
-- [Open Sans](https://fonts.google.com/specimen/Open+Sans)
+Both fonts used in the document are licensed under the [Open Font License](https://openfontlicense.org/) and can be used for non-commercial as well as commercial purposes:
+- [Fira Sans](https://github.com/bBoxType/FiraSans)
+- [Fira Math](https://github.com/firamath/firamath)
+- [Fira Code NF](https://www.nerdfonts.com/font-downloads)
 
 Consider giving the creators of the font credit for their amazing work!
 
@@ -144,8 +145,8 @@ The developers around Typst have made pretty handy comparison guide between LaTe
 ## Legal
 
 This template and its content is in no way officially affiliaterd with either DHBW or ABB AG.
-Its only purpose is to simplify the process of getting started with the typsetting language Typst for writing a university report or thesis. 
-As author and owner of the reposity I claim no copyright of the logos used in the document, the software used to compile the source or the documents based on this template. 
+Its only purpose is to simplify the process of getting started with the typsetting language Typst for writing a university report or thesis.
+As author and owner of the reposity I claim no copyright of the logos used in the document, the software used to compile the source or the documents based on this template.
 
 ## FAQ
 

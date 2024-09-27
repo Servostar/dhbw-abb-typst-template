@@ -58,7 +58,8 @@
 $
   angle.l a, b angle.r &= arrow(a) dot arrow(b) \
   &= a_1 b_1 + a_2 b_2 + ... a_n b_n \
-  &= sum_(i=1)^n a_i b_i.
+  &= sum_(i=1)^n a_i b_i. \
+  integral_2^4(3x + 4x^2)
 $
 
 #lorem(140)

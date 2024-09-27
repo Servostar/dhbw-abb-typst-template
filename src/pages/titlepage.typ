@@ -16,18 +16,20 @@
 
     // title
     #v(2cm)
-    #set par(justify: false)
-    #text(size: 2em, weight: "semibold", hyphenate: false, thesis.title)
+    #par(justify: false, leading: 1.5em)[
+      #text(size: 2em, weight: "bold", hyphenate: false, thesis.title)
+      #linebreak()
+      // subtitle
+      #text(size: 2em, weight: "light", thesis.subtitle)
+    ]
 
-    // subtitle
-    #text(size: 1.5em, thesis.subtitle)
+    #set align(center + horizon)
 
     // type of paper
-    #v(1cm)
-    #text(size: 1.5em, weight: "bold", thesis.kind)
+    #text(size: 1.5em, weight: "medium", thesis.kind)
 
     // faculty
-    #pad(top: 0.5cm)[
+    #pad()[
       #if text.lang == "de" [
         Praxisphase des #author.semester Semesters an der Fakultät für #author.faculty
         #linebreak()
@@ -42,7 +44,7 @@
     ]
 
     // university
-    #pad(top: 0.5cm)[
+    #pad()[
       #if text.lang == "de" [
         an der
       ] else if text.lang == "en" [
@@ -54,7 +56,7 @@
       #author.university
     ]
 
-    #set align(horizon + left)
+    #set align(bottom + left)
 
     #if text.lang == "de" [
       #table(
@@ -64,9 +66,7 @@
         stroke: none,
         [*Verfasser:*], author.name,
         [*Bearbeitungszeitraum:*], thesis.timeframe,
-        [*Matrikelnummer, Kurs:*],
-        str(author.matriculation-number) + ", " + author.course,
-
+        [*Matrikelnummer, Kurs:*], str(author.matriculation-number) + ", " + author.course,
         [*Ausbildungsbetrieb:*], author.company,
         [*Betrieblicher Betreuer:*], author.supervisor,
         [*Abgabedatum:*], thesis.submission-date,
@@ -79,9 +79,7 @@
         stroke: none,
         [*Author:*], author.name,
         [*Editing period:*], thesis.timeframe,
-        [*Matriculation number, course:*],
-        str(author.matriculation-number) + ", " + author.course,
-
+        [*Matriculation number, course:*], str(author.matriculation-number) + ", " + author.course,
         [*Training company:*], author.company,
         [*Company supervisor:*], author.supervisor,
         [*Submission date:*], thesis.submission-date,
