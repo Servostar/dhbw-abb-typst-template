@@ -2,54 +2,19 @@
 
 #import "abstract.typ": abstract, summary
 
-#show: dhbw-template.with((
-  lang: "de",
-  region: "de",
-  draft: false,
-  author: (
-    name: "Sven Vogel",
-    semester: 4,
-    program: "Informationtechnology",
-    course: "TINF19IT1",
-    faculty: "Technik",
-    university: "DHBW Mannheim",
-    company: "ABB AG",
-    supervisor: "Benny Goodman",
-    matriculation-number: 123456789,
-  ),
-  thesis: (
-    title: "Unofficial ABB/DHBW Typst template",
-    subtitle: "for reports and thesises",
-    submission-date: "23rd march 2020",
-    timeframe: "1st january 2020 - 20th march 2020",
-    kind: "T2000",
-    summary: summary,
-    abstract: abstract,
-    preface: include "preface.typ",
-    keywords: ("IT", "other stuff"),
-    bibliography: bibliography("refs.bib"),
-    glossary: yaml("glossary.yml"),
-    appendices: include "appendix.typ",
-  ),
-))
+#show: dhbw-template.with()
 
 #import "@preview/wrap-it:0.1.0": wrap-content
 
 = Lorem Ipsum
 
-#text(fill: ABB-RED, "Hello ABB branding")
-
 #lorem(25)
-@oidc
-@potato
 
 #lorem(100)
-@Anhang-A
 
 == Lorem Ipsum 2
 
-#lorem(200)
-@einstein
+#lorem(230)
 
 = Lorem Ipsum 3 <sec:hello>
 
@@ -68,8 +33,6 @@ $
   figure(image("assets/digitaldog.jpg", width: 200pt), caption: [ Some image caption ]),
   lorem(200),
 )
-
-#url("https://github.com", "text") @sec:hello
 
 #lorem(50)
 
@@ -93,7 +56,6 @@ $
 #pagebreak()
 
 #lorem(100)
-#inline-color("#ff0000", "red") @HTTP
 
 #figure(
   ```rust
