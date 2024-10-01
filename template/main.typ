@@ -10,6 +10,8 @@
 
 #lorem(25)
 
+@einstein
+
 #lorem(100)
 
 == Lorem Ipsum 2
@@ -29,10 +31,7 @@ $
 
 #lorem(140)
 
-#wrap-content(
-  figure(image("assets/digitaldog.jpg", width: 200pt), caption: [ Some image caption ]),
-  lorem(200),
-)
+#figure(image("assets/digitaldog.jpg", width: 200pt), caption: [ Some image caption ])
 
 #lorem(50)
 
@@ -53,8 +52,6 @@ $
   caption: [ Some table ],
 )
 
-#pagebreak()
-
 #lorem(100)
 
 #figure(
@@ -71,8 +68,6 @@ $
 )
 
 #lorem(100)
-
-#pagebreak()
 
 = Conclusion
 
