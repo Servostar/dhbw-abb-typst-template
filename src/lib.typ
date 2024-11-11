@@ -13,9 +13,7 @@
 #import "glossary.typ": glossary
 #import "pages/titlepage.typ": new_title_page
 #import "pages/declaration-of-authorship.typ": new_declaration_of_authorship
-#import "pages/confidentiality-statement.typ": (
-  new_confidentiality_statement_page,
-)
+#import "pages/confidentiality-statement.typ": new_confidentiality_statement_page
 #import "pages/prerelease-note.typ": new_prerelease_note
 #import "pages/outline.typ": new_outline
 #import "pages/abstract.typ": new_abstract
