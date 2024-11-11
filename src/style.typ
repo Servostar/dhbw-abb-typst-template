@@ -300,7 +300,7 @@
           // we need two, so make both half the page width
           columns: (50%, 50%),
           // left align logo of ABB
-          align(left, image("res/ABB.svg", height: style.header.logo-height)),
+          align(left, image(style.header.logo-image, height: style.header.logo-height)),
           // right align logo of DHBW
           align(right, image("res/DHBW.svg", height: style.header.logo-height)))
 
