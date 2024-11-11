@@ -66,7 +66,9 @@
         stroke: none,
         [*Verfasser:*], author.name,
         [*Bearbeitungszeitraum:*], thesis.timeframe,
-        [*Matrikelnummer, Kurs:*], str(author.matriculation-number) + ", " + author.course,
+        [*Matrikelnummer, Kurs:*],
+        str(author.matriculation-number) + ", " + author.course,
+
         [*Ausbildungsbetrieb:*], author.company,
         [*Betrieblicher Betreuer:*], author.supervisor,
         [*Abgabedatum:*], thesis.submission-date,
@@ -79,7 +81,9 @@
         stroke: none,
         [*Author:*], author.name,
         [*Editing period:*], thesis.timeframe,
-        [*Matriculation number, course:*], str(author.matriculation-number) + ", " + author.course,
+        [*Matriculation number, course:*],
+        str(author.matriculation-number) + ", " + author.course,
+
         [*Training company:*], author.company,
         [*Company supervisor:*], author.supervisor,
         [*Submission date:*], thesis.submission-date,

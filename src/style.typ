@@ -75,7 +75,7 @@
 
   show heading: set text(
     font: style.heading.font,
-    weight: "bold"
+    weight: "bold",
   )
 
   let header-supplement = if config.lang == "de" {
