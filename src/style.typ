@@ -294,19 +294,7 @@
       let current-page = here().page()
 
       if current-page == 1 {
-        // logo of ABB and DHBW
-        grid(
-          // set width of columns
-          // we need two, so make both half the page width
-          columns: (50%, 50%),
-          // left align logo of ABB
-          if style.header.logo-image == none {
-            []
-          } else if style.header.logo-image.len() > 0 {
-            align(left, image(style.header.logo-image, height: style.header.logo-height))
-          },
-          // right align logo of DHBW
-          align(right, image("res/DHBW.svg", height: style.header.logo-height)))
+        // logo moved to content
 
       } else if query(<end-of-content>)
         .first()

@@ -59,7 +59,7 @@
       header: (
         content-padding: 1.5em,
         underline-top-padding: 0pt,
-        logo-height: 3em,
+        logo-height: 5em,
         logo-image: "res/ABB.svg"),
       footer: (
         content-padding: 1.5em),

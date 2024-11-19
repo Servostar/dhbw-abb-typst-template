@@ -11,6 +11,25 @@
 
     #let thesis = config.thesis
 
+    // logo of ABB and DHBW
+    #v(-config.style.header.content-padding)
+    #grid(
+      // set width of columns
+      // we need two, so make both half the page width
+      columns: (50%, 50%),
+      // left align logo of ABB
+      if config.style.header.logo-image == none {
+        // error
+      } else if config.style.header.logo-image.len() > 0 {
+        align(left, image(config.style.header.logo-image, height: config.style.header.logo-height))
+      } else {
+        align(left, image("../res/DHBW.svg", height: config.style.header.logo-height))
+      },
+      // right align logo of DHBW
+      if config.style.header.logo-image.len() > 0 {
+        align(right, image("../res/DHBW.svg", height: config.style.header.logo-height))
+      })
+
     #set align(center)
 
     // title
