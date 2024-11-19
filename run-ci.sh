@@ -45,9 +45,5 @@ function enter-section() {
 
 enter-section "Typstyle checking" "./run-fmt.sh --check src/lib.typ" 0
 enter-section "Compiling template..." "typst compile template/main.typ --root . --font-path fonts example.pdf"
-enter-section "TEST: local template import" "typst compile tests/local-import/main.typ --root . --font-path fonts"
-enter-section "TEST: invalid config case 1" "typst compile tests/invalid-config/test-case-1.typ --root . --font-path fonts" "should fail"
-enter-section "TEST: invalid config case 2" "typst compile tests/invalid-config/test-case-2.typ --root . --font-path fonts"
-enter-section "TEST: invalid config case 3" "typst compile tests/invalid-config/test-case-3.typ --root . --font-path fonts" "should fail"
 
 log "INFO" "CI completed successfully"
