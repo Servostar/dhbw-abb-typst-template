@@ -31,6 +31,11 @@
     glossary: yaml("glossary.yml"),
     appendices: include "appendix.typ",
   ),
+  style: (
+    header: (
+      logo-image: ""
+    )
+  )
 ))
 
 #import "@preview/wrap-it:0.1.0": wrap-content
