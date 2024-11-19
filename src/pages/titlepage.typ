@@ -101,15 +101,22 @@
         align: top + left,
         stroke: none,
         [Matrikelnummer, Kurs:],
-        par(leading: 0.5em, for author in config.authors {
-          str(author.matriculation-number) + ", " + author.course
-          linebreak()
-        }),
+        par(
+          leading: 0.5em,
+          for author in config.authors {
+            str(author.matriculation-number) + ", " + author.course
+            linebreak()
+          },
+        ),
+
         [Betrieb, Betreuer:],
-        par(leading: 0.5em, for author in config.authors {
-          author.company + ", " + author.supervisor
-          linebreak()
-        }),
+        par(
+          leading: 0.5em,
+          for author in config.authors {
+            author.company + ", " + author.supervisor
+            linebreak()
+          },
+        ),
       )
     ] else if text.lang == "en" [
       #grid(
@@ -119,15 +126,22 @@
         align: top + left,
         stroke: none,
         [Student ID, Course:],
-        par(leading: 0.5em, for author in config.authors {
-          str(author.matriculation-number) + ", " + author.course
-          linebreak()
-        }),
+        par(
+          leading: 0.5em,
+          for author in config.authors {
+            str(author.matriculation-number) + ", " + author.course
+            linebreak()
+          },
+        ),
+
         [Company, Supervisor:],
-        par(leading: 0.5em, for author in config.authors {
-          author.company + ", " + author.supervisor
-          linebreak()
-        }),
+        par(
+          leading: 0.5em,
+          for author in config.authors {
+            author.company + ", " + author.supervisor
+            linebreak()
+          },
+        ),
       )
     ] else [
       #context panic("no translation for language: ", text.lang)
