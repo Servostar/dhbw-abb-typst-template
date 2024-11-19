@@ -18,16 +18,28 @@
     // Adds preleminarry note page and watermark
     draft: true,
     // information about author(s)
-    author: (
-      name: "Sven Vogel",
-      semester: 4,
+    university: (
       program: "Informationtechnology",
-      course: "TINF19IT1",
       faculty: "Technik",
-      university: "DHBW Mannheim",
-      company: "ABB AG",
-      supervisor: "Benny Goodman",
-      matriculation-number: 123456789),
+      name: "dualen Hochschule Baden-Württemberg",
+      campus: "Eppelheim"
+    ),
+    authors: (
+      (
+        name: "Sven Vogel",
+        course: "TINF19IT1",
+        company: "ABB AG",
+        supervisor: "Benny Goodman",
+        matriculation-number: 123456789
+      ),
+      (
+        name: "Kurt Jammer",
+        course: "TINF24AI2",
+        company: "Siemens",
+        supervisor: "Henry Badman",
+        matriculation-number: 478568763
+      ),
+    ),
     // information about thesis
     thesis: (
       title: "Unofficial ABB/DHBW Typst template",
@@ -87,7 +99,9 @@
     if key in update {
       let update_val = update.at(key)
 
-      if type(val) == dictionary and type(update_val) == dictionary {
+      if type(val) == array {
+        // ignore checking arraay
+      } else if type(val) == dictionary and type(update_val) == dictionary {
         base.insert(key, deep-insert-checked(val, update_val))
       } else if val == none or type(val) == type(update_val) {
         base.insert(key, update_val)

@@ -71,7 +71,7 @@
 
     // set document properties
     #set document(
-      author: config.author.name,
+      // author: config.author.name,
       keywords: config.thesis.keywords,
       title: config.thesis.title,
     )

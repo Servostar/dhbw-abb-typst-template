@@ -10,7 +10,6 @@
   context [
 
     #let thesis = config.thesis
-    #let author = config.author
 
     #set align(center)
 
@@ -31,13 +30,9 @@
     // faculty
     #pad()[
       #if text.lang == "de" [
-        Praxisphase des #author.semester Semesters an der Fakultät für #author.faculty
-        #linebreak()
-        im Studiengang #author.program
+        aus dem Studiengang #config.university.program | #config.university.faculty
       ] else if text.lang == "en" [
-        Practical phase of the #author.semester semester at the Faculty of #author.faculty
-        #linebreak()
-        in the degree program #author.program
+        from the course of studies #config.university.program | #config.university.faculty
       ] else [
         #context panic("no translation for language: ", text.lang)
       ]
@@ -52,41 +47,68 @@
       ] else [
         #context panic("no translation for language: ", text.lang)
       ]
+      #config.university.name
       #linebreak()
-      #author.university
+      #config.university.campus
+    ]
+
+    #pad(top: 1em)[
+      #let names = ()
+      #for author in config.authors {
+        names.push(author.name)
+      }
+      #if text.lang == "de" [
+        von
+      ] else if text.lang == "en" [
+        by
+      ] else [
+        #context panic("no translation for language: ", text.lang)
+      ]
+      #set text(size: 16pt)
+      #grid(columns: 1, row-gutter: 1em, ..names)
+    ]
+
+    #pad(top: 1em)[
+      #thesis.timeframe
     ]
 
     #set align(bottom + left)
 
     #if text.lang == "de" [
-      #table(
+      #grid(
         columns: 2,
         column-gutter: 1cm,
-        align: left,
+        row-gutter: 0.5cm,
+        align: top + left,
         stroke: none,
-        [*Verfasser:*], author.name,
-        [*Bearbeitungszeitraum:*], thesis.timeframe,
-        [*Matrikelnummer, Kurs:*],
-        str(author.matriculation-number) + ", " + author.course,
-
-        [*Ausbildungsbetrieb:*], author.company,
-        [*Betrieblicher Betreuer:*], author.supervisor,
-        [*Abgabedatum:*], thesis.submission-date,
+        [Matrikelnummer, Kurs:],
+        par(leading: 0.5em, for author in config.authors {
+          str(author.matriculation-number) + ", " + author.course
+          linebreak()
+        }),
+        [Betrieb, Betreuer:],
+        par(leading: 0.5em, for author in config.authors {
+          author.company + ", " + author.supervisor
+          linebreak()
+        }),
       )
     ] else if text.lang == "en" [
-      #table(
+      #grid(
         columns: 2,
         column-gutter: 1cm,
-        align: left,
+        row-gutter: 0.5cm,
+        align: top + left,
         stroke: none,
-        [*Author:*], author.name,
-        [*Editing period:*], thesis.timeframe,
-        [*Matriculation number, course:*],
-        str(author.matriculation-number) + ", " + author.course,
-
-        [*Training company:*], author.company,
-        [*Company supervisor:*], author.supervisor,
-        [*Submission date:*], thesis.submission-date,
+        [Student ID, Course:],
+        par(leading: 0.5em, for author in config.authors {
+          str(author.matriculation-number) + ", " + author.course
+          linebreak()
+        }),
+        [Company, Supervisor:],
+        par(leading: 0.5em, for author in config.authors {
+          author.company + ", " + author.supervisor
+          linebreak()
+        }),
       )
     ] else [
       #context panic("no translation for language: ", text.lang)

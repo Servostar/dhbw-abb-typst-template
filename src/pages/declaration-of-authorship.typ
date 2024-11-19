@@ -12,7 +12,6 @@
     pagebreak(weak: true)
 
     let thesis = config.thesis
-    let author = config.author
 
     if text.lang == "de" [
       #heading("Selbständigkeitserklärung")
