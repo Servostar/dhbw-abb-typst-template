@@ -49,7 +49,7 @@ SOFTWARE.*/
 // Reference a term
 #let gls(key, suffix: none, long: none, display: none) = {
   context {
-    let __glossary_entries = __glossary_entries.final(here())
+    let __glossary_entries = __glossary_entries.final()
     if key in __glossary_entries {
       let entry = __glossary_entries.at(key)
 
