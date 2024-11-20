@@ -184,7 +184,7 @@
   show figure.caption: c => [
     #if c.body.fields().len() > 0 {
       text(weight: "medium")[
-        #c.supplement #c.counter.display("1.1.1")
+        #c.supplement #context c.counter.display("1.1.1")
       ]
       c.separator
     }

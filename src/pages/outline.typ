@@ -13,7 +13,7 @@
 #let render_filtered_outline(title: str, kind: selector) = (
   context {
 
-    let elems = query(figure.where(kind: kind), here())
+    let elems = query(figure.where(kind: kind))
     let count = elems.len()
 
     show outline.entry: it => {
