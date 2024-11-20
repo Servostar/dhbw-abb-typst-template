@@ -199,7 +199,8 @@ SOFTWARE.*/
 
                   #block(
                     below: 1.5em,
-                    par(hanging-indent: 1em)[
+                    width: 100%,
+                    par(hanging-indent: 1em, align(left)[
                       #text(weight: "bold", entry.short)
                       #if hasLong and hasDesc [
                         (#text(entry.long))
@@ -238,7 +239,7 @@ SOFTWARE.*/
                           )
                           .join(", ")
                       }
-                    ],
+                    ]),
                   )
                 ]
               }
