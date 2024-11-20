@@ -34,7 +34,6 @@ SOFTWARE.*/
         loc,
         inclusive: false,
       ),
-      loc,
     )
   } else {
     query(selector(label(__glossary_label_prefix + key)))
