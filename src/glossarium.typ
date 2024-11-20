@@ -37,7 +37,7 @@ SOFTWARE.*/
       loc,
     )
   } else {
-    query(selector(label(__glossary_label_prefix + key)), loc)
+    query(selector(label(__glossary_label_prefix + key)))
   }
 }
 
