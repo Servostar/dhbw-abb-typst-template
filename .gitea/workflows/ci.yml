@@ -1,10 +1,19 @@
-name: Gitea Action for checking typst compilation
+name: Build'n check
 run-name: Performing Typst compilation
-on: [push]
-
+on:
+  push:
+  pull_request:
+    branches:
+      - main
 jobs:
   run-ci-linux:
     runs-on: ubuntu-latest
+    # run action mutally exclusive on PRs or
+    # push with commit containing "Run-Checks"
+    if: >
+      (contains(github.event.head_commit.message, 'Run-Checks') &&
+      github.event_name == 'push') ||
+      github.event_name == 'pull_request'
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -16,5 +25,9 @@ jobs:
         uses: cachix/install-nix-action@v27
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-      - name: Run CI
-        run: nix-shell --run ./run-ci.sh
+      - name: Stylecheck
+        run: nix-shell --run "./run-fmt.sh --check src/lib.typ"
+      - id: build
+        name: Build
+        run: |
+          nix-shell --run ./run-ci.sh
