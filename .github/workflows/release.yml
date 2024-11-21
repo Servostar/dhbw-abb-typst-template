@@ -55,7 +55,7 @@ jobs:
         run: echo ${{ steps.download.outputs.download-path }}
       - name: Prepare Release
         run: echo ${{ github.sha }} > Release.txt
-      - name: Release ${{ GITHUB_REF_NAME }}
+      - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
