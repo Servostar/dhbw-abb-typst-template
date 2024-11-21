@@ -1,4 +1,4 @@
-name: Build'n check on ${{ github.event.head_commit.message }}
+name: Build'n check
 
 on:
   push:
