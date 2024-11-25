@@ -1,0 +1,45 @@
+name: Create Release Commit
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - v*.*.*
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'Release-As:')
+    env:
+      USERNAME: servostar
+      EMAIL: sven.vogel123@web.de
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Setup go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '>=1.20.1'
+      - name: Tag Release Commit
+        env:
+          COMMIT_MESSAGE: ${{github.event.head_commit.message}}
+        run: |
+          export VERSION=$(echo "${COMMIT_MESSAGE}" | grep -Po '(?<=Release-As: )v\d+\.\d+\.\d+')
+          echo "==> Tagging for version: ${VERSION}"
+          echo "::group::{Configure git credential store}"
+          git config --global credential.helper store
+          echo "https://${USERNAME}:${{secrets.RELEASE_TOKEN}}}@${{github.repositoryUrl}}" > ~/.git-credentials
+          echo "::endgroup::"
+          echo "::group::{Configure git user identity}"
+          git config --global user.name "${USERNAME}"
+          git config --global user.email "${EMAIL}"
+          echo "::endgroup::"
+          echo "::group::{Modify metadata}"
+          echo "==> Update typst.toml version"
+          sed -i "/version/c\version = \"${VERSION#v}\"" typst.toml
+          git add typst.toml
+          git commit -m "chore: bump release version to $VERSION"
+          echo "::endgroup::"
+          echo "::group::{Tag commit}"
+          git tag -m "Release" "${VERSION}"
+          git push "${VERSION}"
+          echo "::endgroup::"
