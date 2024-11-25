@@ -27,11 +27,12 @@ jobs:
           echo "==> Tagging for version: ${VERSION}"
           echo "::group::{Configure git credential store}"
           git config --global credential.helper store
-          echo "https://${USERNAME}:${{secrets.RELEASE_TOKEN}}}@${{github.repositoryUrl}}" > ~/.git-credentials
+          echo "https://${USERNAME}:${{secrets.RELEASE_TOKEN}}@git.montehaselino.de/DHBW/dhbw-abb-typst-template" > ~/.git-credentials
           echo "::endgroup::"
           echo "::group::{Configure git user identity}"
           git config --global user.name "${USERNAME}"
           git config --global user.email "${EMAIL}"
+          git remote set-url --push origin https://git.montehaselino.de/DHBW/dhbw-abb-typst-template
           echo "::endgroup::"
           echo "::group::{Modify metadata}"
           echo "==> Update typst.toml version"
