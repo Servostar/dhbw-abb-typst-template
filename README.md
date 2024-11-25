@@ -2,7 +2,7 @@
 <div align="center">
     <h1>DHBW-ABB template for Typst</h1>
     <img src="https://img.shields.io/gitea/last-commit/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de">
-    <img src="https://img.shields.io/github/actions/workflow/status/Servostar/dhbw-abb-typst-template/ci.yml?label=build">
+    <img src="https://img.shields.io/github/actions/workflow/status/Servostar/dhbw-abb-typst-template/release.yml?label=build">
     <img src="https://img.shields.io/gitea/v/release/dhbw/dhbw-abb-typst-template?gitea_url=https%3A%2F%2Fgit.montehaselino.de&display_name=release">
     <img src="https://img.shields.io/badge/license-MIT-ff0000">
     <img src="https://img.shields.io/badge/Typst-2B9CB0">
