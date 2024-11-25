@@ -15,26 +15,17 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Setup go
-        uses: actions/setup-go@v4
         with:
-          go-version: '>=1.20.1'
+          ref: 'main'
+          token:  ${{ secrets.RELEASE_TOKEN }}
       - name: Tag Release Commit
         env:
-          COMMIT_MESSAGE: ${{github.event.head_commit.message}}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          GIT_AUTH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
           export VERSION=$(echo "${COMMIT_MESSAGE}" | grep -Po '(?<=Release-As: )v\d+\.\d+\.\d+')
-          echo "==> Tagging for version: ${VERSION}"
-          echo "::group::{Configure git credential store}"
-          git config --global credential.helper store
-          echo "https://${USERNAME}:${{secrets.RELEASE_TOKEN}}@git.montehaselino.de/DHBW/dhbw-abb-typst-template" > ~/.git-credentials
-          echo "::endgroup::"
-          echo "::group::{Configure git user identity}"
           git config --global user.name "${USERNAME}"
           git config --global user.email "${EMAIL}"
-          git remote set-url --push origin https://git.montehaselino.de/DHBW/dhbw-abb-typst-template
-          echo "::endgroup::"
-          echo "::group::{Modify metadata}"
           echo "==> Update typst.toml version"
           sed -i "/version/c\version = \"${VERSION#v}\"" typst.toml
           git add typst.toml
