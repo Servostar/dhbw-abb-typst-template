@@ -200,46 +200,49 @@ SOFTWARE.*/
                   #block(
                     below: 1.5em,
                     width: 100%,
-                    par(hanging-indent: 1em, align(left)[
-                      #text(weight: "bold", entry.short)
-                      #if hasLong and hasDesc [
-                        (#text(entry.long))
-                      ] else if hasLong {
-                        text(entry.long)
-                      }
-                      #if hasDesc [ #sym.dash.en ]
-                      #if hasDesc [ #desc ]
-                      #if disable-back-references != true {
-                        term_references
-                          .map(x => x.location())
-                          .sorted(key: x => x.page())
-                          .fold(
-                            (values: (), pages: ()),
-                            ((values, pages), x) => if pages.contains(
-                              x.page(),
-                            ) {
-                              (values: values, pages: pages)
-                            } else {
-                              values.push(x)
-                              pages.push(x.page())
-                              (values: values, pages: pages)
-                            },
-                          )
-                          .values
-                          .map(x => {
-                              let page-numbering = x.page-numbering()
-                              if page-numbering == none {
-                                page-numbering = "1"
+                    par(
+                      hanging-indent: 1em,
+                      align(left)[
+                        #text(weight: "bold", entry.short)
+                        #if hasLong and hasDesc [
+                          (#text(entry.long))
+                        ] else if hasLong {
+                          text(entry.long)
+                        }
+                        #if hasDesc [ #sym.dash.en ]
+                        #if hasDesc [ #desc ]
+                        #if disable-back-references != true {
+                          term_references
+                            .map(x => x.location())
+                            .sorted(key: x => x.page())
+                            .fold(
+                              (values: (), pages: ()),
+                              ((values, pages), x) => if pages.contains(
+                                x.page(),
+                              ) {
+                                (values: values, pages: pages)
+                              } else {
+                                values.push(x)
+                                pages.push(x.page())
+                                (values: values, pages: pages)
+                              },
+                            )
+                            .values
+                            .map(x => {
+                                let page-numbering = x.page-numbering()
+                                if page-numbering == none {
+                                  page-numbering = "1"
+                                }
+                                link(x)[#numbering(
+                                    page-numbering,
+                                    ..counter(page).at(x),
+                                  )]
                               }
-                              link(x)[#numbering(
-                                  page-numbering,
-                                  ..counter(page).at(x),
-                                )]
-                            }
-                          )
-                          .join(", ")
-                      }
-                    ]),
+                            )
+                            .join(", ")
+                        }
+                      ],
+                    ),
                   )
                 ]
               }
