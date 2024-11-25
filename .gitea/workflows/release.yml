@@ -67,7 +67,7 @@ jobs:
           git push ${{github.repositoryUrl}} "$(cat Version.txt)"
       - name: Create release
         id: create-release
-        uses: actions/release-action@main
+        uses: https://gitea.com/actions/release-action@main
         with:
           files: |-
             Example.pdf
