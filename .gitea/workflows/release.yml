@@ -59,6 +59,14 @@ jobs:
         run: echo ${{ steps.download.outputs.download-path }}
       - name: Prepare Release
         run: echo ${{ github.sha }} > Release.txt
+      - name: Tag Release Commit
+        run: |
+          echo ${{github.event.head_commit.message}} | grep -Po '(?<=Release-As: )v\d+\.\d+\.\d+' > Version.txt
+          echo "==> Tagging for version: $(cat Version.txt)"
+          git config --global credential.helper store
+          echo "https://${USERNAME}:${{secrets.RELEASE_TOKEN}}}@${{github.repositoryUrl}}" > ~/.git-credentials
+          git tag -m "Release" $(cat Version.txt)
+          git push ${{github.repositoryUrl}} $(cat Version.txt)
       - name: Create release
         id: create-release
         uses: https://gitea.com/actions/release-action@main
@@ -66,5 +74,6 @@ jobs:
           files: |-
             Example.pdf
             Release.txt
+            Version.txt
             LICENSE
           api_key: '${{secrets.RELEASE_TOKEN}}'
