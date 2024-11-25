@@ -29,7 +29,7 @@ jobs:
           echo "==> Update typst.toml version"
           sed -i "/version/c\version = \"${VERSION#v}\"" typst.toml
           git add typst.toml
-          git commit -m "chore: bump release version to $VERSION"
+          git commit -m "chore: bump release version to $VERSION" -m "Generated-By: ${{ gitea.actor }}"
           git push origin main
           echo "::endgroup::"
           echo "::group::{Tag commit}"
