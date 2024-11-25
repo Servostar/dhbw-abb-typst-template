@@ -40,6 +40,7 @@ jobs:
     if: contains(github.event.head_commit.message, 'Release-As:')
     env:
       USERNAME: servostar
+      EMAIL: sven.vogel123@web.de
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -63,10 +64,18 @@ jobs:
         run: |
           export VERSION=$(echo "${COMMIT_MESSAGE}" | grep -Po '(?<=Release-As: )v\d+\.\d+\.\d+')
           echo "==> Tagging for version: ${VERSION}"
+          echo "::group::{Configure git credential store}"
           git config --global credential.helper store
           echo "https://${USERNAME}:${{secrets.RELEASE_TOKEN}}}@${{github.repositoryUrl}}" > ~/.git-credentials
+          echo "::endgroup::"
+          echo "::group::{Configure git user identity}"
+          git config --global user.name "${USERNAME}"
+          git config --global user.email "${EMAIL}"
+          echo "::endgroup::"
+          echo "::group::{Tag commit}"
           git tag -m "Release" "${VERSION}"
           git push origin "${VERSION}"
+          echo "::endgroup::"
           echo "${VERSION}" > Version.txt
       - name: Create release
         id: create-release
