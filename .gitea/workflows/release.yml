@@ -63,11 +63,11 @@ jobs:
           echo "==> Tagging for version: $(cat Version.txt)"
           git config --global credential.helper store
           echo "https://${USERNAME}:${{secrets.RELEASE_TOKEN}}}@${{github.repositoryUrl}}" > ~/.git-credentials
-          git tag -m "Release" $(cat Version.txt)
-          git push ${{github.repositoryUrl}} $(cat Version.txt)
+          git tag -m "Release" "$(cat Version.txt)"
+          git push ${{github.repositoryUrl}} "$(cat Version.txt)"
       - name: Create release
         id: create-release
-        uses: https://gitea.com/actions/release-action@main
+        uses: actions/release-action@main
         with:
           files: |-
             Example.pdf
