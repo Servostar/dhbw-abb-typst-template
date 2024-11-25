@@ -9,5 +9,6 @@ pkgs.mkShellNoCC {
     python312Packages.pyyaml
     typst
     typstyle
+    ripgrep
   ];
 }
