@@ -1,10 +1,8 @@
 name: Build'n check
 on:
-  pull_request:
+  push:
     branches:
       - main
-    types:
-      - closed
 jobs:
   build:
     name: Check Template and Build example
