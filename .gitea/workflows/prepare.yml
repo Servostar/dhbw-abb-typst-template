@@ -38,8 +38,9 @@ jobs:
           sed -i "/version/c\version = \"${VERSION#v}\"" typst.toml
           git add typst.toml
           git commit -m "chore: bump release version to $VERSION"
+          git push origin main
           echo "::endgroup::"
           echo "::group::{Tag commit}"
           git tag -m "Release" "${VERSION}"
-          git push "${VERSION}"
+          git push origin "${VERSION}"
           echo "::endgroup::"
