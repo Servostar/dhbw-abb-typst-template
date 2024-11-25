@@ -1,0 +1,65 @@
+name: Build'n check
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Check Template and Build example
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install dependencies for Nix setup action
+        run: |
+          apt update -y
+          apt install sudo -y
+      - name: Setup Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: Stylecheck
+        run: nix-shell --run "./run-fmt.sh --check src/lib.typ"
+      - id: build
+        name: Build
+        run: |
+          nix-shell --run ./run-ci.sh
+      - name: Upload artifact
+        id: artifact-upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: example-document
+          path: ${{ github.workspace }}/example.pdf
+          if-no-files-found: error
+          retention-days: 1
+      - name: Output artifact ID
+        run:  echo 'Artifact ID is ${{ steps.artifact-upload.outputs.artifact-id }}'
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Setup go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '>=1.20.1'
+      - name: Download Artifcat
+        id: download
+        uses: actions/download-artifact@v3
+        with:
+          name: example-document
+          path: ${{ github.workspace }}/Example.pdf
+      - name: 'Artifact Download Path'
+        run: echo ${{ steps.download.outputs.download-path }}
+      - name: Prepare Release
+        run: echo ${{ github.sha }} > Release.txt
+      - name: Create release
+        id: create-release
+        uses: https://gitea.com/actions/release-action@main
+        with:
+          files: |-
+            Example.pdf
+            Release.txt
+            LICENSE
+          api_key: '${{secrets.RELEASE_TOKEN}}'
