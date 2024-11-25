@@ -122,17 +122,27 @@
 
     #metadata("content terminate") <end-of-content>
 
-    #end_styled(config)[
-      // add bibliography if set
-      #if "bibliography" in config.thesis and config.thesis.bibliography != none {
-        pagebreak(weak: true)
-        counter(page).update(1)
-        set bibliography(style: "ieee")
-        config.thesis.bibliography
-      }
+    #end_styled(
+      config,
+      context [
+        // add bibliography if set
+        #if "bibliography" in config.thesis and config.thesis.bibliography != none {
+          pagebreak(weak: true)
+          counter(page).update(1)
+          set bibliography(
+            style: "ieee",
+            title: if (text.lang == "de") {
+              "Literaturverzeichnis"
+            } else if text.lang == "en" {
+              "Bibliography"
+            },
+          )
+          config.thesis.bibliography
+        }
 
-      // appendix
-      #show-appendix(config: config)
-    ]
+        // appendix
+        #show-appendix(config: config)
+      ],
+    )
   ]
 ]

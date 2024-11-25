@@ -24,6 +24,7 @@
       name: "dualen Hochschule Baden-Württemberg",
       campus: "Eppelheim"
     ),
+    supervisor-signature: false,
     authors: (
       (
         name: "Sven Vogel",

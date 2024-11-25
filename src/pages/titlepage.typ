@@ -147,22 +147,24 @@
       #context panic("no translation for language: ", text.lang)
     ]
 
-    #align(
-      bottom,
-      grid(
-      // set width of columns
-      // we need two, so make both half the page width
-      columns: (60%, 40%),
-      align(left, if text.lang == "de" [
-          Unterschrift des betrieblichen Betreuers
-        ] else if text.lang == "en" [
-          Signature of the company supervisor
-        ] else [
-          #context panic("no translation for language: ", text.lang)
-        ]
-      ),
-      align(right, {line(length: 6cm)})),
-    )
+    #if config.supervisor-signature {
+      align(
+        bottom,
+        grid(
+        // set width of columns
+        // we need two, so make both half the page width
+        columns: (60%, 40%),
+        align(left, if text.lang == "de" [
+            Unterschrift des betrieblichen Betreuers
+          ] else if text.lang == "en" [
+            Signature of the company supervisor
+          ] else [
+            #context panic("no translation for language: ", text.lang)
+          ]
+        ),
+        align(right, {line(length: 6cm)})),
+      )
+    }
 
     #counter(page).update(0)
   ]
