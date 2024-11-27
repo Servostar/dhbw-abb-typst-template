@@ -1,6 +1,6 @@
 [package]
 name = "dhbw-abb-typst-template"
-version = "0.5.4"
+version = "0.5.5"
 entrypoint = "src/template.typ"
 authors = ["Sven Vogel <sven.vogel1@de.abb.com>"]
 license = "MIT"
