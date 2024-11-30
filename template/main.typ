@@ -6,16 +6,23 @@
   lang: "de",
   region: "de",
   draft: false,
-  author: (
-    name: "Sven Vogel",
-    semester: 4,
-    program: "Informationtechnology",
-    course: "TINF19IT1",
-    faculty: "Technik",
-    university: "DHBW Mannheim",
-    company: "ABB AG",
-    supervisor: "Benny Goodman",
-    matriculation-number: 123456789,
+  authors: (
+      (
+        name: "Sven Vogel",
+        course: "TINF19IT1",
+        company: none,
+        supervisor: "Benny Goodman",
+        matriculation-number: 123456789,
+        contact: "sven.vogel123@web.de"
+      ),
+      (
+        name: "Sven Vogel",
+        course: "TINF19IT1",
+        company: "ABB AG",
+        supervisor: "Benny Goodman",
+        matriculation-number: 123456789,
+        contact: "sven.vogel123@web.de"
+      )
   ),
   thesis: (
     title: "Unofficial ABB/DHBW Typst template",

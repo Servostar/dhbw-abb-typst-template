@@ -49,9 +49,17 @@
     // faculty
     #pad()[
       #if text.lang == "de" [
-        aus dem Studiengang #config.university.program | #config.university.faculty
+        aus dem Studiengang #config.university.program
       ] else if text.lang == "en" [
-        from the course of studies #config.university.program | #config.university.faculty
+        from the course of studies #config.university.program
+      ] else [
+        #context panic("no translation for language: ", text.lang)
+      ]
+
+      #if text.lang == "de" [
+        an der Fakultät #config.university.faculty
+      ] else if text.lang == "en" [
+        at the faculty of #config.university.faculty
       ] else [
         #context panic("no translation for language: ", text.lang)
       ]
@@ -68,14 +76,19 @@
       ]
       #config.university.name
       #linebreak()
+      #if text.lang == "de" [
+        in
+      ] else if text.lang == "en" [
+        in
+      ] else [
+        #context panic("no translation for language: ", text.lang)
+      ]
       #config.university.campus
     ]
 
-    #pad(top: 1em)[
+    #pad(top: 1.5em)[
       #let names = ()
-      #for author in config.authors {
-        names.push(author.name)
-      }
+
       #if text.lang == "de" [
         von
       ] else if text.lang == "en" [
@@ -83,68 +96,35 @@
       ] else [
         #context panic("no translation for language: ", text.lang)
       ]
-      #set text(size: 16pt)
-      #grid(columns: 1, row-gutter: 1em, ..names)
+
+      #v(1.5em)
+
+      #let rows = int(config.authors.len() / 3 + 0.5)
+
+      #for i in range(0, rows) {
+        let cols = calc.min(config.authors.len() - i * 3, 3)
+
+        grid(columns: cols, column-gutter: 1.5em, ..config
+            .authors
+            .slice(i * 3, i * 3 + cols)
+            .map(author => grid(
+            columns: 1,
+            row-gutter: 1em,
+            text(size: 1.25em, author.name),
+            text(size: 1em, author.company),
+            text(size: 1em, author.contact),
+            [
+              #str(author.matriculation-number),
+              #author.course
+            ],
+          )))
+      }
     ]
 
-    #pad(top: 1em)[
+    #set align(bottom)
+
+    #pad(top: 1.5em)[
       #thesis.timeframe
-    ]
-
-    #set align(bottom + left)
-
-    #if text.lang == "de" [
-      #grid(
-        columns: 2,
-        column-gutter: 1cm,
-        row-gutter: 0.5cm,
-        align: top + left,
-        stroke: none,
-        [Matrikelnummer, Kurs:],
-        par(
-          leading: 0.5em,
-          for author in config.authors {
-            str(author.matriculation-number) + ", " + author.course
-            linebreak()
-          },
-        ),
-
-        [Betrieb, Betreuer:],
-        par(
-          leading: 0.5em,
-          for author in config.authors {
-            author.company + ", " + author.supervisor
-            linebreak()
-          },
-        ),
-      )
-    ] else if text.lang == "en" [
-      #grid(
-        columns: 2,
-        column-gutter: 1cm,
-        row-gutter: 0.5cm,
-        align: top + left,
-        stroke: none,
-        [Student ID, Course:],
-        par(
-          leading: 0.5em,
-          for author in config.authors {
-            str(author.matriculation-number) + ", " + author.course
-            linebreak()
-          },
-        ),
-
-        [Company, Supervisor:],
-        par(
-          leading: 0.5em,
-          for author in config.authors {
-            author.company + ", " + author.supervisor
-            linebreak()
-          },
-        ),
-      )
-    ] else [
-      #context panic("no translation for language: ", text.lang)
     ]
 
     #if config.supervisor-signature {

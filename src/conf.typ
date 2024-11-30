@@ -25,22 +25,7 @@
       campus: "Eppelheim"
     ),
     supervisor-signature: false,
-    authors: (
-      (
-        name: "Sven Vogel",
-        course: "TINF19IT1",
-        company: "ABB AG",
-        supervisor: "Benny Goodman",
-        matriculation-number: 123456789
-      ),
-      (
-        name: "Kurt Jammer",
-        course: "TINF24AI2",
-        company: "Siemens",
-        supervisor: "Henry Badman",
-        matriculation-number: 478568763
-      ),
-    ),
+    authors: ((),()),
     // information about thesis
     thesis: (
       title: "Unofficial ABB/DHBW Typst template",
@@ -102,6 +87,7 @@
 
       if type(val) == array {
         // ignore checking arraay
+        base.insert(key, update_val)
       } else if type(val) == dictionary and type(update_val) == dictionary {
         base.insert(key, deep-insert-checked(val, update_val))
       } else if val == none or type(val) == type(update_val) {
