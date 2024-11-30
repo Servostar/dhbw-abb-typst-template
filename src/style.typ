@@ -241,6 +241,7 @@
   set page(
     paper: style.page.format,
     foreground: watermark(config),
+    background: [#rect(width: 100%, height: 100%, fill: white)],
     header-ascent: style.header.content-padding,
     footer-descent: style.header.content-padding,
     margin: (
