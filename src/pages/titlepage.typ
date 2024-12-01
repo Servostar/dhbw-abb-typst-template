@@ -107,17 +107,21 @@
         grid(columns: cols, column-gutter: 1.5em, ..config
             .authors
             .slice(i * 3, i * 3 + cols)
-            .map(author => grid(
-            columns: 1,
-            row-gutter: 1em,
-            text(size: 1.25em, author.name),
-            text(size: 1em, author.company),
-            text(size: 1em, author.contact),
-            [
-              #str(author.matriculation-number),
-              #author.course
-            ],
-          )))
+            .map(author => par([
+            #if author.at("name", default: none) != none {
+              text(size: 1.25em, author.name)
+              linebreak()
+            }
+            #if author.at("company", default: none) != none {
+              text(size: 1em, author.company)
+              linebreak()
+            }
+            #if author.at("contact", default: none) != none {
+              text(size: 1em, author.contact)
+              linebreak()
+            }
+            #str(author.matriculation-number), #author.course
+          ])))
       }
     ]
 
