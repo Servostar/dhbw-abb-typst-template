@@ -8,7 +8,6 @@
 // License: MIT
 
 #let glossary(entries, config) = {
-
   assert(
     type(entries) == dictionary,
     message: "The glossary is not a dictionary",

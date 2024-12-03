@@ -8,7 +8,6 @@
 
 #let new_abstract(config) = (
   context {
-
     set align(center + horizon)
 
     // only include summary when a language other than english is used

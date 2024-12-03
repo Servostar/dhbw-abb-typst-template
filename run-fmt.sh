@@ -17,7 +17,7 @@ function format() {
         exit 1
     fi
 
-    local imports=$(rg "#import \"([a-z0-9/\-]+\.typ)\"" -Nor '$1' "$1")
+    local imports=$(rg "#import \"([a-z0-9/\-.]+\.typ)\"" -Nor '$1' "$1")
 
     # format all included files
     while IFS= read -r line; do
@@ -26,6 +26,16 @@ function format() {
         fi
         format "$wd/$line" "$2"
     done <<< "$imports"
+
+    local includes=$(rg "#import \"([a-z0-9/\-.]+\.typ)\"" -Nor '$1' "$1")
+
+    # format all included files
+    while IFS= read -r line; do
+        if [ -z "$line" ]; then
+            continue
+        fi
+        format "$wd/$line" "$2"
+    done <<< "$includes"
 }
 
 case $1 in

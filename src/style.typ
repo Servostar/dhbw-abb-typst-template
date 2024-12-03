@@ -296,7 +296,6 @@
 
       if current-page == 1 {
         // logo moved to content
-
       } else if query(<end-of-content>)
         .first()
         .location()
