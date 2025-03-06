@@ -197,6 +197,7 @@ SOFTWARE.*/
                   #let hasLong = long != "" and long != []
                   #let hasDesc = desc != "" and desc != []
 
+                  #set align(left)
                   #block(
                     below: 1.5em,
                     width: 100%,
