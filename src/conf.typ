@@ -104,7 +104,15 @@
       } else if val == none or type(val) == type(update_val) {
         base.insert(key, update_val)
       } else {
-        panic("missmatched dictionary entry `" + key + "` type: expected `" + type(val) + "` got `" + type(update_val) + "`")
+        panic(
+          "missmatched dictionary entry `"
+            + key
+            + "` type: expected `"
+            + type(val)
+            + "` got `"
+            + type(update_val)
+            + "`",
+        )
       }
     } else {
       base.insert(key, val)

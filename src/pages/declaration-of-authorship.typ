@@ -52,13 +52,24 @@
     set align(horizon)
 
     grid(
-    // set width of columns
-    // we need two, so make both half the page width
-    columns: (50%, 50%),
-    row-gutter: 0.75em,
-    align(left, {line(length: 6cm)}),
-    align(left, {line(length: 6cm)}),
-    align(left, if text.lang == "de" [ Ort, Datum ] else if text.lang == "en" [ Place, Date ] else { panic("no translation for language: ", text.lang) }),
-    align(left, if text.lang == "de" [ Unterschrift ] else if text.lang == "en" [ Signature ] else { panic("no translation for language: ", text.lang) }))
+      // set width of columns
+      // we need two, so make both half the page width
+      columns: (50%, 50%),
+      row-gutter: 0.75em,
+      align(left, { line(length: 6cm) }),
+      align(left, { line(length: 6cm) }),
+      align(
+        left,
+        if text.lang == "de" [ Ort, Datum ] else if text.lang == "en" [
+          Place, Date
+        ] else { panic("no translation for language: ", text.lang) },
+      ),
+      align(
+        left,
+        if text.lang == "de" [ Unterschrift ] else if text.lang == "en" [
+          Signature
+        ] else { panic("no translation for language: ", text.lang) },
+      )
+    )
   }
 )

@@ -21,14 +21,27 @@
       if config.style.header.logo-image == none {
         // error
       } else if config.style.header.logo-image.len() > 0 {
-        align(left, image(config.style.header.logo-image, height: config.style.header.logo-height))
+        align(
+          left,
+          image(
+            config.style.header.logo-image,
+            height: config.style.header.logo-height,
+          ),
+        )
       } else {
-        align(left, image("../res/DHBW.svg", height: config.style.header.logo-height))
+        align(
+          left,
+          image("../res/DHBW.svg", height: config.style.header.logo-height),
+        )
       },
       // right align logo of DHBW
       if config.style.header.logo-image.len() > 0 {
-        align(right, image("../res/DHBW.svg", height: config.style.header.logo-height))
-      })
+        align(
+          right,
+          image("../res/DHBW.svg", height: config.style.header.logo-height),
+        )
+      }
+    )
 
     #set align(center)
 
@@ -108,20 +121,20 @@
             .authors
             .slice(i * 3, i * 3 + cols)
             .map(author => par([
-            #if author.at("name", default: none) != none {
-              text(size: 1.25em, author.name)
-              linebreak()
-            }
-            #if author.at("company", default: none) != none {
-              text(size: 1em, author.company)
-              linebreak()
-            }
-            #if author.at("contact", default: none) != none {
-              text(size: 1em, author.contact)
-              linebreak()
-            }
-            #str(author.matriculation-number), #author.course
-          ])))
+              #if author.at("name", default: none) != none {
+                text(size: 1.25em, author.name)
+                linebreak()
+              }
+              #if author.at("company", default: none) != none {
+                text(size: 1em, author.company)
+                linebreak()
+              }
+              #if author.at("contact", default: none) != none {
+                text(size: 1em, author.contact)
+                linebreak()
+              }
+              #str(author.matriculation-number), #author.course
+            ])))
       }
     ]
 
@@ -135,18 +148,21 @@
       align(
         bottom,
         grid(
-        // set width of columns
-        // we need two, so make both half the page width
-        columns: (60%, 40%),
-        align(left, if text.lang == "de" [
-            Unterschrift des betrieblichen Betreuers
-          ] else if text.lang == "en" [
-            Signature of the company supervisor
-          ] else [
-            #context panic("no translation for language: ", text.lang)
-          ]
+          // set width of columns
+          // we need two, so make both half the page width
+          columns: (60%, 40%),
+          align(
+            left,
+            if text.lang == "de" [
+              Unterschrift des betrieblichen Betreuers
+            ] else if text.lang == "en" [
+              Signature of the company supervisor
+            ] else [
+              #context panic("no translation for language: ", text.lang)
+            ],
+          ),
+          align(right, { line(length: 6cm) })
         ),
-        align(right, {line(length: 6cm)})),
       )
     }
 

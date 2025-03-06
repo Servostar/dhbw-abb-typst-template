@@ -126,7 +126,9 @@
       config,
       context [
         // add bibliography if set
-        #if "bibliography" in config.thesis and config.thesis.bibliography != none {
+        #if (
+          "bibliography" in config.thesis and config.thesis.bibliography != none
+        ) {
           pagebreak(weak: true)
           counter(page).update(1)
           set bibliography(

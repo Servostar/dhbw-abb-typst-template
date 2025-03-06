@@ -43,14 +43,18 @@
     if "desc" in v {
       assert(
         type(v.desc) == str,
-        message: "The description of glossary entry `" + k + "` is not a string",
+        message: "The description of glossary entry `"
+          + k
+          + "` is not a string",
       )
     }
 
     if "group" in v {
       assert(
         type(v.group) == str,
-        message: "The optional group of glossary entry `" + k + "` is not a string",
+        message: "The optional group of glossary entry `"
+          + k
+          + "` is not a string",
       )
     } else {
       let acronym_group = if config.lang == "de" {
@@ -89,11 +93,13 @@
     }
   }
 
-  return processed_glossary.pairs().map(((key, entry)) => (
-    key: key,
-    short: entry.short,
-    long: eval(entry.at("long", default: ""), mode: "markup"),
-    desc: eval(entry.at("desc", default: ""), mode: "markup"),
-    group: entry.at("group", default: ""),
-  ))
+  return processed_glossary
+    .pairs()
+    .map(((key, entry)) => (
+      key: key,
+      short: entry.short,
+      long: eval(entry.at("long", default: ""), mode: "markup"),
+      desc: eval(entry.at("desc", default: ""), mode: "markup"),
+      group: entry.at("group", default: ""),
+    ))
 }
