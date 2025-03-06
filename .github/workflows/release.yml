@@ -24,7 +24,7 @@ jobs:
           nix-shell --run ./run-ci.sh
       - name: Upload artifact
         id: artifact-upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: example-document
           path: ${{ github.workspace }}/example.pdf
