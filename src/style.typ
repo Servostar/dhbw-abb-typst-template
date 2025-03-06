@@ -166,10 +166,10 @@
             .map(make_row)
             .flatten()
             .map(c => if c.has("text") and c.text == "" {
-            v(1em)
-          } else {
-            c
-          })
+              v(1em)
+            } else {
+              c
+            })
         )
       },
     )
@@ -193,13 +193,15 @@
 
   // change the display supplement according to the text langugae
   // based on: https://github.com/typst/typst/issues/3273
-  show figure.where(kind: raw): set figure(supplement: context {
-    if text.lang == "de" {
-      "Quelltext"
-    } else {
-      "Listing"
-    }
-  })
+  show figure.where(kind: raw): set figure(
+    supplement: context {
+      if text.lang == "de" {
+        "Quelltext"
+      } else {
+        "Listing"
+      }
+    },
+  )
 
   // APA style table
   set table(
@@ -245,9 +247,9 @@
     header-ascent: style.header.content-padding,
     footer-descent: style.header.content-padding,
     margin: (
-      top: style.page.margin.top + style.header.underline-top-padding + style
-        .header
-        .content-padding,
+      top: style.page.margin.top
+        + style.header.underline-top-padding
+        + style.header.content-padding,
       bottom: style.page.margin.bottom + style.footer.content-padding,
       left: style.page.margin.left,
       right: style.page.margin.right,
@@ -256,15 +258,13 @@
       let current-page = here().page()
       if current-page == 1 {
         []
-      } else if query(<end-of-prelude>)
-        .first()
-        .location()
-        .page() > current-page {
+      } else if (
+        query(<end-of-prelude>).first().location().page() > current-page
+      ) {
         numbering("I", nums.pos().first())
-      } else if query(<end-of-content>)
-        .first()
-        .location()
-        .page() >= current-page {
+      } else if (
+        query(<end-of-content>).first().location().page() >= current-page
+      ) {
         numbering("1", nums.pos().first())
       } else {
         numbering("a", nums.pos().first())
@@ -277,10 +277,14 @@
 
       #if page-number == 1 {
         []
-      } else if query(<end-of-prelude>).first().location().page() > page-number {
+      } else if (
+        query(<end-of-prelude>).first().location().page() > page-number
+      ) {
         set align(center)
         numbering("I", page-counter)
-      } else if query(<end-of-content>).first().location().page() >= page-number {
+      } else if (
+        query(<end-of-content>).first().location().page() >= page-number
+      ) {
         numbering(
           "1 / 1",
           page-counter,
@@ -296,13 +300,11 @@
 
       if current-page == 1 {
         // logo moved to content
-      } else if query(<end-of-content>)
-        .first()
-        .location()
-        .page() >= current-page and query(<end-of-prelude>)
-        .first()
-        .location()
-        .page() < current-page + 1 {
+      } else if (
+        query(<end-of-content>).first().location().page() >= current-page
+          and query(<end-of-prelude>).first().location().page()
+            < current-page + 1
+      ) {
         let heading = currentH()
 
         heading.at(0)

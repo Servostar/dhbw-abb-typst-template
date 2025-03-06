@@ -18,9 +18,12 @@
     show outline.entry: it => {
       link(it.element.location())[
         #v(12pt, weak: true)
-        #text(weight: "regular", it.body)
+        #it.prefix()
+        #[:]
+        #h(0.5em)
+        #text(weight: "regular", it.body())
         #box(width: 1fr, it.fill)
-        #[ #it.page]
+        #[ #it.page()]
       ]
     }
 

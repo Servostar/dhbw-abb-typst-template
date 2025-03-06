@@ -59,8 +59,13 @@ SOFTWARE.*/
       let textLink = if display != none {
         [#display]
       } else if (
-        is_first or long == true
-      ) and entlong != [] and entlong != "" and long != false {
+        (
+          is_first or long == true
+        )
+          and entlong != []
+          and entlong != ""
+          and long != false
+      ) {
         [#entlong (#entry.short#suffix)]
       } else {
         [#entry.short#suffix]
@@ -108,8 +113,13 @@ SOFTWARE.*/
       }
 
       let textLink = if (
-        is_first or long == true
-      ) and entlong != [] and entlong != "" and long != false {
+        (
+          is_first or long == true
+        )
+          and entlong != []
+          and entlong != ""
+          and long != false
+      ) {
         [#entlong (#short)]
       } else {
         [#short]
@@ -128,9 +138,11 @@ SOFTWARE.*/
 // show rule to make the references for glossarium
 #let make-glossary(body) = {
   show ref: r => {
-    if r.element != none and r.element.func() == figure and r
-      .element
-      .kind == __glossarium_figure {
+    if (
+      r.element != none
+        and r.element.func() == figure
+        and r.element.kind == __glossarium_figure
+    ) {
       // call to the general citing function
       gls(str(r.target), suffix: r.citation.supplement)
     } else {
@@ -197,6 +209,7 @@ SOFTWARE.*/
                   #let hasLong = long != "" and long != []
                   #let hasDesc = desc != "" and desc != []
 
+                  #set align(left)
                   #block(
                     below: 1.5em,
                     width: 100%,
@@ -229,16 +242,15 @@ SOFTWARE.*/
                             )
                             .values
                             .map(x => {
-                                let page-numbering = x.page-numbering()
-                                if page-numbering == none {
-                                  page-numbering = "1"
-                                }
-                                link(x)[#numbering(
-                                    page-numbering,
-                                    ..counter(page).at(x),
-                                  )]
+                              let page-numbering = x.page-numbering()
+                              if page-numbering == none {
+                                page-numbering = "1"
                               }
-                            )
+                              link(x)[#numbering(
+                                  page-numbering,
+                                  ..counter(page).at(x),
+                                )]
+                            })
                             .join(", ")
                         }
                       ],
