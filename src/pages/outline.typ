@@ -125,9 +125,14 @@
 #let new_outline() = {
   pagebreak(weak: true)
 
-  show outline.entry.where(level: 1): it => {
-    v(1.5em, weak: true)
-    strong(it)
+  show outline.entry: it => {
+    if it.level == 1 {
+      v(1.5em, weak: true)
+      strong(it)
+    } else {
+      v(1.0em, weak: true)
+      it
+    }
   }
 
   render_heading_outline()
