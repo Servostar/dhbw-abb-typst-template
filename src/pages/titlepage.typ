@@ -112,7 +112,7 @@
 
       #v(1.5em)
 
-      #let rows = int(config.authors.len() / 3 + 0.5)
+      #let rows = int(config.authors.len() / 3 + 0.9)
 
       #for i in range(0, rows) {
         let cols = calc.min(config.authors.len() - i * 3, 3)
