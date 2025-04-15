@@ -42,6 +42,8 @@
     bibliography: none, /* bibliography("refs.bib") */
     glossary: none,
     appendices: none,
+    confidentiality: true,
+    authorship: true,
   ),
   style: (
     header: (

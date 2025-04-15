@@ -8,6 +8,10 @@
 
 #let new_declaration_of_authorship(config) = (
   context {
+    if not config.thesis.authorship {
+      return
+    }
+
     pagebreak(weak: true)
 
     let thesis = config.thesis

@@ -40,6 +40,8 @@
     bibliography: bibliography("refs.bib"),
     glossary: yaml("glossary.yml"),
     appendices: include "appendix.typ",
+    confidentiality: false,
+    authorship: false
   ),
   style: (
     header: (

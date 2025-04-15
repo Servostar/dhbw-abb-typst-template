@@ -8,6 +8,10 @@
 
 #let new_confidentiality_statement_page(config) = (
   context {
+    if not config.thesis.confidentiality {
+      return
+    }
+
     pagebreak(weak: true)
 
     let thesis = config.thesis
