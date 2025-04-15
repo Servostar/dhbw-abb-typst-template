@@ -24,6 +24,9 @@
         contact: "sven.vogel123@web.de"
       )
   ),
+  coauthors: (
+    "Gorbatschew"
+  ),
   thesis: (
     title: "Unofficial ABB/DHBW Typst template",
     subtitle: "for reports and thesises",

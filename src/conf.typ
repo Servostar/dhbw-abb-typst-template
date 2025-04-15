@@ -26,6 +26,7 @@
   ),
   supervisor-signature: false,
   authors: ((), ()),
+  coauthors: (),
   // information about thesis
   thesis: (
     title: "Unofficial ABB/DHBW Typst template",

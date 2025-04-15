@@ -138,6 +138,16 @@
       }
     ]
 
+    #v(1em)
+
+    #align(center)[
+      coauthored in part by
+      #linebreak()
+      #for author in config.coauthors {
+        author
+      }
+    ]
+
     #set align(bottom)
 
     #pad(top: 1.5em)[
